@@ -1,4 +1,5 @@
 import org.apache.commons.dbcp2.BasicDataSource;
+
 import java.util.ArrayList;
 
 public class Main {
@@ -16,13 +17,14 @@ public class Main {
 
         while (ifContinue) {
 
+            System.out.println("\n___________________NORTHWIND GROCERIES___________________");
             System.out.println("-----OPTIONS-----");
             System.out.println("1 - View Products Screen\n2 - View Customers Screen\n3 - View Categories Screen\n4 - View Employees Screen\n0 - Exit");
 //            System.out.println("1 - Display All Products\n2 - Display All Customers\n3 - Display All Categories\n4 - Display All Employees\n0 - Exit");
             int userQueryChoice = Utils.messageAndResponseInt("Please select an option: ");
 
             switch (userQueryChoice) {
-                case 1 -> processAllProducts();
+                case 1 -> displayProductsScreen();
                 case 2 -> processAllCustomers();
                 case 3 -> processAllCategories();
                 case 4 -> processAllEmployees();
@@ -34,6 +36,16 @@ public class Main {
         System.out.println("\n\nHave a Nice Day! :)");
     }
 
+    public static void setDataSource() {
+        String password = System.getenv("SQL_PASSWORD");
+        String userName = "root";
+        String url = "jdbc:mysql://localhost:3306/northwind";
+
+        dataSource.setUrl(url);
+        dataSource.setUsername(userName);
+        dataSource.setPassword(password);
+    }
+
     public static void displayProductsScreen() {
 
         boolean ifContinueProductScreen = true;
@@ -41,9 +53,17 @@ public class Main {
         while (ifContinueProductScreen) {
             System.out.println("\n____________PRODUCTS SCREEN____________");
             System.out.println("-----OPTIONS-----");
-            System.out.println("1 - See All Products\n2 - Search Product By ID\n3 - Search Product By Name\n4 - Search Product By Price\n0 - Go Back");
+            System.out.println("1 - See All Products\n2 - Search Product By ID\n3 - Search Product By Name\n4 - Search Products By Price Range\n0 - Go Back");
             int productScreenChoice = Utils.messageAndResponseInt("Enter your option: ");
 
+            switch (productScreenChoice) {
+                case 1 -> processAllProducts();
+                case 2 -> processProductByID();
+                case 3 -> processProductByName();
+                case 4 -> processProductByPrice();
+                case 0 -> ifContinueProductScreen = false;
+                default -> System.err.println("ERROR! Please enter a number that is listed on the screen!");
+            }
         }
     }
 
@@ -87,6 +107,12 @@ public class Main {
         }
     }
 
+    public static void processAllProducts() {
+        ArrayList<NorthwindData> productsList = productDao.getAllProducts();
+        printData(productsList);
+
+    }
+
     public static void processProductByID() {
 
         String productID = Utils.promptGetUserInput("\nPlease enter the ProductID: ");
@@ -97,48 +123,37 @@ public class Main {
         if (product == null) {
             System.out.println("There was no product found with that ID...");
         } else {
+            System.out.println("------------------------------");
             product.print();
         }
 
+        Utils.pauseApp();
     }
 
     public static void processProductByName() {
         String productName = Utils.promptGetUserInput("\nPlease Enter the Product Name: ");
-        String query = "SELECT * FROM products WHERE ProductName LIKE %?%;";
+        String query = "SELECT * FROM products WHERE ProductName LIKE ?;";
 
         Product product = productDao.getProduct(query, productName);
 
         if (product == null) {
             System.out.println("There was no product found with that Name...");
         } else {
+            System.out.println("------------------------------");
             product.print();
         }
+
+        Utils.pauseApp();
     }
 
     public static void processProductByPrice() {
         double minPrice = Utils.messageAndResponseDouble("\nPlease Enter the Minimum Price: ");
-        double maxPrice = Utils.messageAndResponseDouble("Please Enter the Maximum Price");
+        double maxPrice = Utils.messageAndResponseDouble("Please Enter the Maximum Price: ");
         String query = "SELECT * FROM products WHERE UnitPrice BETWEEN ? and ?;";
 
         ArrayList<NorthwindData> productsList = productDao.getProductsByPrice(query, minPrice, maxPrice);
 
         printData(productsList);
-    }
-
-    public static void setDataSource() {
-        String password = System.getenv("SQL_PASSWORD");
-        String userName = "root";
-        String url = "jdbc:mysql://localhost:3306/northwind";
-
-        dataSource.setUrl(url);
-        dataSource.setUsername(userName);
-        dataSource.setPassword(password);
-    }
-
-    public static void processAllProducts() {
-        ArrayList<NorthwindData> productsList = productDao.getAllProducts();
-        printData(productsList);
-
     }
 
     public static void processAllCustomers() {
@@ -166,7 +181,7 @@ public class Main {
 
         boolean ifRetry = true;
 
-        while(ifRetry) {
+        while (ifRetry) {
             if (userIntCatChoice < 1 || userIntCatChoice > 8) {
                 System.err.println("ERROR! We only have 8 Categories! Enter a number between 1 and 8!");
             } else {
