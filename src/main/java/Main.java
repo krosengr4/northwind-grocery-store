@@ -45,7 +45,13 @@ public class Main {
     }
 
     public static void processAllProducts() {
-        System.out.println("Process All Products");
+        ArrayList<NorthwindData> productsList = productDao.getAllProducts();
+
+        if (productsList.isEmpty()) {
+            System.out.println("There are no products to display...");
+        } else {
+            printData(productsList);
+        }
     }
 
     public static void processAllCustomers(){
