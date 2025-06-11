@@ -92,4 +92,32 @@ public class ProductDao {
         return product;
     }
 
+    public ArrayList<NorthwindData> getProductsByPrice(String query, double minPrice, double maxPrice) {
+        ArrayList<NorthwindData> productsList = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection()) {
+
+            PreparedStatement prepStatement = conn.prepareStatement(query);
+            prepStatement.setDouble(1, minPrice);
+            prepStatement.setDouble(2, maxPrice);
+
+            ResultSet results = prepStatement.executeQuery();
+
+            while (results.next()) {
+                int productID = Integer.parseInt(results.getString("ProductID"));
+                String productName = results.getString("ProductName");
+                double unitPrice = Double.parseDouble(results.getString("UnitPrice"));
+                int unitsInStock = Integer.parseInt(results.getString("UnitsInStock"));
+
+                Product product = new Product(productID, productName, unitPrice, unitsInStock);
+                productsList.add(product);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return productsList;
+    }
+
 }
