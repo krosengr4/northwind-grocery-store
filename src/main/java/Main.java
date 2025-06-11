@@ -115,6 +115,16 @@ public class Main {
         }
     }
 
+    public static void processProductByPrice() {
+        double minPrice = Utils.messageAndResponseDouble("\nPlease Enter the Minimum Price: ");
+        double maxPrice = Utils.messageAndResponseDouble("Please Enter the Maximum Price");
+        String query = "SELECT * FROM products WHERE UnitPrice BETWEEN ? and ?;";
+
+        ArrayList<NorthwindData> productsList = productDao.getProductsByPrice(query, minPrice, maxPrice);
+
+        printData(productsList);
+    }
+
     public static void setDataSource() {
         String password = System.getenv("SQL_PASSWORD");
         String userName = "root";
