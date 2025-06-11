@@ -1,6 +1,4 @@
 import org.apache.commons.dbcp2.BasicDataSource;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Main {
@@ -80,8 +78,8 @@ public class Main {
             if (userIntCatChoice < 1 || userIntCatChoice > 8) {
                 System.err.println("ERROR! We only have 8 Categories! Enter a number between 1 and 8!");
             } else {
-                System.out.println("Get products based on category!");
-
+                ArrayList<NorthwindData> productsList = productDao.getProductsFromCategory(userCatChoice);
+                printData(productsList);
 
                 ifRetry = false;
             }
