@@ -66,14 +66,14 @@ public class ProductDao {
         return productsList;
     }
 
-    public Product getProductByID(String userProductChoice) {
+    public Product getProductByID(int userProductChoice) {
 
         Product product = null;
 
         try (Connection conn = dataSource.getConnection()) {
             String query = "SELECT * from products WHERE ProductID = ?;";
             PreparedStatement prepStatement = conn.prepareStatement(query);
-            prepStatement.setString(1, userProductChoice);
+            prepStatement.setInt(1, userProductChoice);
 
             ResultSet results = prepStatement.executeQuery();
             while (results.next()) {

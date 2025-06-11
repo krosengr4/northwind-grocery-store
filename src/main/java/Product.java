@@ -12,24 +12,6 @@ public class Product implements NorthwindData {
         this.unitsInStock = unitsInStock;
     }
 
-    //region getters
-    public int getProductID() {
-        return productID;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public double getUnitPrice() {
-        return unitPrice;
-    }
-
-    public int getUnitsInStock() {
-        return unitsInStock;
-    }
-    //endregion
-
     public void print() {
         System.out.println("Product ID: " + this.productID);
         System.out.println("Product Name: " + this.name);

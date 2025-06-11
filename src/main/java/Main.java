@@ -71,7 +71,7 @@ public class Main {
         while (ifContinueCategoryScreen) {
             System.out.println("\n____________CATEGORIES SCREEN____________");
             System.out.println("-----OPTIONS-----");
-            System.out.println("1 - See All Categories\n2 - Search Category By Name\n3 - See All Products In Specific Category\n0 - Go Back");
+            System.out.println("1 - See All Categories\n2 - Search Category By Name\n3 - See All Products In a Category\n0 - Go Back");
             int categoryScreenChoice = Utils.messageAndResponseInt("Enter your option: ");
         }
     }
@@ -85,6 +85,20 @@ public class Main {
             System.out.println("1 - See All Employees\n2 - Search Employee By Name\n3 - Search Employees by Title\n0 - Go Back");
             int employeeScreenChoice = Utils.messageAndResponseInt("Enter your option: ");
         }
+    }
+
+    public static void processProductByID() {
+
+        int productID = Utils.messageAndResponseInt("Please enter the ProductID: ");
+
+        Product product = productDao.getProductByID(productID);
+
+        if (product == null) {
+            System.out.println("There was no product found with that ID...");
+        } else {
+            product.print();
+        }
+
     }
 
     public static void setDataSource() {
