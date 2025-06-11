@@ -89,9 +89,10 @@ public class Main {
 
     public static void processProductByID() {
 
-        int productID = Utils.messageAndResponseInt("Please enter the ProductID: ");
+        String productID = Utils.promptGetUserInput("\nPlease enter the ProductID: ");
+        String query = "SELECT * FROM products WHERE ProductID = ?";
 
-        Product product = productDao.getProductByID(productID);
+        Product product = productDao.getProduct(query, productID);
 
         if (product == null) {
             System.out.println("There was no product found with that ID...");
@@ -99,6 +100,19 @@ public class Main {
             product.print();
         }
 
+    }
+
+    public static void processProductByName() {
+        String productName = Utils.promptGetUserInput("\nPlease Enter the Product Name: ");
+        String query = "SELECT * FROM products WHERE ProductName LIKE %?%;";
+
+        Product product = productDao.getProduct(query, productName);
+
+        if (product == null) {
+            System.out.println("There was no product found with that Name...");
+        } else {
+            product.print();
+        }
     }
 
     public static void setDataSource() {
