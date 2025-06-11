@@ -1,4 +1,4 @@
-public class Category {
+public class Category implements Printable {
 
     int categoryID;
     String name;
