@@ -66,4 +66,30 @@ public class ProductDao {
         return productsList;
     }
 
+    public Product getProductByID(String userProductChoice) {
+
+        Product product = null;
+
+        try (Connection conn = dataSource.getConnection()) {
+            String query = "SELECT * from products WHERE ProductID = ?;";
+            PreparedStatement prepStatement = conn.prepareStatement(query);
+            prepStatement.setString(1, userProductChoice);
+
+            ResultSet results = prepStatement.executeQuery();
+            while (results.next()) {
+                int productID = Integer.parseInt(results.getString("ProductID"));
+                String productName = results.getString("ProductName");
+                double unitPrice = Double.parseDouble(results.getString("UnitPrice"));
+                int unitsInStock = Integer.parseInt(results.getString("UnitsInStock"));
+
+                product = new Product(productID, productName, unitPrice, unitsInStock);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return product;
+    }
+
 }
