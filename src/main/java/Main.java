@@ -1,5 +1,6 @@
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Main {
@@ -46,31 +47,36 @@ public class Main {
 
     public static void processAllProducts() {
         ArrayList<NorthwindData> productsList = productDao.getAllProducts();
+        printData(productsList);
 
-        if (productsList.isEmpty()) {
-            System.out.println("There are no products to display...");
-        } else {
-            printData(productsList);
-        }
     }
 
-    public static void processAllCustomers(){
-        System.out.println("Process All Customers");
+    public static void processAllCustomers() {
+        ArrayList<NorthwindData> customersList = customerDao.getAllCustomers();
+        printData(customersList);
+
     }
 
     public static void processAllCategories() {
-        System.out.println("Process All Categories");
+        ArrayList<NorthwindData> categoriesList = categoryDao.getAllCategories();
+        printData(categoriesList);
+
     }
 
     public static void processAllEmployees() {
-        System.out.println("Process All Employees");
+        ArrayList<NorthwindData> employeesList = employeeDao.getAllEmployees();
+        printData(employeesList);
     }
 
     public static void printData(ArrayList<NorthwindData> northwindDataList) {
 
-        for (NorthwindData column : northwindDataList) {
-            column.print();
-            System.out.println("-------------------------------------------------------------");
+        if (northwindDataList.isEmpty()) {
+            System.out.println("There is no data to display...");
+        } else {
+            for (NorthwindData column : northwindDataList) {
+                column.print();
+                System.out.println("-------------------------------------------------------------");
+            }
         }
 
         Utils.pauseApp();
