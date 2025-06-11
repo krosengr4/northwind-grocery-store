@@ -10,8 +10,8 @@ public class ProductDao {
         this.dataSource = dataSource;
     }
 
-    public ArrayList<Printable> getAllProducts() {
-        ArrayList<Printable> productsList = new ArrayList<>();
+    public ArrayList<NorthwindData> getAllProducts() {
+        ArrayList<NorthwindData> productsList = new ArrayList<>();
 
         try (Connection conn = dataSource.getConnection()) {
 

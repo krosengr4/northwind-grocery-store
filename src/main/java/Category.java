@@ -1,4 +1,4 @@
-public class Category implements Printable {
+public class Category implements NorthwindData {
 
     int categoryID;
     String name;

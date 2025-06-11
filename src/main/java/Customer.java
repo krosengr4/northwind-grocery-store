@@ -1,4 +1,4 @@
-public class Customer implements Printable {
+public class Customer implements NorthwindData {
 
     String contactName;
     String companyName;

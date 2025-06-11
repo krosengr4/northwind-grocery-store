@@ -10,9 +10,9 @@ public class CustomerDao {
         this.dataSource = dataSource;
     }
 
-    public ArrayList<Printable> getAllCustomers() {
+    public ArrayList<NorthwindData> getAllCustomers() {
 
-        ArrayList<Printable> customersList = new ArrayList<>();
+        ArrayList<NorthwindData> customersList = new ArrayList<>();
 
         try (Connection conn = dataSource.getConnection()) {
 

@@ -1,9 +1,14 @@
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import java.util.ArrayList;
+
 public class Main {
 
     static BasicDataSource dataSource = new BasicDataSource();
-
+    static ProductDao productDao = new ProductDao(dataSource);
+    static CategoryDao categoryDao = new CategoryDao(dataSource);
+    static CustomerDao customerDao = new CustomerDao(dataSource);
+    static EmployeeDao employeeDao = new EmployeeDao(dataSource);
 
     public static void main(String[] args) {
 
@@ -53,6 +58,16 @@ public class Main {
 
     public static void processAllEmployees() {
         System.out.println("Process All Employees");
+    }
+
+    public static void printData(ArrayList<NorthwindData> northwindDataList) {
+
+        for (NorthwindData column : northwindDataList) {
+            column.print();
+            System.out.println("-------------------------------------------------------------");
+        }
+
+        Utils.pauseApp();
     }
 
 }

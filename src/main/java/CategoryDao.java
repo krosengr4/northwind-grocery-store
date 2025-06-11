@@ -10,9 +10,9 @@ public class CategoryDao {
         this.dataSource = dataSource;
     }
 
-    public ArrayList<Printable> getAllCategories() {
+    public ArrayList<NorthwindData> getAllCategories() {
 
-        ArrayList<Printable> categoriesList = new ArrayList<>();
+        ArrayList<NorthwindData> categoriesList = new ArrayList<>();
 
         try (Connection conn = dataSource.getConnection()) {
 

@@ -1,4 +1,4 @@
-public class Product implements Printable {
+public class Product implements NorthwindData {
 
     int productID;
     String name;
