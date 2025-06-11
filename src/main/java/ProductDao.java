@@ -37,4 +37,33 @@ public class ProductDao {
         return productsList;
     }
 
+    public ArrayList<NorthwindData> getProductsFromCategory(String userCatChoice) {
+        ArrayList<NorthwindData> productsList = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection()) {
+
+            String query = "SELECT * FROM products WHERE CategoryID = ?;";
+            PreparedStatement prepStatement = conn.prepareStatement(query);
+            prepStatement.setString(1, userCatChoice);
+
+            ResultSet results = prepStatement.executeQuery();
+
+            while (results.next()) {
+                int productID = Integer.parseInt(results.getString("ProductID"));
+                String productName = results.getString("ProductName");
+                double unitPrice = Double.parseDouble(results.getString("UnitPrice"));
+                int unitsInStock = Integer.parseInt(results.getString("UnitsInStock"));
+
+                Product newProduct = new Product(productID, productName, unitPrice, unitsInStock);
+
+                productsList.add(newProduct);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return productsList;
+    }
+
 }
