@@ -17,7 +17,8 @@ public class Main {
         while (ifContinue) {
 
             System.out.println("-----OPTIONS-----");
-            System.out.println("1 - Display All Products\n2 - Display All Customers\n3 - Display All Categories\n4 - Display All Employees\n0 - Exit");
+            System.out.println("1 - View Products Screen\n2 - View Customers Screen\n3 - View Categories Screen\n4 - View Employees Screen\n0 - Exit");
+//            System.out.println("1 - Display All Products\n2 - Display All Customers\n3 - Display All Categories\n4 - Display All Employees\n0 - Exit");
             int userQueryChoice = Utils.messageAndResponseInt("Please select an option: ");
 
             switch (userQueryChoice) {
@@ -31,6 +32,59 @@ public class Main {
         }
 
         System.out.println("\n\nHave a Nice Day! :)");
+    }
+
+    public static void displayProductsScreen() {
+
+        boolean ifContinueProductScreen = true;
+
+        while (ifContinueProductScreen) {
+            System.out.println("\n____________PRODUCTS SCREEN____________");
+            System.out.println("-----OPTIONS-----");
+            System.out.println("1 - See All Products\n2 - Search Product By ID\n3 - Search Product By Name\n4 - Search Product By Price\n0 - Go Back");
+            int productScreenChoice = Utils.messageAndResponseInt("Enter your option: ");
+
+        }
+    }
+
+    public static void displayCustomerScreen() {
+        boolean ifContinueCustomerScreen = true;
+
+        while (ifContinueCustomerScreen) {
+            System.out.println("\n____________CUSTOMERS SCREEN____________");
+            System.out.println("-----OPTIONS-----");
+            System.out.println("""
+                    1 - See All Customers
+                    2 - Search Customer by Contact Name
+                    3 - Search Customer by Company Name\
+                    
+                    4 - Search Customer by City
+                    5 - Search Customer by Country
+                    0 - Go Back""");
+            int customerScreenChoice = Utils.messageAndResponseInt("Enter your option: ");
+        }
+    }
+
+    public static void displayCategoriesScreen() {
+        boolean ifContinueCategoryScreen = true;
+
+        while (ifContinueCategoryScreen) {
+            System.out.println("\n____________CATEGORIES SCREEN____________");
+            System.out.println("-----OPTIONS-----");
+            System.out.println("1 - See All Categories\n2 - Search Category By Name\n3 - See All Products In Specific Category\n0 - Go Back");
+            int categoryScreenChoice = Utils.messageAndResponseInt("Enter your option: ");
+        }
+    }
+
+    public static void displayEmployeeScreen() {
+        boolean ifContinueEmployeeScreen = true;
+
+        while (ifContinueEmployeeScreen) {
+            System.out.println("\n____________EMPLOYEES SCREEN____________");
+            System.out.println("-----OPTIONS-----");
+            System.out.println("1 - See All Employees\n2 - Search Employee By Name\n3 - Search Employees by Title\n0 - Go Back");
+            int employeeScreenChoice = Utils.messageAndResponseInt("Enter your option: ");
+        }
     }
 
     public static void setDataSource() {
