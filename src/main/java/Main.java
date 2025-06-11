@@ -61,6 +61,31 @@ public class Main {
         ArrayList<NorthwindData> categoriesList = categoryDao.getAllCategories();
         printData(categoriesList);
 
+        System.out.println("\nWould you like to view all products in a certain category? (Y or N)");
+        String userChoice = Utils.promptGetUserInput("Enter here: ").trim();
+
+        if (userChoice.equalsIgnoreCase("y")) {
+            processProductsFromCategory();
+        }
+    }
+
+    public static void processProductsFromCategory() {
+
+        String userCatChoice = Utils.promptGetUserInput("\nSelect a CategoryID Number (1-8): ").trim();
+        int userIntCatChoice = Integer.parseInt(userCatChoice);
+
+        boolean ifRetry = true;
+
+        while(ifRetry) {
+            if (userIntCatChoice < 1 || userIntCatChoice > 8) {
+                System.err.println("ERROR! We only have 8 Categories! Enter a number between 1 and 8!");
+            } else {
+                System.out.println("Get products based on category!");
+
+
+                ifRetry = false;
+            }
+        }
     }
 
     public static void processAllEmployees() {
