@@ -1,9 +1,12 @@
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 
 public class Main {
 
+    private static final Log log = LogFactory.getLog(Main.class);
     static BasicDataSource dataSource = new BasicDataSource();
     static ProductDao productDao = new ProductDao(dataSource);
     static CategoryDao categoryDao = new CategoryDao(dataSource);
@@ -12,26 +15,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        setDataSource();
-        boolean ifContinue = true;
-
-        while (ifContinue) {
-
-            System.out.println("\n___________________NORTHWIND GROCERIES___________________");
-            System.out.println("-----OPTIONS-----");
-            System.out.println("1 - View Products Screen\n2 - View Customers Screen\n3 - View Categories Screen\n4 - View Employees Screen\n0 - Exit");
-//            System.out.println("1 - Display All Products\n2 - Display All Customers\n3 - Display All Categories\n4 - Display All Employees\n0 - Exit");
-            int userQueryChoice = Utils.messageAndResponseInt("Please select an option: ");
-
-            switch (userQueryChoice) {
-                case 1 -> displayProductsScreen();
-                case 2 -> displayCustomerScreen();
-                case 3 -> displayCategoriesScreen();
-                case 4 -> displayEmployeeScreen();
-                case 0 -> ifContinue = false;
-                default -> System.err.println("ERROR! Please enter a number listed on the screen!");
-            }
-        }
+        System.out.println("\n\t\t----------------------WELCOME TO NORTHWIND GROCERIES!----------------------\n");
+        UILogic.setDataSource();
+        UILogic.processHomeScreen();
 
         System.out.println("\n\nHave a Nice Day! :)");
     }

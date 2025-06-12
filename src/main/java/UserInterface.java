@@ -18,7 +18,6 @@ public class UserInterface {
     public int displayProductScreen() {
         System.out.println("\n____________PRODUCTS SCREEN____________");
         System.out.println("-----OPTIONS-----");
-        System.out.println("1 - See All Products\n2 - Search Product By ID\n3 - Search Product By Name\n4 - Search Products By Price Range\n0 - Go Back");
         System.out.println("""
                 1 - See All Products
                 2 - Search Product By ID
