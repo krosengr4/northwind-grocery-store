@@ -75,7 +75,7 @@ public class Main {
             System.out.println("-----OPTIONS-----");
             System.out.println("""
                     1 - See All Customers
-                    2 - Search Customers by Name
+                    2 - Search Customers by Contact Name
                     4 - Search Customers by Company Name
                     5 - Search Customers by City
                     6 - Search Customers by Country
@@ -172,6 +172,15 @@ public class Main {
         } else {
             customer.print();
         }
+    }
+
+    public static void processCustomerByCompany() {
+        String companyName = Utils.promptGetUserInput("Please Enter the Company Name: ");
+        String query = "SELECT * FROM customers WHERE CompanyName LIKE ?";
+
+        ArrayList<NorthwindData> customersList = customerDao.getCustomersList(query, companyName);
+
+        printData(customersList);
     }
 
     public static void processAllCategories() {
