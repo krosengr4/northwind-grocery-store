@@ -102,6 +102,14 @@ public class Main {
             System.out.println("-----OPTIONS-----");
             System.out.println("1 - See All Categories\n2 - Search Category By Name\n3 - See All Products In a Category\n0 - Go Back");
             int categoryScreenChoice = Utils.messageAndResponseInt("Enter your option: ");
+
+            switch (categoryScreenChoice) {
+                case 1 -> processAllCategories();
+                case 2 -> processCategoryByName();
+                case 3 -> processProductsFromCategory();
+                case 0 -> ifContinueCategoryScreen = false;
+                default -> System.err.println("ERROR! Please Enter a number that is listed!");
+            }
         }
     }
 
@@ -217,6 +225,21 @@ public class Main {
         if (userChoice.equalsIgnoreCase("y")) {
             processProductsFromCategory();
         }
+    }
+
+    public static void processCategoryByName() {
+
+        String categoryName = Utils.promptGetUserInput("Enter the name of category: ");
+
+        Category category = categoryDao.getCategory(categoryName);
+
+        if (category == null) {
+            System.out.println("There are no categories with that name...");
+        } else {
+            category.print();
+        }
+
+        Utils.pauseApp();
     }
 
     public static void processProductsFromCategory() {
