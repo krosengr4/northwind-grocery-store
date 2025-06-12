@@ -127,12 +127,11 @@ public class Main {
     public static void processAllProducts() {
         ArrayList<NorthwindData> productsList = productDao.getAllProducts();
         printData(productsList);
-
     }
 
     public static void processProductByID() {
 
-        String productID = Utils.promptGetUserInput("\nPlease enter the ProductID: ");
+        String productID = Utils.promptGetUserInput("\nPlease enter the ProductID: ").trim();
         String query = "SELECT * FROM products WHERE ProductID = ?";
 
         Product product = productDao.getProduct(query, productID);
@@ -148,7 +147,7 @@ public class Main {
     }
 
     public static void processProductByName() {
-        String productName = Utils.promptGetUserInput("\nPlease Enter the Product Name: ");
+        String productName = Utils.promptGetUserInput("\nPlease Enter the Product Name: ").trim();
         String query = "SELECT * FROM products WHERE ProductName LIKE ?;";
 
         Product product = productDao.getProduct(query, productName);
@@ -176,11 +175,10 @@ public class Main {
     public static void processAllCustomers() {
         ArrayList<NorthwindData> customersList = customerDao.getAllCustomers();
         printData(customersList);
-
     }
 
     public static void processCustomerByName() {
-        String customerName = Utils.promptGetUserInput("\nPlease Enter the customers First or Last Name: ");
+        String customerName = Utils.promptGetUserInput("\nPlease Enter the customers First or Last Name: ").trim();
         String query = "SELECT * FROM customers where ContactName LIKE ?";
 
         ArrayList<NorthwindData> customerList = customerDao.getCustomersList(query, customerName);
@@ -189,7 +187,7 @@ public class Main {
     }
 
     public static void processCustomerByCompany() {
-        String companyName = Utils.promptGetUserInput("\nPlease Enter the Company Name: ");
+        String companyName = Utils.promptGetUserInput("\nPlease Enter the Company Name: ").trim();
         String query = "SELECT * FROM customers WHERE CompanyName LIKE ?";
 
         ArrayList<NorthwindData> customersList = customerDao.getCustomersList(query, companyName);
@@ -198,7 +196,7 @@ public class Main {
     }
 
     public static void processCustomerByCity() {
-        String cityName = Utils.promptGetUserInput("\nPlease Enter the name of the city: ");
+        String cityName = Utils.promptGetUserInput("\nPlease Enter the name of the city: ").trim();
         String query = "SELECT * FROM customers WHERE City LIKE ?";
 
         ArrayList<NorthwindData> customersList = customerDao.getCustomersList(query, cityName);
@@ -207,7 +205,7 @@ public class Main {
     }
 
     public static void processCustomerByCountry() {
-        String countryName = Utils.promptGetUserInput("\nPlease Enter the Name of the Country: ");
+        String countryName = Utils.promptGetUserInput("\nPlease Enter the Name of the Country: ").trim();
         String query = "SELECT * FROM customers WHERE Country LIKE ?";
 
         ArrayList<NorthwindData> customersList = customerDao.getCustomersList(query, countryName);
@@ -222,7 +220,7 @@ public class Main {
 
     public static void processCategoryByName() {
 
-        String categoryName = Utils.promptGetUserInput("Enter the name of category: ");
+        String categoryName = Utils.promptGetUserInput("Enter the name of category: ").trim();
 
         Category category = categoryDao.getCategory(categoryName);
 
@@ -258,6 +256,30 @@ public class Main {
         ArrayList<NorthwindData> employeesList = employeeDao.getAllEmployees();
         printData(employeesList);
     }
+
+    public static void processEmployeeByName() {
+        String employeeName = Utils.promptGetUserInput("Enter the first or last name of an employee: ").trim();
+        String query = "SELECT * FROM employees WHERE FirstName LIKE ? OR LastName LIKE ?;";
+
+        Employee employee = employeeDao.getEmployee(query, employeeName);
+
+        if (employee == null) {
+            System.out.println("There are no employees with that name...");
+        } else {
+            employee.print();
+        }
+
+        Utils.pauseApp();
+    }
+
+    public static void processGetEmployeeByTitle() {
+        String employeeTitle = Utils.promptGetUserInput("Please enter a title to search by: ").trim();
+        String query = "SELECT * FROM employees WHERE Title LIKE ?";
+
+        ArrayList<NorthwindData> employeesList = employeeDao.getEmployeesList(query, employeeTitle);
+        printData(employeesList);
+    }
+
 
     public static void printData(ArrayList<NorthwindData> northwindDataList) {
 
