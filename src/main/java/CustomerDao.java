@@ -66,4 +66,33 @@ public class CustomerDao {
         return customer;
     }
 
+    public ArrayList<NorthwindData> getCustomersList(String query, String userInput) {
+        ArrayList<NorthwindData> customersList = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection()) {
+
+            PreparedStatement prepStatement = conn.prepareStatement(query);
+            prepStatement.setString(1, userInput);
+
+            ResultSet results = prepStatement.executeQuery();
+
+            while (results.next()) {
+                String customerName = results.getString("ContactName");
+                String companyName = results.getString("CompanyName");
+                String city = results.getString("City");
+                String country = results.getString("Country");
+                String phoneNumber = results.getString("Phone");
+
+                Customer newCustomer = new Customer(customerName, companyName, city, country, phoneNumber);
+
+                customersList.add(newCustomer);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return customersList;
+    }
+
 }
