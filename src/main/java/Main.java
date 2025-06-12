@@ -26,7 +26,7 @@ public class Main {
             switch (userQueryChoice) {
                 case 1 -> displayProductsScreen();
                 case 2 -> displayCustomerScreen();
-                case 3 -> processAllCategories();
+                case 3 -> displayCategoriesScreen();
                 case 4 -> processAllEmployees();
                 case 0 -> ifContinue = false;
                 default -> System.err.println("ERROR! Please enter a number listed on the screen!");
@@ -218,13 +218,6 @@ public class Main {
     public static void processAllCategories() {
         ArrayList<NorthwindData> categoriesList = categoryDao.getAllCategories();
         printData(categoriesList);
-
-        System.out.println("\nWould you like to view all products in a certain category? (Y or N)");
-        String userChoice = Utils.promptGetUserInput("Enter here: ").trim();
-
-        if (userChoice.equalsIgnoreCase("y")) {
-            processProductsFromCategory();
-        }
     }
 
     public static void processCategoryByName() {
