@@ -75,11 +75,10 @@ public class Main {
             System.out.println("-----OPTIONS-----");
             System.out.println("""
                     1 - See All Customers
-                    2 - Search Customer by Contact Name
-                    3 - Search Customer by Company Name\
-                    
-                    4 - Search Customer by City
-                    5 - Search Customer by Country
+                    2 - Search Customers by Name
+                    4 - Search Customers by Company Name
+                    5 - Search Customers by City
+                    6 - Search Customers by Country
                     0 - Go Back""");
             int customerScreenChoice = Utils.messageAndResponseInt("Enter your option: ");
         }
@@ -160,6 +159,19 @@ public class Main {
         ArrayList<NorthwindData> customersList = customerDao.getAllCustomers();
         printData(customersList);
 
+    }
+
+    public static void processCustomerByName() {
+        String customerName = Utils.promptGetUserInput("\nPlease Enter the customers First or Last Name: ");
+        String query = "SELECT * FROM customers where ContactName LIKE ?";
+
+        Customer customer = customerDao.getCustomer(query, customerName);
+
+        if (customer == null){
+            System.out.println("No customers found with that Contact Name...");
+        } else {
+            customer.print();
+        }
     }
 
     public static void processAllCategories() {

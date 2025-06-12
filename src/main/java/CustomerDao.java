@@ -72,7 +72,7 @@ public class CustomerDao {
         try (Connection conn = dataSource.getConnection()) {
 
             PreparedStatement prepStatement = conn.prepareStatement(query);
-            prepStatement.setString(1, userInput);
+            prepStatement.setString(1, "%" + userInput + "%");
 
             ResultSet results = prepStatement.executeQuery();
 
