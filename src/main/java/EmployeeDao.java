@@ -62,4 +62,28 @@ public class EmployeeDao {
 
         return employee;
     }
+
+    public ArrayList<NorthwindData> getEmployeesList(String query, String userInput) {
+        ArrayList<NorthwindData> employeesList = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection()) {
+
+            PreparedStatement prepStatement = conn.prepareStatement(query);
+            prepStatement.setString(1, userInput);
+
+            ResultSet results = prepStatement.executeQuery();
+            while (results.next()) {
+                String firstName = results.getString("FirstName");
+                String lastName = results.getString("LastName");
+                String title = results.getString("Title");
+
+                Employee newEmployee = new Employee(firstName, lastName, title);
+                employeesList.add(newEmployee);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return employeesList;
+    }
 }
