@@ -2,6 +2,8 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeDaoTest {
@@ -22,6 +24,21 @@ class EmployeeDaoTest {
         String actual = employee.lastName;
 
         Assertions.assertEquals("Buchanan", actual);
+    }
 
+    @Test
+    void getEmployeesList() {
+        dataSource.setUrl("jdbc:mysql://localhost:3306/northwind");
+        dataSource.setUsername("root");
+        dataSource.setPassword(System.getenv("SQL_PASSWORD"));
+
+        String title = "Sales Representative";
+        String query = "SELECT * FROM employees WHERE Title LIKE ?";
+        ArrayList<NorthwindData> employeeList = employeeDao.getEmployeesList(query, title);
+
+        Employee employee = (Employee) employeeList.getFirst();
+        String actual = employee.firstName;
+
+        Assertions.assertEquals("Nancy", actual);
     }
 }
