@@ -25,7 +25,7 @@ public class Main {
 
             switch (userQueryChoice) {
                 case 1 -> displayProductsScreen();
-                case 2 -> processAllCustomers();
+                case 2 -> displayCustomerScreen();
                 case 3 -> processAllCategories();
                 case 4 -> processAllEmployees();
                 case 0 -> ifContinue = false;
@@ -76,11 +76,21 @@ public class Main {
             System.out.println("""
                     1 - See All Customers
                     2 - Search Customers by Contact Name
-                    4 - Search Customers by Company Name
-                    5 - Search Customers by City
-                    6 - Search Customers by Country
+                    3 - Search Customers by Company Name
+                    4 - Search Customers by City
+                    5 - Search Customers by Country
                     0 - Go Back""");
             int customerScreenChoice = Utils.messageAndResponseInt("Enter your option: ");
+
+            switch (customerScreenChoice) {
+                case 1 -> processAllCustomers();
+                case 2 -> processCustomerByName();
+                case 3 -> processCustomerByCompany();
+                case 4 -> processCustomerByCity();
+                case 5 -> processCustomerByCountry();
+                case 0 -> ifContinueCustomerScreen = false;
+                default -> System.err.println("ERROR! Please Enter a Number that is listed!");
+            }
         }
     }
 
@@ -165,20 +175,34 @@ public class Main {
         String customerName = Utils.promptGetUserInput("\nPlease Enter the customers First or Last Name: ");
         String query = "SELECT * FROM customers where ContactName LIKE ?";
 
-        Customer customer = customerDao.getCustomer(query, customerName);
+        ArrayList<NorthwindData> customerList = customerDao.getCustomersList(query, customerName);
 
-        if (customer == null){
-            System.out.println("No customers found with that Contact Name...");
-        } else {
-            customer.print();
-        }
+        printData(customerList);
     }
 
     public static void processCustomerByCompany() {
-        String companyName = Utils.promptGetUserInput("Please Enter the Company Name: ");
+        String companyName = Utils.promptGetUserInput("\nPlease Enter the Company Name: ");
         String query = "SELECT * FROM customers WHERE CompanyName LIKE ?";
 
         ArrayList<NorthwindData> customersList = customerDao.getCustomersList(query, companyName);
+
+        printData(customersList);
+    }
+
+    public static void processCustomerByCity() {
+        String cityName = Utils.promptGetUserInput("\nPlease Enter the name of the city: ");
+        String query = "SELECT * FROM customers WHERE City LIKE ?";
+
+        ArrayList<NorthwindData> customersList = customerDao.getCustomersList(query, cityName);
+
+        printData(customersList);
+    }
+
+    public static void processCustomerByCountry() {
+        String countryName = Utils.promptGetUserInput("\nPlease Enter the Name of the Country: ");
+        String query = "SELECT * FROM customers WHERE Country LIKE ?";
+
+        ArrayList<NorthwindData> customersList = customerDao.getCustomersList(query, countryName);
 
         printData(customersList);
     }
