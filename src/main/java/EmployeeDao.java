@@ -36,4 +36,29 @@ public class EmployeeDao {
 
         return employeesList;
     }
+
+    public Employee getEmployee(String query, String userInput) {
+        Employee employee = null;
+
+        try(Connection conn = dataSource.getConnection()) {
+
+            PreparedStatement prepStatement = conn.prepareStatement(query);
+            prepStatement.setString(1, userInput);
+
+            ResultSet results = prepStatement.executeQuery();
+
+            while (results.next()) {
+                String firstName = results.getString("FirstName");
+                String lastName = results.getString("LastName");
+                String title = results.getString("Title");
+
+                employee = new Employee(firstName, lastName, title);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return employee;
+    }
 }
