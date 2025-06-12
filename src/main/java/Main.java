@@ -27,7 +27,7 @@ public class Main {
                 case 1 -> displayProductsScreen();
                 case 2 -> displayCustomerScreen();
                 case 3 -> displayCategoriesScreen();
-                case 4 -> processAllEmployees();
+                case 4 -> displayEmployeeScreen();
                 case 0 -> ifContinue = false;
                 default -> System.err.println("ERROR! Please enter a number listed on the screen!");
             }
@@ -121,6 +121,14 @@ public class Main {
             System.out.println("-----OPTIONS-----");
             System.out.println("1 - See All Employees\n2 - Search Employee By Name\n3 - Search Employees by Title\n0 - Go Back");
             int employeeScreenChoice = Utils.messageAndResponseInt("Enter your option: ");
+
+            switch (employeeScreenChoice) {
+                case 1 -> processAllEmployees();
+                case 2 -> processEmployeeByName();
+                case 3 -> processEmployeeByTitle();
+                case 0 -> ifContinueEmployeeScreen = false;
+                default -> System.err.println("ERROR! Please Enter a number that is listed!");
+            }
         }
     }
 
@@ -272,7 +280,7 @@ public class Main {
         Utils.pauseApp();
     }
 
-    public static void processGetEmployeeByTitle() {
+    public static void processEmployeeByTitle() {
         String employeeTitle = Utils.promptGetUserInput("Please enter a title to search by: ").trim();
         String query = "SELECT * FROM employees WHERE Title LIKE ?";
 
@@ -287,6 +295,7 @@ public class Main {
             System.out.println("There is no data to display...");
         } else {
             for (NorthwindData column : northwindDataList) {
+                System.out.println("\n-------------------------------------------------------------");
                 column.print();
                 System.out.println("-------------------------------------------------------------");
             }
