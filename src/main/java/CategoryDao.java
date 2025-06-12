@@ -36,4 +36,30 @@ public class CategoryDao {
 
         return categoriesList;
     }
+
+    public Category getCategory(String userInput) {
+        Category category = null;
+
+        try (Connection conn = dataSource.getConnection()) {
+
+            String query = "SELECT * FROM categories WHERE CategoryName LIKE ?";
+            PreparedStatement prepStatement = conn.prepareStatement(query);
+            prepStatement.setString(1, "%" + userInput + "%");
+
+            ResultSet results = prepStatement.executeQuery();
+
+            while (results.next()) {
+                int catID = Integer.parseInt(results.getString("CategoryID"));
+                String catName = results.getString("CategoryName");
+                String catDescription = results.getString("Description");
+
+                category = new Category(catID, catName, catDescription);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return category;
+    }
 }

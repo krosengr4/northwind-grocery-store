@@ -9,12 +9,6 @@ class ProductTest {
     static BasicDataSource dataSource = new BasicDataSource();
     static ProductDao productDao = new ProductDao(dataSource);
 
-    private static void setDataSource() {
-        dataSource.setUrl("jdbc:mysql://localhost:3306/northwind");
-        dataSource.setUsername("root");
-        dataSource.setPassword(System.getenv("SQL_PASSWORD"));
-    }
-
     @Test
     void processProductByID() {
 
