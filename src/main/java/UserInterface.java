@@ -23,6 +23,9 @@ public class UserInterface {
                 1 - See All Products
                 2 - Search Product By Name
                 3 - Search Products By Price Range
+                4 - Add A New Product
+                5 - Update an Existing Product
+                6 - Remove A Product (requires password)
                 0 - Go Back
                 """);
 
@@ -38,6 +41,9 @@ public class UserInterface {
                     3 - Search Customers by Company Name
                     4 - Search Customers by City
                     5 - Search Customers by Country
+                    6 - Add A New Customer
+                    7 - Update an Existing Customer
+                    8 - Remove A Customer (requires password)
                     0 - Go Back""");
 
         return Utils.messageAndResponseInt("Enter your option: ");
@@ -50,6 +56,9 @@ public class UserInterface {
                 1 - See All Categories
                 2 - Search Category By Name
                 3 - See All Products In a Category
+                4 - Add A New Category
+                5 - Update an Existing Category
+                6 - Remove A Category (requires password)
                 0 - Go Back
                 """);
 
@@ -63,6 +72,9 @@ public class UserInterface {
                 1 - See All Employees
                 2 - Search Employee By Name
                 3 - Search Employees by Title
+                4 - Add A New Employee
+                5 - Update an Existing Employee
+                6 - Remove an Employee (requires password)
                 0 - Go Back
                 """);
 
@@ -76,9 +88,9 @@ public class UserInterface {
                 1 - View All Shippers
                 2 - Search Shippers by Name
                 3 - Search Shipper by Phone
-                4 - Add a Shipper
-                5 - Update a Shipper
-                6 - Delete a Shipper (requires password)
+                4 - Add a New Shipper
+                5 - Update an Existing Shipper
+                6 - Remove a Shipper (requires password)
                 0 - Go back
                 """);
 
