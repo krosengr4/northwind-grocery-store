@@ -11,11 +11,11 @@ public class UILogic {
     static EmployeeDao employeeDao = new EmployeeDao(dataSource);
     static UserInterface ui = new UserInterface();
 
-    public static void setDataSource() {
-        String password = System.getenv("SQL_PASSWORD");
-        String userName = "root";
-        String url = "jdbc:mysql://localhost:3306/northwind";
+    static String url = "jdbc:mysql://localhost:3306/northwind";
+    static String userName = "root";
+    static String password = System.getenv("SQL_PASSWORD");
 
+    public static void setDataSource() {
         dataSource.setUrl(url);
         dataSource.setUsername(userName);
         dataSource.setPassword(password);
@@ -61,7 +61,7 @@ public class UILogic {
         while (continueCustomerScreen) {
             int customerScreenAction = ui.displayCustomerScreen();
 
-            switch (customerScreenAction){
+            switch (customerScreenAction) {
                 case 1 -> processAllCustomers();
                 case 2 -> processCustomerByName();
                 case 3 -> processCustomerByCompany();
@@ -79,7 +79,7 @@ public class UILogic {
         while (continueCategoryScreen) {
             int categoryScreenAction = ui.displayCategoriesScreen();
 
-            switch (categoryScreenAction){
+            switch (categoryScreenAction) {
                 case 1 -> processAllCategories();
                 case 2 -> processCategoryByName();
                 case 3 -> processProductsFromCategory();
@@ -153,6 +153,18 @@ public class UILogic {
         printData(productsList);
     }
 
+    public static void processAddProduct() {
+        //Create product
+    }
+
+    public static void processUpdateProduct() {
+        //Update product
+    }
+
+    public static void processDeleteProduct() {
+        //todo create a method to check a password
+    }
+
     public static void processAllCustomers() {
         ArrayList<NorthwindData> customersList = customerDao.getAllCustomers();
         printData(customersList);
@@ -194,6 +206,18 @@ public class UILogic {
         printData(customersList);
     }
 
+    public static void processAddCustomer() {
+        //Add customer
+    }
+
+    public static void processUpdateCustomer() {
+        //Update customer
+    }
+
+    public static void processDeleteCustomer() {
+        //todo create a method to check a password
+    }
+
     public static void processAllCategories() {
         ArrayList<NorthwindData> categoriesList = categoryDao.getAllCategories();
         printData(categoriesList);
@@ -231,6 +255,18 @@ public class UILogic {
         }
     }
 
+    public static void processAddCategory() {
+        //add a category
+    }
+
+    public static void processUpdateCategory() {
+        //Update category
+    }
+
+    public static void processDeleteCategory() {
+        //todo create a method to check a password
+    }
+
     public static void processAllEmployees() {
         ArrayList<NorthwindData> employeesList = employeeDao.getAllEmployees();
         printData(employeesList);
@@ -259,6 +295,18 @@ public class UILogic {
         printData(employeesList);
     }
 
+    public static void processAddEmployee() {
+        //Add employee
+    }
+
+    public static void processUpdateEmployee() {
+        //Update employee
+    }
+
+    public static void processDeleteEmployee(){
+        //todo create a method to check a password
+    }
+
     public static void processAllShippers() {
 
     }
@@ -268,11 +316,11 @@ public class UILogic {
     }
 
     public static void processAddShipper() {
-
+        //Add a shipper
     }
 
     public static void processUpdateShipper() {
-
+        //Update a shipper
     }
 
     public static void processDeleteShipper() {
