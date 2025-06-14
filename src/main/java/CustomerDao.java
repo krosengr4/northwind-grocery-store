@@ -119,4 +119,47 @@ public class CustomerDao {
         return customersList;
     }
 
+    public void addCustomer (Customer customer) {
+        //region Setting each field of object into its own variable
+        String companyName = customer.companyName;
+        String contactName = customer.contactName;
+        String contactTitle = customer.contactTitle;
+        String address = customer.address;
+        String region = customer.region;
+        String postalCode = customer.postalCode;
+        String city = customer.city;
+        String country = customer.country;
+        String phoneNumber = customer.phoneNumber;
+        String fax = customer.fax;
+        //endregion
+
+        try (Connection conn = dataSource.getConnection()) {
+
+            String query = "INSERT INTO customers (CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1, companyName);
+            statement.setString(2, contactName);
+            statement.setString(3, contactTitle);
+            statement.setString(4, address);
+            statement.setString(5, region);
+            statement.setString(6, postalCode);
+            statement.setString(7, city);
+            statement.setString(8, country);
+            statement.setString(9, phoneNumber);
+            statement.setString(10, fax);
+
+            int rows = statement.executeUpdate();
+
+            if (rows != 0) {
+                System.out.println("Success! The new customer was added to the database.");
+            } else {
+                System.err.println("ERROR! The new customer was not added!!!");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
