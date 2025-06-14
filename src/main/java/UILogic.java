@@ -46,9 +46,8 @@ public class UILogic {
 
             switch (productsScreenAction) {
                 case 1 -> processAllProducts();
-                case 2 -> processProductsByID();
-                case 3 -> processProductByName();
-                case 4 -> processProductByPrice();
+                case 2 -> processProductByName();
+                case 3 -> processProductByPrice();
                 case 0 -> continueProductsScreen = false;
                 default -> System.err.println("ERROR! Please enter a number that is listed on the screen!");
             }
@@ -138,18 +137,44 @@ public class UILogic {
     }
 
     public static void processAllCustomers() {
+        ArrayList<NorthwindData> customersList = customerDao.getAllCustomers();
+        printData(customersList);
     }
 
     public static void processCustomerByName() {
+        String customerName = Utils.promptGetUserInput("\nPlease Enter the customers First or Last Name: ").trim();
+        String query = "SELECT * FROM customers where ContactName LIKE ?";
+
+        ArrayList<NorthwindData> customerList = customerDao.getCustomersList(query, customerName);
+
+        printData(customerList);
     }
 
     public static void processCustomerByCompany() {
+        String companyName = Utils.promptGetUserInput("\nPlease Enter the Company Name: ").trim();
+        String query = "SELECT * FROM customers WHERE CompanyName LIKE ?";
+
+        ArrayList<NorthwindData> customersList = customerDao.getCustomersList(query, companyName);
+
+        printData(customersList);
     }
 
     public static void processCustomerByCity() {
+        String cityName = Utils.promptGetUserInput("\nPlease Enter the name of the city: ").trim();
+        String query = "SELECT * FROM customers WHERE City LIKE ?";
+
+        ArrayList<NorthwindData> customersList = customerDao.getCustomersList(query, cityName);
+
+        printData(customersList);
     }
 
     public static void processCustomerByCountry() {
+        String countryName = Utils.promptGetUserInput("\nPlease Enter the Name of the Country: ").trim();
+        String query = "SELECT * FROM customers WHERE Country LIKE ?";
+
+        ArrayList<NorthwindData> customersList = customerDao.getCustomersList(query, countryName);
+
+        printData(customersList);
     }
 
     public static void processAllCategories() {
