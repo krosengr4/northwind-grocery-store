@@ -308,8 +308,7 @@ public class UILogic {
 
     public static void processUpdateCustomer() {
         System.out.println("\nPlease Enter the Customer ID of the customer you wish to update.");
-        int customerIDInt = Utils.getUserInputInt("Enter here: ");
-        String customerID = String.valueOf(customerIDInt);
+        String customerID = Utils.getUserInput("Enter Here: ");
 
         String query = setCustomerUpdateQuery();
 
@@ -317,6 +316,7 @@ public class UILogic {
             String newValue = Utils.getUserInput("Enter the New Value: ");
 
             customerDao.updateCustomer(query, customerID, newValue);
+            displayCustomerAfterUpdate(customerID);
         }
     }
 
@@ -329,6 +329,7 @@ public class UILogic {
         } else {
             customer.print();
         }
+        Utils.pauseApp();
     }
 
     private static String setCustomerUpdateQuery() {
