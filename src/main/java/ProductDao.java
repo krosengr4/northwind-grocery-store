@@ -146,4 +146,22 @@ public class ProductDao {
         return rows;
     }
 
+    public int updateAProduct(String query, int productID, String newValue) {
+
+        int rows = 0;
+
+        try (Connection conn = dataSource.getConnection()) {
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1, newValue);
+            statement.setString(2, String.valueOf(productID));
+
+            rows = statement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return rows;
+    }
+
 }
