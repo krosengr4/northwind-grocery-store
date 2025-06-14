@@ -178,12 +178,40 @@ public class UILogic {
     }
 
     public static void processAllCategories() {
+        ArrayList<NorthwindData> categoriesList = categoryDao.getAllCategories();
+        printData(categoriesList);
     }
 
     public static void processCategoryByName() {
+        String categoryName = Utils.promptGetUserInput("Enter the name of category: ").trim();
+
+        Category category = categoryDao.getCategory(categoryName);
+
+        if (category == null) {
+            System.out.println("There are no categories with that name...");
+        } else {
+            category.print();
+        }
+
+        Utils.pauseApp();
     }
 
     public static void processProductsFromCategory() {
+        String userCatChoice = Utils.promptGetUserInput("\nSelect a CategoryID Number (1-8): ").trim();
+        int userIntCatChoice = Integer.parseInt(userCatChoice);
+
+        boolean ifRetry = true;
+
+        while (ifRetry) {
+            if (userIntCatChoice < 1 || userIntCatChoice > 8) {
+                System.err.println("ERROR! We only have 8 Categories! Enter a number between 1 and 8!");
+            } else {
+                ArrayList<NorthwindData> productsList = productDao.getProductsFromCategory(userCatChoice);
+                printData(productsList);
+
+                ifRetry = false;
+            }
+        }
     }
 
     public static void processAllEmployees() {
