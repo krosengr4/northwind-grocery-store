@@ -9,6 +9,7 @@ public class UserInterface {
                 2 - View Customers Screen
                 3 - View Categories Screen
                 4 - View Employees Screen
+                5 - View Shippers Screen
                 0 - Exit
                 """);
 
@@ -63,6 +64,21 @@ public class UserInterface {
                 2 - Search Employee By Name
                 3 - Search Employees by Title
                 0 - Go Back
+                """);
+
+        return Utils.messageAndResponseInt("Enter your option: ");
+    }
+
+    public int displayShippersScreen() {
+        System.out.println("\n____________PRODUCTS SCREEN____________");
+        System.out.println("-----OPTIONS-----");
+        System.out.println("""
+                1 - View All Shippers
+                2 - Search Shippers by Name
+                3 - Add a Shipper
+                4 - Update a Shipper
+                5 - Delete a Shipper (requires password)
+                0 - Go back
                 """);
 
         return Utils.messageAndResponseInt("Enter your option: ");
