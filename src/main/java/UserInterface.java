@@ -85,4 +85,23 @@ public class UserInterface {
         return Utils.messageAndResponseInt("Enter your option: ");
     }
 
+    public int displayUpdateProduct() {
+        System.out.println("Please choose which column you would like to update.");
+        System.out.println("-----OPTIONS-----");
+        System.out.println("""
+                1 - Update Product Name
+                2 - Update Supplier ID
+                3 - Update Category ID
+                4 - Update Quantity Per Unit
+                5 - Update Unit Price
+                6 - Update Units in Stock
+                7 - Update Units on Order
+                8 - Update Reorder Level
+                9 - Update if product is discontinued
+                0 - Go Back
+                """);
+
+        return Utils.messageAndResponseInt("Enter your option: ");
+    }
+
 }
