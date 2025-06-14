@@ -116,4 +116,24 @@ public class UserInterface {
         return Utils.getUserInputIntMinMax("Enter your option: ", 0, 9);
     }
 
+    public int displayUpdateCustomer() {
+        System.out.println("Please choose which column you would like to update.");
+        System.out.println("-----OPTIONS-----");
+        System.out.println("""
+                1 - Update Company Name
+                2 - Update Contact Name
+                3 - Update Contact Title
+                4 - Update Address
+                5 - Update Region
+                6 - Update Postal Code
+                7 - Update City
+                8 - Update Country
+                9  - Update Phone Number
+                10 - Update Fax
+                0 - Go Back
+                """);
+
+        return Utils.getUserInputIntMinMax("Enter your option: ", 0, 10);
+    }
+
 }
