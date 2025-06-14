@@ -120,4 +120,30 @@ public class ProductDao {
         return productsList;
     }
 
+    public int addAProduct (String productName, int supplierID, int categoryID, String quantityPerUnit, double unitPrice,
+                            int unitsInStock, int unitsOnOrder, int reorderLevel) {
+        int rows = 0;
+
+        try (Connection conn = dataSource.getConnection()) {
+            String query = "INSERT INTO products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1, productName);
+            statement.setString(2, String.valueOf(supplierID));
+            statement.setString(3, String.valueOf(categoryID));
+            statement.setString(4, quantityPerUnit);
+            statement.setString(5, String.valueOf(unitPrice));
+            statement.setString(6, String.valueOf(unitsInStock));
+            statement.setString(7, String.valueOf(unitsOnOrder));
+            statement.setString(8, String.valueOf(reorderLevel));
+
+            rows = statement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return rows;
+    }
+
 }
