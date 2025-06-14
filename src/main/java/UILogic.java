@@ -107,15 +107,34 @@ public class UILogic {
 
 
     public static void processAllProducts() {
-    }
-
-    public static void processProductsByID() {
+        ArrayList<NorthwindData> productsList = productDao.getAllProducts();
+        printData(productsList);
     }
 
     public static void processProductByName() {
+        String productName = Utils.promptGetUserInput("\nPlease Enter the Product Name: ").trim();
+        String query = "SELECT * FROM products WHERE ProductName LIKE ?;";
+
+        Product product = productDao.getProduct(query, productName);
+
+        if (product == null) {
+            System.out.println("There was no product found with that Name...");
+        } else {
+            System.out.println("------------------------------");
+            product.print();
+        }
+
+        Utils.pauseApp();
     }
 
     public static void processProductByPrice() {
+        double minPrice = Utils.messageAndResponseDouble("\nPlease Enter the Minimum Price: ");
+        double maxPrice = Utils.messageAndResponseDouble("Please Enter the Maximum Price: ");
+        String query = "SELECT * FROM products WHERE UnitPrice BETWEEN ? and ?;";
+
+        ArrayList<NorthwindData> productsList = productDao.getProductsByPrice(query, minPrice, maxPrice);
+
+        printData(productsList);
     }
 
     public static void processAllCustomers() {

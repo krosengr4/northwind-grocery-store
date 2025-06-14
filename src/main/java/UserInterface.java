@@ -20,9 +20,8 @@ public class UserInterface {
         System.out.println("-----OPTIONS-----");
         System.out.println("""
                 1 - See All Products
-                2 - Search Product By ID
-                3 - Search Product By Name
-                4 - Search Products By Price Range
+                2 - Search Product By Name
+                3 - Search Products By Price Range
                 0 - Go Back
                 """);
 
