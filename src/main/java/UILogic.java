@@ -215,15 +215,44 @@ public class UILogic {
     }
 
     public static void processAllEmployees() {
+        ArrayList<NorthwindData> employeesList = employeeDao.getAllEmployees();
+        printData(employeesList);
     }
 
     public static void processEmployeeByName() {
+        String employeeName = Utils.promptGetUserInput("Enter the first or last name of an employee: ").trim();
+        String query = "SELECT * FROM employees WHERE FirstName LIKE ? OR LastName LIKE ?;";
+
+        Employee employee = employeeDao.getEmployee(query, employeeName);
+
+        if (employee == null) {
+            System.out.println("There are no employees with that name...");
+        } else {
+            employee.print();
+        }
+
+        Utils.pauseApp();
     }
 
     public static void processEmployeeByTitle() {
+        String employeeTitle = Utils.promptGetUserInput("Please enter a title to search by: ").trim();
+        String query = "SELECT * FROM employees WHERE Title LIKE ?";
+
+        ArrayList<NorthwindData> employeesList = employeeDao.getEmployeesList(query, employeeTitle);
+        printData(employeesList);
     }
 
     public static void printData(ArrayList<NorthwindData> northwindDataList) {
+        if (northwindDataList.isEmpty()) {
+            System.out.println("There is no data to display...");
+        } else {
+            for (NorthwindData column : northwindDataList) {
+                column.print();
+                System.out.println("-------------------------------------------------------------");
+            }
+        }
+
+        Utils.pauseApp();
     }
 
 
