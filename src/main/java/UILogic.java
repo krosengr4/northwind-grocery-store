@@ -50,6 +50,7 @@ public class UILogic {
                 case 1 -> processAllProducts();
                 case 2 -> processProductByName();
                 case 3 -> processProductByPrice();
+                case 4 -> processProductsByCategory();
                 case 4 -> processAddProduct();
                 case 5 -> processUpdateProduct();
                 case 6 -> processDeleteProduct();
@@ -89,10 +90,9 @@ public class UILogic {
             switch (categoryScreenAction) {
                 case 1 -> processAllCategories();
                 case 2 -> processCategoryByName();
-                case 3 -> processProductsFromCategory();
-                case 4 -> processAddCategory();
-                case 5 -> processUpdateCategory();
-                case 6 -> processDeleteCategory();
+                case 3 -> processAddCategory();
+                case 4 -> processUpdateCategory();
+                case 5 -> processDeleteCategory();
                 case 0 -> continueCategoryScreen = false;
                 default -> System.err.println("ERROR! Please Enter a number that is listed!");
             }
@@ -165,6 +165,26 @@ public class UILogic {
         ArrayList<NorthwindData> productsList = productDao.getProductsByPrice(query, minPrice, maxPrice);
 
         printData(productsList);
+    }
+
+    public static void processProductsByCategory() {
+        processAllCategories();
+
+        boolean ifRetry = true;
+
+        while (ifRetry) {
+            String userCatChoice = Utils.getUserInput("\nSelect a CategoryID Number (1-8): ").trim();
+            int userIntCatChoice = Integer.parseInt(userCatChoice);
+
+            if (userIntCatChoice < 1 || userIntCatChoice > 8) {
+                System.err.println("ERROR! We only have 8 Categories! Enter a number between 1 and 8!");
+            } else {
+                ArrayList<NorthwindData> productsList = productDao.getProductsFromCategory(userCatChoice);
+                printData(productsList);
+
+                ifRetry = false;
+            }
+        }
     }
 
     public static void processAddProduct() {
@@ -311,26 +331,6 @@ public class UILogic {
         }
 
         Utils.pauseApp();
-    }
-
-    public static void processProductsFromCategory() {
-
-
-        boolean ifRetry = true;
-
-        while (ifRetry) {
-            String userCatChoice = Utils.getUserInput("\nSelect a CategoryID Number (1-8): ").trim();
-            int userIntCatChoice = Integer.parseInt(userCatChoice);
-
-            if (userIntCatChoice < 1 || userIntCatChoice > 8) {
-                System.err.println("ERROR! We only have 8 Categories! Enter a number between 1 and 8!");
-            } else {
-                ArrayList<NorthwindData> productsList = productDao.getProductsFromCategory(userCatChoice);
-                printData(productsList);
-
-                ifRetry = false;
-            }
-        }
     }
 
     public static void processAddCategory() {

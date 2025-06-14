@@ -23,9 +23,10 @@ public class UserInterface {
                 1 - See All Products
                 2 - Search Product By Name
                 3 - Search Products By Price Range
-                4 - Add A New Product
-                5 - Update an Existing Product
-                6 - Remove A Product (requires password)
+                4 - Search Products By Category
+                5 - Add A New Product
+                6 - Update an Existing Product
+                7 - Remove A Product (requires password)
                 0 - Go Back
                 """);
 
@@ -55,10 +56,9 @@ public class UserInterface {
         System.out.println("""
                 1 - See All Categories
                 2 - Search Category By Name
-                3 - See All Products In a Category
-                4 - Add A New Category
-                5 - Update an Existing Category
-                6 - Remove A Category (requires password)
+                3 - Add A New Category
+                4 - Update an Existing Category
+                5 - Remove A Category (requires password)
                 0 - Go Back
                 """);
 
@@ -82,7 +82,7 @@ public class UserInterface {
     }
 
     public int displayShippersScreen() {
-        System.out.println("\n____________PRODUCTS SCREEN____________");
+        System.out.println("\n____________SHIPPER SCREEN____________");
         System.out.println("-----OPTIONS-----");
         System.out.println("""
                 1 - View All Shippers
