@@ -146,22 +146,27 @@ public class ProductDao {
         return rows;
     }
 
-    public int updateAProduct(String query, int productID, String newValue) {
-
-        int rows = 0;
+    public void updateAProduct(String query, String productID, String newValue) {
 
         try (Connection conn = dataSource.getConnection()) {
-            PreparedStatement statement = conn.prepareStatement(query);
+            PreparedStatement statement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, newValue);
             statement.setString(2, String.valueOf(productID));
 
-            rows = statement.executeUpdate();
+            int rows = statement.executeUpdate();
+            ResultSet keys = statement.getGeneratedKeys();
+
+            if (rows == 0) {
+                System.out.println("We could not find that product...");
+            } else {
+                while (keys.next()) {
+                    System.out.println("Success! Updated Product with the ID of " + keys.getLong(1));
+                }
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        return rows;
     }
 
 }

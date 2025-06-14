@@ -160,7 +160,53 @@ public class UILogic {
     }
 
     public static void processUpdateProduct() {
-        //Update product
+        String query = setUpdateProductQuery();
+
+        if (!query.equalsIgnoreCase("back")) {
+            System.out.println("\nPlease enter the Product ID of the product you wish to update.");
+            String productID = Utils.promptGetUserInput("Enter here: ").trim();
+
+            String newValue = Utils.promptGetUserInput("\nPlease enter the new value ");
+
+            productDao.updateAProduct(query, productID, newValue);
+            displayProductAfterUpdate(productID);
+        }
+
+    }
+
+    public static String setUpdateProductQuery() {
+        int columnToUpdate = ui.displayUpdateProduct();
+        String query = "UPDATE products SET ";
+
+        switch (columnToUpdate) {
+            case 1 -> query += "ProductName = ?";
+            case 2 -> query += "SupplierID = ?";
+            case 3 -> query += "CategoryID = ?";
+            case 4 -> query += "QuantityPerUnit = ?";
+            case 5 -> query += "UnitPrice = ?";
+            case 6 -> query += "UnitsInStock = ?";
+            case 7 -> query += "UnitsOnOrder = ?";
+            case 8 -> query += "ReorderLevel = ?";
+            case 9 -> query += "Discontinued = ?";
+            case 0 -> {
+                return "back";
+            }
+            default -> System.err.println("ERROR! Please Enter a number that is listed!");
+        }
+        query += " WHERE ProductID = ?;";
+
+        return query;
+    }
+
+    public static void displayProductAfterUpdate (String productID) {
+        String getProductQuery = "SELECT * FROM products WHERE ProductID = ?;";
+        Product product = productDao.getProduct(getProductQuery, productID);
+
+        if (product == null) {
+            System.err.println("ERROR! Could not get product after update!!!");
+        } else {
+            product.print();
+        }
     }
 
     public static void processDeleteProduct() {
