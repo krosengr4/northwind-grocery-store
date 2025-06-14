@@ -13,7 +13,7 @@ public class UserInterface {
                 0 - Exit
                 """);
 
-        return Utils.messageAndResponseInt("Please select an option: ");
+        return Utils.getUserInputInt("Please select an option: ");
     }
 
     public int displayProductScreen() {
@@ -29,7 +29,7 @@ public class UserInterface {
                 0 - Go Back
                 """);
 
-        return Utils.messageAndResponseInt("Enter your option: ");
+        return Utils.getUserInputInt("Enter your option: ");
     }
 
     public int displayCustomerScreen() {
@@ -46,7 +46,7 @@ public class UserInterface {
                     8 - Remove A Customer (requires password)
                     0 - Go Back""");
 
-        return Utils.messageAndResponseInt("Enter your option: ");
+        return Utils.getUserInputInt("Enter your option: ");
     }
 
     public int displayCategoriesScreen() {
@@ -62,7 +62,7 @@ public class UserInterface {
                 0 - Go Back
                 """);
 
-        return Utils.messageAndResponseInt("Enter your option: ");
+        return Utils.getUserInputInt("Enter your option: ");
     }
 
     public int displayEmployeeScreen() {
@@ -78,7 +78,7 @@ public class UserInterface {
                 0 - Go Back
                 """);
 
-        return Utils.messageAndResponseInt("Enter your option: ");
+        return Utils.getUserInputInt("Enter your option: ");
     }
 
     public int displayShippersScreen() {
@@ -94,7 +94,7 @@ public class UserInterface {
                 0 - Go back
                 """);
 
-        return Utils.messageAndResponseInt("Enter your option: ");
+        return Utils.getUserInputInt("Enter your option: ");
     }
 
     public int displayUpdateProduct() {
@@ -113,7 +113,7 @@ public class UserInterface {
                 0 - Go Back
                 """);
 
-        return Utils.messageAndResponseInt("Enter your option: ");
+        return Utils.getUserInputIntMinMax("Enter your option: ", 0, 9);
     }
 
 }

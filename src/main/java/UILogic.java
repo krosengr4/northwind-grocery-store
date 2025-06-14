@@ -142,7 +142,7 @@ public class UILogic {
     }
 
     public static void processProductByName() {
-        String productName = Utils.promptGetUserInput("\nPlease Enter the Product Name: ").trim();
+        String productName = Utils.getUserInput("\nPlease Enter the Product Name: ").trim();
         String query = "SELECT * FROM products WHERE ProductName LIKE ?;";
 
         Product product = productDao.getProduct(query, productName);
@@ -158,8 +158,8 @@ public class UILogic {
     }
 
     public static void processProductByPrice() {
-        double minPrice = Utils.messageAndResponseDouble("\nPlease Enter the Minimum Price: ");
-        double maxPrice = Utils.messageAndResponseDouble("Please Enter the Maximum Price: ");
+        double minPrice = Utils.getUserInputDouble("\nPlease Enter the Minimum Price: ");
+        double maxPrice = Utils.getUserInputDouble("Please Enter the Maximum Price: ");
         String query = "SELECT * FROM products WHERE UnitPrice BETWEEN ? and ?;";
 
         ArrayList<NorthwindData> productsList = productDao.getProductsByPrice(query, minPrice, maxPrice);
@@ -174,14 +174,14 @@ public class UILogic {
     public static void processUpdateProduct() {
         System.out.println("\nPlease enter the Product ID of the product you wish to update.");
 //            String productID = Utils.promptGetUserInput("Enter here: ").trim();
-        int productIDInt = Utils.messageAndResponseInt("Enter Here: ");
+        int productIDInt = Utils.getUserInputInt("Enter Here: ");
         String productID = String.valueOf(productIDInt);
 
         String query = setUpdateProductQuery();
 
         if (!query.equalsIgnoreCase("back")) {
 
-            String newValue = Utils.promptGetUserInput("\nPlease enter the new value ");
+            String newValue = Utils.getUserInput("\nPlease enter the new value ");
 
             //! Fix Error "Data truncation: Data too long for column 'Discontinued' at row 1"
             productDao.updateAProduct(query, productID, newValue);
@@ -237,7 +237,7 @@ public class UILogic {
     }
 
     public static void processCustomerByName() {
-        String customerName = Utils.promptGetUserInput("\nPlease Enter the customers First or Last Name: ").trim();
+        String customerName = Utils.getUserInput("\nPlease Enter the customers First or Last Name: ").trim();
         String query = "SELECT * FROM customers where ContactName LIKE ?";
 
         ArrayList<NorthwindData> customerList = customerDao.getCustomersList(query, customerName);
@@ -246,7 +246,7 @@ public class UILogic {
     }
 
     public static void processCustomerByCompany() {
-        String companyName = Utils.promptGetUserInput("\nPlease Enter the Company Name: ").trim();
+        String companyName = Utils.getUserInput("\nPlease Enter the Company Name: ").trim();
         String query = "SELECT * FROM customers WHERE CompanyName LIKE ?";
 
         ArrayList<NorthwindData> customersList = customerDao.getCustomersList(query, companyName);
@@ -255,7 +255,7 @@ public class UILogic {
     }
 
     public static void processCustomerByCity() {
-        String cityName = Utils.promptGetUserInput("\nPlease Enter the name of the city: ").trim();
+        String cityName = Utils.getUserInput("\nPlease Enter the name of the city: ").trim();
         String query = "SELECT * FROM customers WHERE City LIKE ?";
 
         ArrayList<NorthwindData> customersList = customerDao.getCustomersList(query, cityName);
@@ -264,7 +264,7 @@ public class UILogic {
     }
 
     public static void processCustomerByCountry() {
-        String countryName = Utils.promptGetUserInput("\nPlease Enter the Name of the Country: ").trim();
+        String countryName = Utils.getUserInput("\nPlease Enter the Name of the Country: ").trim();
         String query = "SELECT * FROM customers WHERE Country LIKE ?";
 
         ArrayList<NorthwindData> customersList = customerDao.getCustomersList(query, countryName);
@@ -290,7 +290,7 @@ public class UILogic {
     }
 
     public static void processCategoryByName() {
-        String categoryName = Utils.promptGetUserInput("Enter the name of category: ").trim();
+        String categoryName = Utils.getUserInput("Enter the name of category: ").trim();
 
         Category category = categoryDao.getCategory(categoryName);
 
@@ -304,12 +304,14 @@ public class UILogic {
     }
 
     public static void processProductsFromCategory() {
-        String userCatChoice = Utils.promptGetUserInput("\nSelect a CategoryID Number (1-8): ").trim();
-        int userIntCatChoice = Integer.parseInt(userCatChoice);
+
 
         boolean ifRetry = true;
 
         while (ifRetry) {
+            String userCatChoice = Utils.getUserInput("\nSelect a CategoryID Number (1-8): ").trim();
+            int userIntCatChoice = Integer.parseInt(userCatChoice);
+
             if (userIntCatChoice < 1 || userIntCatChoice > 8) {
                 System.err.println("ERROR! We only have 8 Categories! Enter a number between 1 and 8!");
             } else {
@@ -339,7 +341,7 @@ public class UILogic {
     }
 
     public static void processEmployeeByName() {
-        String employeeName = Utils.promptGetUserInput("Enter the first or last name of an employee: ").trim();
+        String employeeName = Utils.getUserInput("Enter the first or last name of an employee: ").trim();
         String query = "SELECT * FROM employees WHERE FirstName LIKE ? OR LastName LIKE ?;";
 
         Employee employee = employeeDao.getEmployee(query, employeeName);
@@ -354,7 +356,7 @@ public class UILogic {
     }
 
     public static void processEmployeeByTitle() {
-        String employeeTitle = Utils.promptGetUserInput("Please enter a title to search by: ").trim();
+        String employeeTitle = Utils.getUserInput("Please enter a title to search by: ").trim();
         String query = "SELECT * FROM employees WHERE Title LIKE ?";
 
         ArrayList<NorthwindData> employeesList = employeeDao.getEmployeesList(query, employeeTitle);
@@ -379,7 +381,7 @@ public class UILogic {
     }
 
     public static void processShipperByName() {
-        String companyName = Utils.promptGetUserInput("Please Enter the Company Name of the Shipper: ");
+        String companyName = Utils.getUserInput("Please Enter the Company Name of the Shipper: ");
         String query = "SELECT * FROM shippers WHERE CompanyName LIKE ?";
 
         Shipper shipper = shipperDao.getShipper(query, companyName);
@@ -394,7 +396,7 @@ public class UILogic {
 
     public static void processShipperByPhone() {
         System.out.println("Please enter the phone number of the shipper like '(XXX) xxx-xxxx'");
-        String phoneNumber = Utils.promptGetUserInput("Enter here: ");
+        String phoneNumber = Utils.getUserInput("Enter here: ");
         String query = "SELECT * FROM shippers WHERE Phone LIKE ?";
 
         Shipper shipper = shipperDao.getShipper(query, phoneNumber);

@@ -7,12 +7,12 @@ public class Utils {
     static Scanner myScanner = new Scanner(System.in);
 
     //prompt user, then get and return user input
-    public static String promptGetUserInput(String message) {
+    public static String getUserInput(String message) {
         System.out.println(message);
         return myScanner.nextLine().trim();
     }
 
-    public static int messageAndResponseInt(String message) {
+    public static int getUserInputInt(String message) {
         while (true) {
             System.out.print(message);
             try {
@@ -23,7 +23,24 @@ public class Utils {
         }
     }
 
-    public static double messageAndResponseDouble(String message) {
+    public static int getUserInputIntMinMax(String message, int min, int max) {
+        while (true) {
+            System.out.print(message);
+            try {
+//                return Integer.parseInt(myScanner.nextLine());
+                int userInput = Integer.parseInt(myScanner.nextLine());
+                if (userInput >= min && userInput <= max) {
+                    return userInput;
+                } else {
+                    System.err.println("ERROR! Please Input a Valid Number!");
+                }
+            } catch (NumberFormatException e) {
+                System.err.println("ERROR! Invalid Input! Please enter a valid integer!");
+            }
+        }
+    }
+
+    public static double getUserInputDouble(String message) {
         while (true) {
             System.out.print(message);
             try {

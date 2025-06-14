@@ -140,31 +140,45 @@ public class ProductDao {
         return productsList;
     }
 
-    public int addAProduct (String productName, int supplierID, int categoryID, String quantityPerUnit, double unitPrice,
-                            int unitsInStock, int unitsOnOrder, int reorderLevel, boolean isDiscontinued) {
-        int rows = 0;
+    //String productName, int supplierID, int categoryID, String quantityPerUnit, double unitPrice,
+    //                            int unitsInStock, int unitsOnOrder, int reorderLevel, boolean isDiscontinued
+
+    public void addAProduct (Product product) {
+
+        String productName = product.productName;
+        int supplierID = product.supplierID;
+        int categoryID = product.categoryID;
+        String quantityPerUnit = product.quantityPerUnit;
+        double unitPrice = product.unitPrice;
+        int unitsInStock = product.unitsInStock;
+        int reorderLevel = product.reorderLevel;
+        boolean isDiscontinued = product.isDiscontinued;
 
         try (Connection conn = dataSource.getConnection()) {
             String query = "INSERT INTO products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
-            PreparedStatement statement = conn.prepareStatement(query);
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+            PreparedStatement statement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, productName);
             statement.setString(2, String.valueOf(supplierID));
             statement.setString(3, String.valueOf(categoryID));
             statement.setString(4, quantityPerUnit);
             statement.setString(5, String.valueOf(unitPrice));
             statement.setString(6, String.valueOf(unitsInStock));
-            statement.setString(7, String.valueOf(unitsOnOrder));
-            statement.setString(8, String.valueOf(reorderLevel));
-            statement.setString(9, String.valueOf(isDiscontinued));
+            statement.setString(7, String.valueOf(reorderLevel));
+            statement.setString(8, String.valueOf(isDiscontinued));
 
-            rows = statement.executeUpdate();
+            int rows = statement.executeUpdate();
+            ResultSet result = statement.getGeneratedKeys();
+
+            if (rows == 0) {
+                System.out.println("ERROR! The new product was not added to the database!!!");
+            } else {
+                System.out.println("Success! The new product was added to the database with a ProductID: " + result);
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        return rows;
     }
 
     public void updateAProduct(String query, String productID, String newValue) {
@@ -182,7 +196,6 @@ public class ProductDao {
                 System.out.println("\nWe could not find that product...");
             } else {
                 System.out.println("\nSuccess! Updated Product with the ID of " + productID);
-
             }
 
         } catch (SQLException e) {
