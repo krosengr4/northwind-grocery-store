@@ -32,6 +32,7 @@ public class UILogic {
                 case 2 -> processCustomerScreen();
                 case 3 -> processCategoryScreen();
                 case 4 -> processEmployeeScreen();
+                case 5 -> processShippersScreen();
                 case 0 -> ifContinue = false;
                 default -> System.err.println("ERROR! Please enter a number listed on the screen!");
             }
@@ -104,6 +105,22 @@ public class UILogic {
         }
     }
 
+    public static void processShippersScreen() {
+        boolean continueShipperScreen = true;
+
+        while (continueShipperScreen) {
+            int shipperScreenAction = ui.displayShippersScreen();
+
+            switch (shipperScreenAction) {
+                case 1 -> processAllShippers();
+                case 2 -> processShipperByName();
+                case 3 -> processAddShipper();
+                case 4 -> processUpdateShipper();
+                case 5 -> processDeleteShipper();
+                case 0 -> continueShipperScreen = false;
+            }
+        }
+    }
 
     public static void processAllProducts() {
         ArrayList<NorthwindData> productsList = productDao.getAllProducts();
@@ -240,6 +257,26 @@ public class UILogic {
 
         ArrayList<NorthwindData> employeesList = employeeDao.getEmployeesList(query, employeeTitle);
         printData(employeesList);
+    }
+
+    public static void processAllShippers() {
+
+    }
+
+    public static void processShipperByName() {
+
+    }
+
+    public static void processAddShipper() {
+
+    }
+
+    public static void processUpdateShipper() {
+
+    }
+
+    public static void processDeleteShipper() {
+        //todo Add a method that will check password
     }
 
     public static void printData(ArrayList<NorthwindData> northwindDataList) {
