@@ -1,23 +1,35 @@
 public class Customer implements NorthwindData {
 
-    String contactName;
     String companyName;
+    String contactName;
+    String contactTitle;
+    String address;
+    String region;
+    String postalCode;
     String city;
     String country;
     String phoneNumber;
+    String fax;
 
-    public Customer (String contactName, String companyName, String city, String country, String phoneNumber) {
-        this.contactName = contactName;
+    public Customer (String companyName, String contactName, String contactTitle, String address, String region, String postalCode,
+                     String city, String country, String phoneNumber, String fax) {
         this.companyName = companyName;
+        this.contactName = contactName;
+        this.contactTitle = contactTitle;
+        this.address = address;
+        this.region = region;
+        this.postalCode = postalCode;
         this.city = city;
         this.country = country;
         this.phoneNumber = phoneNumber;
+        this.fax = fax;
     }
 
     public void print() {
         System.out.println("-----CUSTOMER-----");
         System.out.println("Contact Name: " + this.contactName);
         System.out.println("Company Name: " + this.companyName);
+        System.out.println("Title: " + this.contactTitle);
         System.out.println("City: " + this.city);
         System.out.println("Country: " + this.country);
         System.out.println("Phone Number: " + this.phoneNumber);

@@ -51,9 +51,9 @@ public class UILogic {
                 case 2 -> processProductByName();
                 case 3 -> processProductByPrice();
                 case 4 -> processProductsByCategory();
-                case 4 -> processAddProduct();
-                case 5 -> processUpdateProduct();
-                case 6 -> processDeleteProduct();
+                case 5 -> processAddProduct();
+                case 6 -> processUpdateProduct();
+                case 7 -> processDeleteProduct();
                 case 0 -> continueProductsScreen = false;
                 default -> System.err.println("ERROR! Please enter a number that is listed on the screen!");
             }

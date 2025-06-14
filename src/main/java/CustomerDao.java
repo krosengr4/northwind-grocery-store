@@ -22,13 +22,21 @@ public class CustomerDao {
             ResultSet results = prepStatement.executeQuery();
 
             while (results.next()) {
-                String customerName = results.getString("ContactName");
+                //region getting fields for Customer object
                 String companyName = results.getString("CompanyName");
+                String customerName = results.getString("ContactName");
+                String contactTitle = results.getString("ContactTitle");
+                String address = results.getString("Address");
+                String region = results.getString("Region");
+                String postalCode = results.getString("PostalCode");
                 String city = results.getString("City");
                 String country = results.getString("Country");
                 String phoneNumber = results.getString("Phone");
+                String fax = results.getString("Fax");
+                //endregion
 
-                Customer newCustomer = new Customer(customerName, companyName, city, country, phoneNumber);
+
+                Customer newCustomer = new Customer(companyName, customerName, contactTitle, address, region, postalCode, city, country, phoneNumber, fax);
                 customersList.add(newCustomer);
             }
 
@@ -50,13 +58,21 @@ public class CustomerDao {
             ResultSet results = prepStatement.executeQuery();
 
             while (results.next()) {
-                String customerName = results.getString("ContactName");
+                //region getting fields for Customer object
                 String companyName = results.getString("CompanyName");
+                String customerName = results.getString("ContactName");
+                String contactTitle = results.getString("ContactTitle");
+                String address = results.getString("Address");
+                String region = results.getString("Region");
+                String postalCode = results.getString("PostalCode");
                 String city = results.getString("City");
                 String country = results.getString("Country");
                 String phoneNumber = results.getString("Phone");
+                String fax = results.getString("Fax");
+                //endregion
 
-                customer = new Customer(customerName, companyName, city, country, phoneNumber);
+
+                customer = new Customer(companyName, customerName, contactTitle, address, region, postalCode, city, country, phoneNumber, fax);
             }
 
         } catch (SQLException e) {
@@ -77,13 +93,21 @@ public class CustomerDao {
             ResultSet results = prepStatement.executeQuery();
 
             while (results.next()) {
-                String customerName = results.getString("ContactName");
+                //region getting fields for Customer object
                 String companyName = results.getString("CompanyName");
+                String customerName = results.getString("ContactName");
+                String contactTitle = results.getString("ContactTitle");
+                String address = results.getString("Address");
+                String region = results.getString("Region");
+                String postalCode = results.getString("PostalCode");
                 String city = results.getString("City");
                 String country = results.getString("Country");
                 String phoneNumber = results.getString("Phone");
+                String fax = results.getString("Fax");
+                //endregion
 
-                Customer newCustomer = new Customer(customerName, companyName, city, country, phoneNumber);
+
+                Customer newCustomer = new Customer(companyName, customerName, contactTitle, address, region, postalCode, city, country, phoneNumber, fax);
 
                 customersList.add(newCustomer);
             }
