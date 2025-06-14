@@ -168,7 +168,17 @@ public class UILogic {
     }
 
     public static void processAddProduct() {
-        //Create product
+        System.out.println("---ADD A NEW PRODUCT---");
+        String productName = Utils.getUserInput("Enter the Product Name: ");
+        int supplierID = Utils.getUserInputInt("Enter the Supplier ID: ");
+        int categoryID = Utils.getUserInputInt("Enter the Category ID: ");
+        String quantityPerUnit = Utils.getUserInput("Enter the Quantity Per Unit: ");
+        double unitPrice = Utils.getUserInputDouble("Enter the Price of 1 Unit:");
+        int unitsInStock = Utils.getUserInputInt("Enter the Units In Stock:");
+        int reorderLevel = Utils.getUserInputInt("Enter the Number of Units to Reorder At:");
+        Product product = new Product(0, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, 0);
+
+        productDao.addAProduct(product);
     }
 
     public static void processUpdateProduct() {

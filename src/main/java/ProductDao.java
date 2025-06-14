@@ -29,7 +29,7 @@ public class ProductDao {
                 double unitPrice = Double.parseDouble(results.getString("UnitPrice"));
                 int unitsInStock = Integer.parseInt(results.getString("UnitsInStock"));
                 int reorderLevel = Integer.parseInt(results.getString("ReorderLevel"));
-                boolean isDiscontinued = Boolean.parseBoolean(results.getString("Discontinued"));
+                int isDiscontinued = Integer.parseInt(results.getString("Discontinued"));
 
                 Product newProduct = new Product(productID, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, isDiscontinued);
                 productsList.add(newProduct);
@@ -62,7 +62,7 @@ public class ProductDao {
                 double unitPrice = Double.parseDouble(results.getString("UnitPrice"));
                 int unitsInStock = Integer.parseInt(results.getString("UnitsInStock"));
                 int reorderLevel = Integer.parseInt(results.getString("ReorderLevel"));
-                boolean isDiscontinued = Boolean.parseBoolean(results.getString("Discontinued"));
+                int isDiscontinued = Integer.parseInt(results.getString("Discontinued"));
 
                 Product newProduct = new Product(productID, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, isDiscontinued);
 
@@ -95,7 +95,7 @@ public class ProductDao {
                 double unitPrice = Double.parseDouble(results.getString("UnitPrice"));
                 int unitsInStock = Integer.parseInt(results.getString("UnitsInStock"));
                 int reorderLevel = Integer.parseInt(results.getString("ReorderLevel"));
-                boolean isDiscontinued = Boolean.parseBoolean(results.getString("Discontinued"));
+                int isDiscontinued = Integer.parseInt(results.getString("Discontinued"));
 
                 product = new Product(productID, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, isDiscontinued);
             }
@@ -127,7 +127,7 @@ public class ProductDao {
                 double unitPrice = Double.parseDouble(results.getString("UnitPrice"));
                 int unitsInStock = Integer.parseInt(results.getString("UnitsInStock"));
                 int reorderLevel = Integer.parseInt(results.getString("ReorderLevel"));
-                boolean isDiscontinued = Boolean.parseBoolean(results.getString("Discontinued"));
+                int isDiscontinued = Integer.parseInt(results.getString("Discontinued"));
 
                 Product newProduct = new Product(productID, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, isDiscontinued);
                 productsList.add(newProduct);
@@ -152,7 +152,7 @@ public class ProductDao {
         double unitPrice = product.unitPrice;
         int unitsInStock = product.unitsInStock;
         int reorderLevel = product.reorderLevel;
-        boolean isDiscontinued = product.isDiscontinued;
+        int isDiscontinued = product.isDiscontinued;
 
         try (Connection conn = dataSource.getConnection()) {
             String query = "INSERT INTO products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel) " +

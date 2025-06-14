@@ -10,10 +10,10 @@ public class Product implements NorthwindData {
     double unitPrice;
     int unitsInStock;
     int reorderLevel;
-    boolean isDiscontinued;
+    int isDiscontinued; //!<-- This will need to be a boolean
 
     public Product (int productID, String productName, int supplierID, int categoryID, String quantityPerUnit,
-                    double unitPrice, int unitsInStock, int reorderLevel, boolean isDiscontinued) {
+                    double unitPrice, int unitsInStock, int reorderLevel, int isDiscontinued) {
         this.productID = productID;
         this.productName = productName;
         this.supplierID = supplierID;
