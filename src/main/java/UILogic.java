@@ -50,6 +50,9 @@ public class UILogic {
                 case 1 -> processAllProducts();
                 case 2 -> processProductByName();
                 case 3 -> processProductByPrice();
+                case 4 -> processAddProduct();
+                case 5 -> processUpdateProduct();
+                case 6 -> processDeleteProduct();
                 case 0 -> continueProductsScreen = false;
                 default -> System.err.println("ERROR! Please enter a number that is listed on the screen!");
             }
@@ -68,6 +71,9 @@ public class UILogic {
                 case 3 -> processCustomerByCompany();
                 case 4 -> processCustomerByCity();
                 case 5 -> processCustomerByCountry();
+                case 6 -> processAddCustomer();
+                case 7 -> processUpdateCustomer();
+                case 8 -> processDeleteCustomer();
                 case 0 -> continueCustomerScreen = false;
                 default -> System.err.println("ERROR! Please Enter a Number that is listed!");
             }
@@ -84,6 +90,9 @@ public class UILogic {
                 case 1 -> processAllCategories();
                 case 2 -> processCategoryByName();
                 case 3 -> processProductsFromCategory();
+                case 4 -> processAddCategory();
+                case 5 -> processUpdateCategory();
+                case 6 -> processDeleteCategory();
                 case 0 -> continueCategoryScreen = false;
                 default -> System.err.println("ERROR! Please Enter a number that is listed!");
             }
@@ -100,6 +109,9 @@ public class UILogic {
                 case 1 -> processAllEmployees();
                 case 2 -> processEmployeeByName();
                 case 3 -> processEmployeeByTitle();
+                case 4 -> processAddEmployee();
+                case 5 -> processUpdateEmployee();
+                case 6 -> processDeleteEmployee();
                 case 0 -> continueEmployeeScreen = false;
                 default -> System.err.println("ERROR! Please Enter a number that is listed!");
             }
