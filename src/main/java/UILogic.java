@@ -250,6 +250,8 @@ public class UILogic {
                 column.print();
                 System.out.println("-------------------------------------------------------------");
             }
+
+            System.out.println("\nColumns Returned: " + northwindDataList.size());
         }
 
         Utils.pauseApp();
