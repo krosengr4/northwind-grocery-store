@@ -152,7 +152,7 @@ public class CustomerDao {
             int rows = statement.executeUpdate();
 
             if (rows != 0) {
-                System.out.println("Success! The new customer was added to the database.");
+                System.out.println("Success! The new customer was added to the database!");
             } else {
                 System.err.println("ERROR! The new customer was not added!!!");
             }
@@ -160,6 +160,28 @@ public class CustomerDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void updateCustomer (String query, String customerID, String newValue) {
+
+        try (Connection conn = dataSource.getConnection()) {
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1, newValue);
+            statement.setString(2, customerID);
+
+            int rows = statement.executeUpdate();
+
+            if (rows != 0) {
+                System.out.println("Success! Information Updated for Customer with an ID of: " + customerID);
+            } else {
+                System.err.println("ERROR! The Customer Information was not updated!!!");
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 }

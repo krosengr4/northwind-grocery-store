@@ -157,7 +157,7 @@ public class ProductDao {
         try (Connection conn = dataSource.getConnection()) {
             String query = "INSERT INTO products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
-            PreparedStatement statement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = conn.prepareStatement(query);
             statement.setString(1, productName);
             statement.setString(2, String.valueOf(supplierID));
             statement.setString(3, String.valueOf(categoryID));
@@ -168,12 +168,11 @@ public class ProductDao {
             statement.setString(8, String.valueOf(isDiscontinued));
 
             int rows = statement.executeUpdate();
-            ResultSet result = statement.getGeneratedKeys();
 
-            if (rows == 0) {
-                System.out.println("ERROR! The new product was not added to the database!!!");
+            if (rows != 0) {
+                System.out.println("Success! The new product was added to the database!");
             } else {
-                System.out.println("Success! The new product was added to the database with a ProductID: " + result);
+                System.out.println("ERROR! The new product was not added to the database!!!");
             }
 
         } catch (SQLException e) {
@@ -185,17 +184,16 @@ public class ProductDao {
 
         //! Fix Error "Data truncation: Data too long for column 'Discontinued' at row 1"
         try (Connection conn = dataSource.getConnection()) {
-            PreparedStatement statement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = conn.prepareStatement(query);
             statement.setString(1, newValue);
             statement.setString(2, String.valueOf(productID));
 
             int rows = statement.executeUpdate();
-//            ResultSet keys = statement.getGeneratedKeys();
 
-            if (rows == 0) {
-                System.out.println("\nWe could not find that product...");
+            if (rows != 0) {
+                System.out.println("\nSuccess! Information Updated for Product with an ID of: " + productID);
             } else {
-                System.out.println("\nSuccess! Updated Product with the ID of " + productID);
+                System.out.println("\nWe could not find that product...");
             }
 
         } catch (SQLException e) {
