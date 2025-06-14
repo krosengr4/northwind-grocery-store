@@ -23,10 +23,15 @@ public class ProductDao {
             while (results.next()) {
                 int productID = Integer.parseInt(results.getString("ProductID"));
                 String productName = results.getString("ProductName");
+                int supplierID = Integer.parseInt(results.getString("SupplierID"));
+                int categoryID = Integer.parseInt(results.getString("CategoryID"));
+                String quantityPerUnit = results.getString("QuantityPerUnit");
                 double unitPrice = Double.parseDouble(results.getString("UnitPrice"));
                 int unitsInStock = Integer.parseInt(results.getString("UnitsInStock"));
+                int reorderLevel = Integer.parseInt(results.getString("ReorderLevel"));
+                boolean isDiscontinued = Boolean.parseBoolean(results.getString("Discontinued"));
 
-                Product newProduct = new Product(productID, productName, unitPrice, unitsInStock);
+                Product newProduct = new Product(productID, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, isDiscontinued);
                 productsList.add(newProduct);
             }
 
@@ -51,10 +56,15 @@ public class ProductDao {
             while (results.next()) {
                 int productID = Integer.parseInt(results.getString("ProductID"));
                 String productName = results.getString("ProductName");
+                int supplierID = Integer.parseInt(results.getString("SupplierID"));
+                int categoryID = Integer.parseInt(results.getString("CategoryID"));
+                String quantityPerUnit = results.getString("QuantityPerUnit");
                 double unitPrice = Double.parseDouble(results.getString("UnitPrice"));
                 int unitsInStock = Integer.parseInt(results.getString("UnitsInStock"));
+                int reorderLevel = Integer.parseInt(results.getString("ReorderLevel"));
+                boolean isDiscontinued = Boolean.parseBoolean(results.getString("Discontinued"));
 
-                Product newProduct = new Product(productID, productName, unitPrice, unitsInStock);
+                Product newProduct = new Product(productID, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, isDiscontinued);
 
                 productsList.add(newProduct);
             }
@@ -79,10 +89,15 @@ public class ProductDao {
             while (results.next()) {
                 int productID = Integer.parseInt(results.getString("ProductID"));
                 String productName = results.getString("ProductName");
+                int supplierID = Integer.parseInt(results.getString("SupplierID"));
+                int categoryID = Integer.parseInt(results.getString("CategoryID"));
+                String quantityPerUnit = results.getString("QuantityPerUnit");
                 double unitPrice = Double.parseDouble(results.getString("UnitPrice"));
                 int unitsInStock = Integer.parseInt(results.getString("UnitsInStock"));
+                int reorderLevel = Integer.parseInt(results.getString("ReorderLevel"));
+                boolean isDiscontinued = Boolean.parseBoolean(results.getString("Discontinued"));
 
-                product = new Product(productID, productName, unitPrice, unitsInStock);
+                product = new Product(productID, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, isDiscontinued);
             }
 
         } catch (SQLException e) {
@@ -106,11 +121,16 @@ public class ProductDao {
             while (results.next()) {
                 int productID = Integer.parseInt(results.getString("ProductID"));
                 String productName = results.getString("ProductName");
+                int supplierID = Integer.parseInt(results.getString("SupplierID"));
+                int categoryID = Integer.parseInt(results.getString("CategoryID"));
+                String quantityPerUnit = results.getString("QuantityPerUnit");
                 double unitPrice = Double.parseDouble(results.getString("UnitPrice"));
                 int unitsInStock = Integer.parseInt(results.getString("UnitsInStock"));
+                int reorderLevel = Integer.parseInt(results.getString("ReorderLevel"));
+                boolean isDiscontinued = Boolean.parseBoolean(results.getString("Discontinued"));
 
-                Product product = new Product(productID, productName, unitPrice, unitsInStock);
-                productsList.add(product);
+                Product newProduct = new Product(productID, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, isDiscontinued);
+                productsList.add(newProduct);
             }
 
         } catch (SQLException e) {
@@ -121,12 +141,12 @@ public class ProductDao {
     }
 
     public int addAProduct (String productName, int supplierID, int categoryID, String quantityPerUnit, double unitPrice,
-                            int unitsInStock, int unitsOnOrder, int reorderLevel) {
+                            int unitsInStock, int unitsOnOrder, int reorderLevel, boolean isDiscontinued) {
         int rows = 0;
 
         try (Connection conn = dataSource.getConnection()) {
             String query = "INSERT INTO products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement statement = conn.prepareStatement(query);
             statement.setString(1, productName);
             statement.setString(2, String.valueOf(supplierID));
@@ -136,6 +156,7 @@ public class ProductDao {
             statement.setString(6, String.valueOf(unitsInStock));
             statement.setString(7, String.valueOf(unitsOnOrder));
             statement.setString(8, String.valueOf(reorderLevel));
+            statement.setString(9, String.valueOf(isDiscontinued));
 
             rows = statement.executeUpdate();
 
@@ -148,20 +169,20 @@ public class ProductDao {
 
     public void updateAProduct(String query, String productID, String newValue) {
 
+        //! Fix Error "Data truncation: Data too long for column 'Discontinued' at row 1"
         try (Connection conn = dataSource.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, newValue);
             statement.setString(2, String.valueOf(productID));
 
             int rows = statement.executeUpdate();
-            ResultSet keys = statement.getGeneratedKeys();
+//            ResultSet keys = statement.getGeneratedKeys();
 
             if (rows == 0) {
-                System.out.println("We could not find that product...");
+                System.out.println("\nWe could not find that product...");
             } else {
-                while (keys.next()) {
-                    System.out.println("Success! Updated Product with the ID of " + keys.getLong(1));
-                }
+                System.out.println("\nSuccess! Updated Product with the ID of " + productID);
+
             }
 
         } catch (SQLException e) {

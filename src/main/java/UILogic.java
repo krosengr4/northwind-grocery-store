@@ -172,18 +172,23 @@ public class UILogic {
     }
 
     public static void processUpdateProduct() {
+        System.out.println("\nPlease enter the Product ID of the product you wish to update.");
+//            String productID = Utils.promptGetUserInput("Enter here: ").trim();
+        int productIDInt = Utils.messageAndResponseInt("Enter Here: ");
+        String productID = String.valueOf(productIDInt);
+
         String query = setUpdateProductQuery();
 
         if (!query.equalsIgnoreCase("back")) {
-            System.out.println("\nPlease enter the Product ID of the product you wish to update.");
-            String productID = Utils.promptGetUserInput("Enter here: ").trim();
 
             String newValue = Utils.promptGetUserInput("\nPlease enter the new value ");
 
+            //! Fix Error "Data truncation: Data too long for column 'Discontinued' at row 1"
             productDao.updateAProduct(query, productID, newValue);
             displayProductAfterUpdate(productID);
         }
 
+        Utils.pauseApp();
     }
 
     public static String setUpdateProductQuery() {
@@ -219,6 +224,7 @@ public class UILogic {
         } else {
             product.print();
         }
+        Utils.pauseApp();
     }
 
     public static void processDeleteProduct() {
