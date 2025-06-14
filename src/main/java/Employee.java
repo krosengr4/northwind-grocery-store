@@ -11,6 +11,7 @@ public class Employee implements NorthwindData {
     }
 
     public void print() {
+        System.out.println("-----EMPLOYEE-----");
         System.out.println("First Name: " + this.firstName);
         System.out.println("Last Name: " + this.lastName);
         System.out.println("Title: " + this.title);

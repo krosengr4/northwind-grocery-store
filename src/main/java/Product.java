@@ -1,3 +1,5 @@
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 public class Product implements NorthwindData {
 
     int productID;
@@ -13,6 +15,7 @@ public class Product implements NorthwindData {
     }
 
     public void print() {
+        System.out.println("-----PRODUCT-----");
         System.out.println("Product ID: " + this.productID);
         System.out.println("Product Name: " + this.name);
         System.out.printf("Unit Price: $%.2f\n", this.unitPrice);

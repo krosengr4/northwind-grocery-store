@@ -15,6 +15,7 @@ public class Customer implements NorthwindData {
     }
 
     public void print() {
+        System.out.println("-----CUSTOMER-----");
         System.out.println("Contact Name: " + this.contactName);
         System.out.println("Company Name: " + this.companyName);
         System.out.println("City: " + this.city);

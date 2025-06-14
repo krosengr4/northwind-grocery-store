@@ -11,6 +11,7 @@ public class Category implements NorthwindData {
     }
 
     public void print() {
+        System.out.println("-----CATEGORY-----");
         System.out.println("Category ID: " + this.categoryID);
         System.out.println("Category Name: " + this.name);
         System.out.println("Category Description: " + this.description);
