@@ -40,7 +40,7 @@ public class ShipperDao {
 
         try (Connection conn = dataSource.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(query);
-            statement.setString(1, userInput);
+            statement.setString(1, "%" + userInput + "%");
 
             ResultSet results = statement.executeQuery();
             while (results.next()) {
