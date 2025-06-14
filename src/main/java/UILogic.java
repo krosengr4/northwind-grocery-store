@@ -245,7 +245,7 @@ public class UILogic {
         return query;
     }
 
-    public static void displayProductAfterUpdate (String productID) {
+    public static void displayProductAfterUpdate(String productID) {
         String getProductQuery = "SELECT * FROM products WHERE ProductID = ?;";
         Product product = productDao.getProduct(getProductQuery, productID);
 
@@ -307,7 +307,54 @@ public class UILogic {
     }
 
     public static void processUpdateCustomer() {
-        //Update customer
+        System.out.println("\nPlease Enter the Customer ID of the customer you wish to update.");
+        int customerIDInt = Utils.getUserInputInt("Enter here: ");
+        String customerID = String.valueOf(customerIDInt);
+
+        String query = setCustomerUpdateQuery();
+
+        if (!query.equalsIgnoreCase("back")) {
+            String newValue = Utils.getUserInput("Enter the New Value: ");
+
+            customerDao.updateCustomer(query, customerID, newValue);
+        }
+    }
+
+    private static void displayCustomerAfterUpdate(String customerID) {
+        String query = "SELECT * FROM customers WHERE CustomerID = ?;";
+        Customer customer = customerDao.getCustomer(query, customerID);
+
+        if (customer == null) {
+            System.err.println("Error! We could not get the customer after the update...");
+        } else {
+            customer.print();
+        }
+    }
+
+    private static String setCustomerUpdateQuery() {
+        int columnToUpdate = ui.displayUpdateCustomer();
+        String query = "UPDATE customers SET ";
+
+        switch (columnToUpdate) {
+            case 1 -> query += "CompanyName = ?";
+            case 2 -> query += "ContactName = ?";
+            case 3 -> query += "ContactTitle = ?";
+            case 4 -> query += "Address = ?";
+            case 5 -> query += "Region = ?";
+            case 6 -> query += "PostalCode = ?";
+            case 7 -> query += "City = ?";
+            case 8 -> query += "Country = ?";
+            case 9 -> query += "Phone = ?";
+            case 10 -> query += "Fax = ?";
+            case 0 -> {
+                return "back";
+            }
+            default -> System.out.println("ERROR! Please Select One of the listed number!");
+        }
+
+        query += " WHERE CustomerID = ?;";
+
+        return query;
     }
 
     public static void processDeleteCustomer() {
@@ -381,7 +428,7 @@ public class UILogic {
         //Update employee
     }
 
-    public static void processDeleteEmployee(){
+    public static void processDeleteEmployee() {
         //todo create a method to check a password
     }
 
