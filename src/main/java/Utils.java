@@ -70,4 +70,9 @@ public class Utils {
         }
         return capitalized.toString().trim();
     }
+
+    public static boolean passwordCheck(String userInput) {
+        String password = System.getenv("SQL_PASSWORD");
+        return userInput.equals(password);
+    }
 }
