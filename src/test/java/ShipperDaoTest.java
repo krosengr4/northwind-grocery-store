@@ -37,4 +37,19 @@ class ShipperDaoTest {
 
         Assertions.assertEquals(3, actual);
     }
+
+    @Test
+    void getShipperByName() {
+        dataSource.setUrl("jdbc:mysql://localhost:3306/northwind");
+        dataSource.setUsername("root");
+        dataSource.setPassword(System.getenv("SQL_PASSWORD"));
+
+        String query = "SELECT * FROM shippers WHERE CompanyName LIKE ?";
+        String companyName = "United Package";
+
+        Shipper shipper = shipperDao.getShipper(query, companyName);
+        int actual = shipper.shipperID;
+
+        Assertions.assertEquals(2, actual);
+    }
 }
