@@ -9,6 +9,7 @@ public class UILogic {
     static CategoryDao categoryDao = new CategoryDao(dataSource);
     static CustomerDao customerDao = new CustomerDao(dataSource);
     static EmployeeDao employeeDao = new EmployeeDao(dataSource);
+    static ShipperDao shipperDao = new ShipperDao(dataSource);
     static UserInterface ui = new UserInterface();
 
     static String url = "jdbc:mysql://localhost:3306/northwind";
@@ -114,9 +115,10 @@ public class UILogic {
             switch (shipperScreenAction) {
                 case 1 -> processAllShippers();
                 case 2 -> processShipperByName();
-                case 3 -> processAddShipper();
-                case 4 -> processUpdateShipper();
-                case 5 -> processDeleteShipper();
+                case 3 -> processShipperByPhone();
+                case 4 -> processAddShipper();
+                case 5 -> processUpdateShipper();
+                case 6 -> processDeleteShipper();
                 case 0 -> continueShipperScreen = false;
             }
         }
@@ -308,11 +310,37 @@ public class UILogic {
     }
 
     public static void processAllShippers() {
-
+        ArrayList<NorthwindData> shipperList = shipperDao.getAllShippers();
+        printData(shipperList);
     }
 
     public static void processShipperByName() {
+        String companyName = Utils.promptGetUserInput("Please Enter the Company Name of the Shipper: ");
+        String query = "SELECT * FROM shippers WHERE CompanyName LIKE ?";
 
+        Shipper shipper = shipperDao.getShipper(query, companyName);
+        if (shipper == null) {
+            System.out.println("There are no shippers with that name...");
+        } else {
+            shipper.print();
+        }
+
+        Utils.pauseApp();
+    }
+
+    public static void processShipperByPhone() {
+        System.out.println("Please enter the phone number of the shipper like '(XXX) xxx-xxxx'");
+        String phoneNumber = Utils.promptGetUserInput("Enter here: ");
+        String query = "SELECT * FROM shippers WHERE Phone LIKE ?";
+
+        Shipper shipper = shipperDao.getShipper(query, phoneNumber);
+        if (shipper == null) {
+            System.out.println("There are no shippers with that phone number...");
+        } else {
+            shipper.print();
+        }
+
+        Utils.pauseApp();
     }
 
     public static void processAddShipper() {

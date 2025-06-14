@@ -75,9 +75,10 @@ public class UserInterface {
         System.out.println("""
                 1 - View All Shippers
                 2 - Search Shippers by Name
-                3 - Add a Shipper
-                4 - Update a Shipper
-                5 - Delete a Shipper (requires password)
+                3 - Search Shipper by Phone
+                4 - Add a Shipper
+                5 - Update a Shipper
+                6 - Delete a Shipper (requires password)
                 0 - Go back
                 """);
 
