@@ -29,7 +29,7 @@ public class ProductDao {
                 double unitPrice = Double.parseDouble(results.getString("UnitPrice"));
                 int unitsInStock = Integer.parseInt(results.getString("UnitsInStock"));
                 int reorderLevel = Integer.parseInt(results.getString("ReorderLevel"));
-                int isDiscontinued = Integer.parseInt(results.getString("Discontinued"));
+                boolean isDiscontinued = Boolean.parseBoolean(results.getString("Discontinued"));
 
                 Product newProduct = new Product(productID, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, isDiscontinued);
                 productsList.add(newProduct);
@@ -62,7 +62,7 @@ public class ProductDao {
                 double unitPrice = Double.parseDouble(results.getString("UnitPrice"));
                 int unitsInStock = Integer.parseInt(results.getString("UnitsInStock"));
                 int reorderLevel = Integer.parseInt(results.getString("ReorderLevel"));
-                int isDiscontinued = Integer.parseInt(results.getString("Discontinued"));
+                boolean isDiscontinued = Boolean.parseBoolean(results.getString("Discontinued"));
 
                 Product newProduct = new Product(productID, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, isDiscontinued);
 
@@ -95,7 +95,7 @@ public class ProductDao {
                 double unitPrice = Double.parseDouble(results.getString("UnitPrice"));
                 int unitsInStock = Integer.parseInt(results.getString("UnitsInStock"));
                 int reorderLevel = Integer.parseInt(results.getString("ReorderLevel"));
-                int isDiscontinued = Integer.parseInt(results.getString("Discontinued"));
+                boolean isDiscontinued = Boolean.parseBoolean(results.getString("Discontinued"));
 
                 product = new Product(productID, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, isDiscontinued);
             }
@@ -127,7 +127,7 @@ public class ProductDao {
                 double unitPrice = Double.parseDouble(results.getString("UnitPrice"));
                 int unitsInStock = Integer.parseInt(results.getString("UnitsInStock"));
                 int reorderLevel = Integer.parseInt(results.getString("ReorderLevel"));
-                int isDiscontinued = Integer.parseInt(results.getString("Discontinued"));
+                boolean isDiscontinued = Boolean.parseBoolean(results.getString("Discontinued"));
 
                 Product newProduct = new Product(productID, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, isDiscontinued);
                 productsList.add(newProduct);
@@ -152,10 +152,10 @@ public class ProductDao {
         double unitPrice = product.unitPrice;
         int unitsInStock = product.unitsInStock;
         int reorderLevel = product.reorderLevel;
-        int isDiscontinued = product.isDiscontinued;
+        boolean isDiscontinued = product.isDiscontinued;
 
         try (Connection conn = dataSource.getConnection()) {
-            String query = "INSERT INTO products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel) " +
+            String query = "INSERT INTO products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, ReorderLevel, Discontinued) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement statement = conn.prepareStatement(query);
             statement.setString(1, productName);
@@ -165,7 +165,8 @@ public class ProductDao {
             statement.setString(5, String.valueOf(unitPrice));
             statement.setString(6, String.valueOf(unitsInStock));
             statement.setString(7, String.valueOf(reorderLevel));
-            statement.setString(8, String.valueOf(isDiscontinued));
+//            statement.setString(8, String.valueOf(isDiscontinued));
+            statement.setBoolean(8, isDiscontinued);
 
             int rows = statement.executeUpdate();
 

@@ -196,8 +196,8 @@ public class UILogic {
         double unitPrice = Utils.getUserInputDouble("Enter the Price of 1 Unit:");
         int unitsInStock = Utils.getUserInputInt("Enter the Units In Stock:");
         int reorderLevel = Utils.getUserInputInt("Enter the Number of Units to Reorder At:");
-        Product product = new Product(0, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, 0);
 
+        Product product = new Product(0, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, false);
         productDao.addAProduct(product);
     }
 
@@ -303,7 +303,19 @@ public class UILogic {
     }
 
     public static void processAddCustomer() {
-        //Add customer
+        System.out.println("\n---ADD NEW CUSTOMER---");
+        String companyName = Utils.getUserInput("Enter the Company Name: ");
+        String contactName = Utils.getUserInput("Enter the Contact Name: ");
+        String address = Utils.getUserInput("Enter the Address: ");
+        String region = Utils.getUserInput("Enter the Region: ");
+        String postalCode = Utils.getUserInput("Enter the Postal Code: ");
+        String city = Utils.getUserInput("Enter the Customer's City: ");
+        String country = Utils.getUserInput("Enter the Customer's Country: ");
+        String phoneNumber = Utils.getUserInput("Enter the Customer's Phone Number: ");
+        String fax = Utils.getUserInput("Enter the Customer's Phone Number: ");
+
+        Customer customer = new Customer(null, companyName, contactName, address, region, postalCode, city, country, phoneNumber, fax);
+        customerDao.addCustomer(customer);
     }
 
     public static void processUpdateCustomer() {

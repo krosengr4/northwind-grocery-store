@@ -62,4 +62,16 @@ public class CategoryDao {
 
         return category;
     }
+
+    public void getConnection() {
+        try {
+            Connection conn = dataSource.getConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addCategory(Category category) {
+        String categoryName = category.name;
+    }
 }
