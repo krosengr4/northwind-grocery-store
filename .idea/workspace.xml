@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="90d6bda1-ba48-48c6-81d7-2c5dfe924efb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/CategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CategoryDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ProductDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UILogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UILogic.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +52,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
+    "Application.Run Main.executor": "Run",
+    "Application.Unnamed.executor": "Run",
     "JUnit.CategoryDaoTest.executor": "Run",
     "JUnit.EmployeeDaoTest.executor": "Run",
     "JUnit.ProductTest.executor": "Run",
@@ -83,6 +81,13 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration name="Run Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="NorthwindGroceryStore" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="northwind-grocery-store" />
       <method v="2">

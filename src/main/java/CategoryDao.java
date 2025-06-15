@@ -63,15 +63,26 @@ public class CategoryDao {
         return category;
     }
 
-    public void getConnection() {
-        try {
-            Connection conn = dataSource.getConnection();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public void addCategory(Category category) {
         String categoryName = category.name;
+        String description = category.description;
+
+        try (Connection conn = dataSource.getConnection()) {
+          String query = "INSERT INTO categories (CategoryName, Description)" +
+                  "VALUES (?, ?);";
+          PreparedStatement statement = conn.prepareStatement(query);
+          statement.setString(1, categoryName);
+          statement.setString(2, description);
+
+          int rows = statement.executeUpdate();
+          if (rows != 0) {
+            System.out.println("Success! Added " + categoryName + " Category");
+          } else {
+            System.err.println("ERROR! Could not add Category to the database!!!");
+          }
+
+        } catch (SQLException e) {
+          throw new RuntimeException(e);
+        }
     }
 }
