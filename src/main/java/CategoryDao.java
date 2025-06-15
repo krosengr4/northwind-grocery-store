@@ -85,4 +85,22 @@ public class CategoryDao {
           throw new RuntimeException(e);
         }
     }
+
+    public void updateCategory(String query, int categoryID, String newValue) {
+      try (Connection conn = dataSource.getConnection()) {
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setString(1, newValue);
+        statement.setInt(2, categoryID);
+
+        int rows = statement.executeUpdate();
+        if (rows != 0) {
+          System.out.println("\nSuccess! Information Updated for Category with an ID of: " + categoryID);
+        } else {
+          System.out.println("\nCould not find Category with that ID...");
+        }
+
+      } catch (SQLException e) {
+        throw new RuntimeException(e);
+      }
+    }
 }

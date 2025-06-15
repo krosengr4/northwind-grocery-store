@@ -194,7 +194,7 @@ public class ProductDao {
             if (rows != 0) {
                 System.out.println("\nSuccess! Information Updated for Product with an ID of: " + productID);
             } else {
-                System.out.println("\nWe could not find that product...");
+                System.out.println("\nCould not find that product...");
             }
 
         } catch (SQLException e) {
