@@ -98,7 +98,7 @@ public class UserInterface {
     }
 
     public int displayUpdateProduct() {
-        System.out.println("Please choose which column you would like to update.");
+        System.out.println("\nPlease choose which column you would like to update.");
         System.out.println("-----OPTIONS-----");
         System.out.println("""
                 1 - Update Product Name
@@ -117,7 +117,7 @@ public class UserInterface {
     }
 
     public int displayUpdateCustomer() {
-        System.out.println("Please choose which column you would like to update.");
+        System.out.println("\nPlease choose which column you would like to update.");
         System.out.println("-----OPTIONS-----");
         System.out.println("""
                 1 - Update Company Name
@@ -134,6 +134,18 @@ public class UserInterface {
                 """);
 
         return Utils.getUserInputIntMinMax("Enter your option: ", 0, 10);
+    }
+
+    public int displayUpdateCategory() {
+      System.out.println("\nPlease choose which column you would like to update.");
+      System.out.println("-----OPTIONS-----");
+      System.out.println("""
+              1 - Update Category Name
+              2 - Update Description
+              0 - Go Back
+              """);
+
+      return Utils.getUserInputIntMinMax("Enter your option: ", 0, 2);
     }
 
 }
