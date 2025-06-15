@@ -394,7 +394,12 @@ public class UILogic {
     }
 
     public static void processAddCategory() {
-        //add a category
+      System.out.println("\n---ADD NEW CATEGORY---\n");
+      String categoryName = Utils.getUserInput("Enter a Category Name: ");
+      String description = Utils.getUserInput("Enter a Category description: ");
+
+      Category category = new Category(0, categoryName, description);
+      categoryDao.addCategory(category);
     }
 
     public static void processUpdateCategory() {
