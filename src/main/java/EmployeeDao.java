@@ -22,11 +22,12 @@ public class EmployeeDao {
             ResultSet results = prepStatement.executeQuery();
 
             while (results.next()) {
+			   int employeeID = results.getInt("EmployeeID");
                 String firstName = results.getString("FirstName");
                 String lastName = results.getString("LastName");
                 String title = results.getString("Title");
 
-                Employee newEmployee = new Employee(firstName, lastName, title);
+                Employee newEmployee = new Employee(employeeID, firstName, lastName, title);
 
                 employeesList.add(newEmployee);
             }
@@ -49,11 +50,12 @@ public class EmployeeDao {
             ResultSet results = prepStatement.executeQuery();
 
             while (results.next()) {
+			   int employeeID = results.getInt("EmployeeID");
                 String firstName = results.getString("FirstName");
                 String lastName = results.getString("LastName");
                 String title = results.getString("Title");
 
-                employee = new Employee(firstName, lastName, title);
+                employee = new Employee(employeeID, firstName, lastName, title);
             }
 
         } catch (SQLException e) {
@@ -73,11 +75,12 @@ public class EmployeeDao {
 
             ResultSet results = prepStatement.executeQuery();
             while (results.next()) {
+			   int employeeID = results.getInt("EmployeeID");
                 String firstName = results.getString("FirstName");
                 String lastName = results.getString("LastName");
                 String title = results.getString("Title");
 
-                Employee newEmployee = new Employee(firstName, lastName, title);
+                Employee newEmployee = new Employee(employeeID, firstName, lastName, title);
                 employeesList.add(newEmployee);
             }
         } catch (SQLException e) {

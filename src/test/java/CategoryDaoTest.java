@@ -2,9 +2,6 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import javax.sql.DataSource;
-
-import static org.junit.jupiter.api.Assertions.*;
 class CategoryDaoTest {
 
     BasicDataSource dataSource = new BasicDataSource();
@@ -18,7 +15,7 @@ class CategoryDaoTest {
 
         String categoryName = "Dairy";
 
-        Category category = categoryDao.getCategory(categoryName);
+        Category category = categoryDao.getCategoryByName(categoryName);
         int actual = category.categoryID;
 
         Assertions.assertEquals(4, actual);
