@@ -20,7 +20,7 @@ public class ShipperDao {
 
             ResultSet results = statement.executeQuery();
             while (results.next()) {
-                int shipperID = Integer.parseInt(results.getString("ShipperID"));
+                int shipperID = results.getInt("ShipperID");
                 String companyName = results.getString("CompanyName");
                 String phoneNumber = results.getString("Phone");
 
@@ -44,7 +44,7 @@ public class ShipperDao {
 
             ResultSet results = statement.executeQuery();
             while (results.next()) {
-                int shipperID = Integer.parseInt(results.getString("ShipperID"));
+                int shipperID = results.getInt("ShipperID");
                 String companyName = results.getString("CompanyName");
                 String phoneNumber = results.getString("Phone");
 

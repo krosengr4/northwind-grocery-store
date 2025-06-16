@@ -22,7 +22,7 @@ public class CategoryDao {
 		 ResultSet results = prepStatement.executeQuery();
 
 		 while(results.next()) {
-			int catID = Integer.parseInt(results.getString("CategoryID"));
+			int catID = results.getInt("CategoryID");
 			String catName = results.getString("CategoryName");
 			String catDescription = results.getString("Description");
 
@@ -49,7 +49,7 @@ public class CategoryDao {
 		 ResultSet results = prepStatement.executeQuery();
 
 		 while(results.next()) {
-			int catID = Integer.parseInt(results.getString("CategoryID"));
+			int catID = results.getInt("CategoryID");
 			String catName = results.getString("CategoryName");
 			String catDescription = results.getString("Description");
 
