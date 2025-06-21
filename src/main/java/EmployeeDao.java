@@ -26,8 +26,10 @@ public class EmployeeDao {
                 String firstName = results.getString("FirstName");
                 String lastName = results.getString("LastName");
                 String title = results.getString("Title");
+//				Date birthDate = results.getDate("BirthDate");
+				String notes = results.getString("Notes");
 
-                Employee newEmployee = new Employee(employeeID, firstName, lastName, title);
+                Employee newEmployee = new Employee(employeeID, firstName, lastName, title, notes);
 
                 employeesList.add(newEmployee);
             }
@@ -54,8 +56,10 @@ public class EmployeeDao {
                 String firstName = results.getString("FirstName");
                 String lastName = results.getString("LastName");
                 String title = results.getString("Title");
+//			   Date birthDate = results.getDate("BirthDate");
+			   String notes = results.getString("Notes");
 
-                employee = new Employee(employeeID, firstName, lastName, title);
+                employee = new Employee(employeeID, firstName, lastName, title, notes);
             }
 
         } catch (SQLException e) {
@@ -78,8 +82,10 @@ public class EmployeeDao {
 			 String firstName = results.getString("FirstName");
 			 String lastName = results.getString("LastName");
 			 String title = results.getString("Title");
+//			 Date birthDate = results.getDate("BirthDate");
+			 String notes = results.getString("Notes");
 
-			 employee = new Employee(employeeId, firstName, lastName, title);
+			 employee = new Employee(employeeId, firstName, lastName, title, notes);
 		  }
 
 	   } catch (SQLException e) {
@@ -102,8 +108,10 @@ public class EmployeeDao {
                 String firstName = results.getString("FirstName");
                 String lastName = results.getString("LastName");
                 String title = results.getString("Title");
+//			   Date birthDate = results.getDate("BirthDate");
+			   String notes = results.getString("Notes");
 
-                Employee newEmployee = new Employee(employeeID, firstName, lastName, title);
+                Employee newEmployee = new Employee(employeeID, firstName, lastName, title, notes);
                 employeesList.add(newEmployee);
             }
         } catch (SQLException e) {
@@ -118,14 +126,16 @@ public class EmployeeDao {
 	   String firstName = employee.firstName;
 	   String lastName = employee.lastName;
 	   String employeeTitle = employee.title;
+	   String notes = employee.notes;
 
 	   try(Connection connection = dataSource.getConnection()) {
-		  String query = "INSERT INTO employees (FirstName, LastName, Title) " +
-								 "VALUES (?, ?, ?);";
+		  String query = "INSERT INTO employees (FirstName, LastName, Title, Notes) " +
+								 "VALUES (?, ?, ?, ?);";
 		  PreparedStatement statement = connection.prepareStatement(query);
 		  statement.setString(1, firstName);
 		  statement.setString(2, lastName);
 		  statement.setString(3, employeeTitle);
+		  statement.setString(4, notes);
 
 		  int rows = statement.executeUpdate();
 		  if(rows != 0) {

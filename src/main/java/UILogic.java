@@ -1,6 +1,7 @@
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class UILogic {
 
@@ -504,10 +505,10 @@ public class UILogic {
 	  String firstName = Utils.getUserInput("Enter the employees first name: ");
 	  String lastName = Utils.getUserInput("Enter the employees last name: ");
 	  String title = Utils.getUserInput("Enter the employees title: ");
+	  String notes = Utils.getUserInput("Please enter any notes (if none, enter 'none'): ");
 
 
-	  Employee employee = new Employee(0, firstName, lastName, title);
-	  //! Fix bug. Notes cannot be null.
+	  Employee employee = new Employee(0, firstName, lastName, title, notes);
 	  employeeDao.addEmployee(employee);
    }
 

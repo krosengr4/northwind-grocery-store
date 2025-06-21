@@ -12,12 +12,14 @@ public class Employee implements NorthwindData {
 //	String city;
 //	String Country;
 //	String postalCode;
+   String notes;
 
-    public Employee(int employeeID, String firstName, String lastName, String title) {
+    public Employee(int employeeID, String firstName, String lastName, String title, String notes) {
 	   this.employeeID = employeeID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.title = title;
+		this.notes = notes;
     }
 
     public void print() {
