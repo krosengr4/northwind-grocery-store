@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="90d6bda1-ba48-48c6-81d7-2c5dfe924efb" name="Changes" comment="" />
+    <list default="true" id="90d6bda1-ba48-48c6-81d7-2c5dfe924efb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/UILogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UILogic.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

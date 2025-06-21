@@ -601,7 +601,12 @@ public class UILogic {
    }
 
    public static void processAddShipper() {
-	  //Add a shipper
+	  System.out.println("\n-------ADD A NEW SHIPPER-------");
+	  String companyName = Utils.getUserInput("Enter the Company Name: ");
+	  String phoneNumber = Utils.getUserInput("Enter the Phone Number: ");
+
+	  Shipper shipper = new Shipper(0, companyName, phoneNumber);
+	  shipperDao.addShipper(shipper);
    }
 
    public static void processUpdateShipper() {
