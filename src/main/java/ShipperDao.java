@@ -58,4 +58,27 @@ public class ShipperDao {
         return shipper;
     }
 
+	public Shipper getShipperById(int shipperId) {
+	   Shipper shipper = null;
+
+	   String query = "	SELECT * FROM shippers WHERE ShipperID = ?;";
+	   try (Connection conn = dataSource.getConnection()) {
+		  PreparedStatement statement = conn.prepareStatement(query);
+		  statement.setInt(1, shipperId);
+
+		  ResultSet results = statement.executeQuery();
+		  while(results.next()) {
+			 int shipperID = results.getInt("ShipperID");
+			 String categoryName = results.getString("CompanyName");
+			 String phoneNumber = results.getString("Phone");
+
+			 shipper = new Shipper(shipperID, categoryName, phoneNumber);
+		  }
+
+	   } catch (SQLException e) {
+		  throw new RuntimeException(e);
+	   }
+	   return shipper;
+	}
+
 }
