@@ -81,4 +81,27 @@ public class ShipperDao {
 	   return shipper;
 	}
 
+	public void addShipper(Shipper shipper) {
+	   String companyName = shipper.companyName;
+	   String phoneNumber = shipper.phoneNumber;
+
+	   String query = "INSERT INTO shippers (CompanyName, Phone) " +
+							  "VALUES (?, ?);";
+	   try (Connection conn = dataSource.getConnection()) {
+		  PreparedStatement statement = conn.prepareStatement(query);
+		  statement.setString(1, companyName);
+		  statement.setString(2, phoneNumber);
+
+		  int rows = statement.executeUpdate();
+		  if(rows != 0){
+			 System.out.println("Success! Shipper was added!!!");
+		  } else {
+			 System.err.println("ERROR! Could not add shipper!!!");
+		  }
+
+	   } catch (SQLException e) {
+		  throw new RuntimeException(e);
+	   }
+	}
+
 }
