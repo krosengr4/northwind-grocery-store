@@ -460,7 +460,16 @@ public class UILogic {
    }
 
    public static void processDeleteCategory() {
-	  //todo create a method to check a password
+	  String password = Utils.getUserInput("Enter the password: ");
+	  boolean isCorrect = Utils.passwordCheck(password);
+
+	  if(isCorrect) {
+		 int categoryId = Utils.getUserInputInt("Enter the Category ID to delete: ");
+		 categoryDao.deleteCategory(categoryId);
+	  } else {
+		 System.out.println("That password is incorrect!!!");
+	  }
+	  Utils.pauseApp();
    }
 
    public static void processAllEmployees() {
