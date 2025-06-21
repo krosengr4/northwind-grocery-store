@@ -184,4 +184,22 @@ public class CustomerDao {
 
     }
 
+	public void deleteCustomer(int customerId) {
+	   String query = "DELETE FROM customers WHERE CustomerID = ?;";
+
+	   try (Connection conn = dataSource.getConnection()) {
+		  PreparedStatement statement = conn.prepareStatement(query);
+		  statement.setInt(1, customerId);
+
+		  int rows = statement.executeUpdate();
+		  if (rows != 0) {
+			 System.out.println("Success! Customer was deleted!");
+		  } else {
+			 System.err.println("ERROR! Customer was not deleted!!!");
+		  }
+	   } catch (SQLException e) {
+		  throw new RuntimeException(e);
+	   }
+	}
+
 }

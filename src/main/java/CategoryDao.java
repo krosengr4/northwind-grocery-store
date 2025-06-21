@@ -139,7 +139,7 @@ public class CategoryDao {
 		 if (rows != 0){
 			System.out.println("Success! The category was deleted!");
 		 } else {
-			System.err.println("ERROR! The category could not be deleted!")
+			System.err.println("ERROR! The category could not be deleted!");
 		 }
 	  } catch(SQLException e) {
 		 throw new RuntimeException(e);
