@@ -127,4 +127,22 @@ public class CategoryDao {
 		 throw new RuntimeException(e);
 	  }
    }
+
+   public void deleteCategory(int categoryId) {
+	  String query = "DELETE FROM categories WHERE CategoryID = ?;";
+
+	  try(Connection conn = dataSource.getConnection()) {
+		 PreparedStatement statement = conn.prepareStatement(query);
+		 statement.setInt(1, categoryId);
+
+		 int rows = statement.executeUpdate();
+		 if (rows != 0){
+			System.out.println("Success! The category was deleted!");
+		 } else {
+			System.err.println("ERROR! The category could not be deleted!")
+		 }
+	  } catch(SQLException e) {
+		 throw new RuntimeException(e);
+	  }
+   }
 }
