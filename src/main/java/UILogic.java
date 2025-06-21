@@ -554,7 +554,16 @@ public class UILogic {
    }
 
    public static void processDeleteEmployee() {
-	  //todo create a method to check a password
+	  String password = Utils.getUserInput("Enter the password: ");
+	  boolean isCorrect = Utils.passwordCheck(password);
+
+	  if(isCorrect) {
+		 int employeeId = Utils.getUserInputInt("Enter the Employee ID to delete: ");
+		 employeeDao.deleteEmployee(employeeId);
+	  } else {
+		 System.out.println("That password is incorrect!!!");
+	  }
+	  Utils.pauseApp();
    }
 
    public static void processAllShippers() {
