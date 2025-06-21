@@ -156,4 +156,23 @@ public class EmployeeDao {
 		  throw new RuntimeException(e);
 	   }
 	}
+
+	public void deleteEmployee(int employeeId) {
+	   String query = "DELETE FROM employees WHERE EmployeeID = ?;";
+
+	   try (Connection conn = dataSource.getConnection()) {
+		  PreparedStatement statement = conn.prepareStatement(query);
+		  statement.setInt(1, employeeId);
+
+		  int rows = statement.executeUpdate();
+		  if (rows != 0) {
+			 System.out.println("Success! Employee was deleted!");
+		  } else {
+			 System.err.println("ERROR! Could not delete employee!");
+		  }
+
+	   } catch (SQLException e) {
+		  throw new RuntimeException(e);
+	   }
+	}
 }
