@@ -213,7 +213,6 @@ public class UILogic {
 
 		 String newValue = Utils.getUserInput("\nPlease enter the new value ");
 
-		 //! Fix Error "Data truncation: Data too long for column 'Discontinued' at row 1"
 		 productDao.updateAProduct(query, productID, newValue);
 		 displayProductAfterUpdate(productID);
 	  }
@@ -258,7 +257,16 @@ public class UILogic {
    }
 
    public static void processDeleteProduct() {
-	  //todo create a method to check a password
+	  String password = Utils.getUserInput("Enter the password: ");
+	  boolean isPassword = Utils.passwordCheck(password);
+
+	  if(isPassword) {
+		 int productId = Utils.getUserInputInt("Enter the Product ID to delete: ");
+		 productDao.deleteProduct(productId);
+	  } else {
+		 System.out.println("That password is incorrect!");
+	  }
+	  Utils.pauseApp();
    }
 
    public static void processAllCustomers() {
