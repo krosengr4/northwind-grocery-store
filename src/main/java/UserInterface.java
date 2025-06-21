@@ -160,4 +160,15 @@ public class UserInterface {
 	   return Utils.getUserInputInt("Enter your option: ");
 	}
 
+	public int displayUpdateShipper() {
+	   System.out.println("\nPlease choose which column you would like to update.");
+	   System.out.println("-----OPTIONS-----");
+	   System.out.println("""
+						1 - Update Company Name
+						2 - Update Phone Number
+						0 - Go Back
+						""");
+	   return Utils.getUserInputInt("Enter your option: ");
+	}
+
 }
