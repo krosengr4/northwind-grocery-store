@@ -6,12 +6,12 @@ public class Employee implements NorthwindData {
     String firstName;
     String lastName;
     String title;
-	Date birthDate;
-	Date hireDate;
-	String address;
-	String city;
-	String Country;
-	String postalCode;
+//	Date birthDate;
+//	Date hireDate;
+//	String address;
+//	String city;
+//	String Country;
+//	String postalCode;
 
     public Employee(int employeeID, String firstName, String lastName, String title) {
 	   this.employeeID = employeeID;

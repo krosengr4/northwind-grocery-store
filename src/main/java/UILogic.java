@@ -475,7 +475,14 @@ public class UILogic {
    }
 
    public static void processAddEmployee() {
-	  //Add employee
+	  String firstName = Utils.getUserInput("Enter the employees first name: ");
+	  String lastName = Utils.getUserInput("Enter the employees last name: ");
+	  String title = Utils.getUserInput("Enter the employees title: ");
+
+
+	  Employee employee = new Employee(0, firstName, lastName, title);
+	  //! Fix bug. Notes cannot be null.
+	  employeeDao.addEmployee(employee);
    }
 
    public static void processUpdateEmployee() {
