@@ -145,46 +145,4 @@ public class CategoryDao {
 		 throw new RuntimeException(e);
 	  }
    }
-
-   public static void processUpdateEmployee() {
-	  System.out.println("Please enter the Employee ID of the employee you wish to update.");
-	  int employeeID = Utils.getUserInputInt("Enter here: ");
-
-	  String query = setEmployeeUpdateQuery();
-
-	  if(!query.equals("back")) {
-		 String newValue = Utils.getUserInput("Please enter the new value: ");
-
-		 employeeDao.updateEmployee(query, employeeID, newValue);
-		 displayEmployeeAfterUpdate(employeeID);
-	  }
-
-   }
-
-   private static String setEmployeeUpdateQuery() {
-	  int columnToUpdate = ui.displayUpdateEmployee();
-	  String query = "UPDATE employees SET ";
-
-	  switch(columnToUpdate){
-		 case 1 -> query += "FirstName = ?";
-		 case 2 -> query += "LastName = ?";
-		 case 3 -> query += "Title = ?";
-		 case 0 -> {
-			return "back";
-		 }
-	  }
-	  query += " WHERE EmployeeID = ?;";
-
-	  return query;
-   }
-
-   private static void displayEmployeeAfterUpdate(int employeeID) {
-	  Employee employee = employeeDao.getEmployeeByID(employeeID);
-
-	  if(employee != null){
-		 employee.print();
-	  } else {
-		 System.err.println("Error! Could not find employee with that ID!");
-	  }
-   }
 }

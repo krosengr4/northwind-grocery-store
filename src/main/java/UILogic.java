@@ -621,6 +621,7 @@ public class UILogic {
 		 shipperDao.updateShipper(query, shipperId, newValue);
 		 displayShipperAfterUpdate(shipperId);
 	  }
+	  Utils.pauseApp();
    }
 
    private static String setUpdateShipperQuery() {
@@ -650,7 +651,16 @@ public class UILogic {
    }
 
    public static void processDeleteShipper() {
-	  //todo Add a method that will check password
+	  String password = Utils.getUserInput("Please enter the password: ");
+	  boolean isCorrect = Utils.passwordCheck(password);
+
+	  if (isCorrect) {
+		 int shipperId = Utils.getUserInputInt("Enter the Shipper ID you wish to delete: ");
+		 shipperDao.deleteShipper(shipperId);
+	  } else {
+		 System.out.println("That password is incorrect!!!");
+	  }
+	  Utils.pauseApp();
    }
 
    public static void printData(ArrayList<NorthwindData> northwindDataList) {
