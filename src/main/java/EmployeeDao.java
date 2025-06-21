@@ -65,6 +65,29 @@ public class EmployeeDao {
         return employee;
     }
 
+	public Employee getEmployeeByID(int employeeId) {
+	   Employee employee = null;
+	   String query = "SELECT * FROM employees WHERE EmployeeID = ?;";
+
+	   try (Connection conn = dataSource.getConnection()) {
+		  PreparedStatement statement = conn.prepareStatement(query);
+		  statement.setInt(1, employeeId);
+
+		  ResultSet results = statement.executeQuery();
+		  while (results.next()) {
+			 String firstName = results.getString("FirstName");
+			 String lastName = results.getString("LastName");
+			 String title = results.getString("Title");
+
+			 employee = new Employee(employeeId, firstName, lastName, title);
+		  }
+
+	   } catch (SQLException e) {
+		  throw new RuntimeException(e);
+	   }
+	   return employee;
+	}
+
     public ArrayList<NorthwindData> getEmployeesList(String query, String userInput) {
         ArrayList<NorthwindData> employeesList = new ArrayList<>();
 
@@ -109,6 +132,24 @@ public class EmployeeDao {
 			 System.out.println("Success! The new employee has been added!");
 		  } else {
 			 System.err.println("ERROR! The new employee has not been added!!!");
+		  }
+
+	   } catch (SQLException e) {
+		  throw new RuntimeException(e);
+	   }
+	}
+
+	public void updateEmployee(String query, int employeeId, String newValue) {
+	   try (Connection conn = dataSource.getConnection()) {
+		  PreparedStatement statement = conn.prepareStatement(query);
+		  statement.setString(1, newValue);
+		  statement.setInt(2, employeeId);
+
+		  int rows = statement.executeUpdate();
+		  if (rows != 0) {
+			 System.out.println("Success! Employee successfully updated!");
+		  } else {
+			 System.err.println("ERROR! The Employee Information was not updated!");
 		  }
 
 	   } catch (SQLException e) {
