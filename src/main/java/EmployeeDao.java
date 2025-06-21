@@ -89,4 +89,30 @@ public class EmployeeDao {
 
         return employeesList;
     }
+
+	public void addEmployee(Employee employee) {
+	   int employeeID = employee.employeeID;
+	   String firstName = employee.firstName;
+	   String lastName = employee.lastName;
+	   String employeeTitle = employee.title;
+
+	   try(Connection connection = dataSource.getConnection()) {
+		  String query = "INSERT INTO employees (FirstName, LastName, Title) " +
+								 "VALUES (?, ?, ?);";
+		  PreparedStatement statement = connection.prepareStatement(query);
+		  statement.setString(1, firstName);
+		  statement.setString(2, lastName);
+		  statement.setString(3, employeeTitle);
+
+		  int rows = statement.executeUpdate();
+		  if(rows != 0) {
+			 System.out.println("Success! The new employee has been added!");
+		  } else {
+			 System.err.println("ERROR! The new employee has not been added!!!");
+		  }
+
+	   } catch (SQLException e) {
+		  throw new RuntimeException(e);
+	   }
+	}
 }

@@ -5,11 +5,14 @@
     <option name="tags">
       <list>
         <CustomTag>
+          <option name="bold" value="true" />
           <option name="color" value="#FF2D00" />
+          <option name="hasUnderline" value="true" />
           <option name="type" value="!" />
         </CustomTag>
         <CustomTag>
           <option name="color" value="#3498DB" />
+          <option name="italic" value="true" />
           <option name="type" value="?" />
         </CustomTag>
         <CustomTag>
@@ -23,6 +26,7 @@
         </CustomTag>
         <CustomTag>
           <option name="color" value="#98C379" />
+          <option name="hasUnderline" value="true" />
           <option name="type" value="*" />
         </CustomTag>
       </list>

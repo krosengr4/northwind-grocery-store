@@ -159,12 +159,12 @@ public class ProductDao {
 								"VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 		 PreparedStatement statement = conn.prepareStatement(query);
 		 statement.setString(1, productName);
-		 statement.setString(2, String.valueOf(supplierID));
-		 statement.setString(3, String.valueOf(categoryID));
+		 statement.setInt(2, supplierID);
+		 statement.setInt(3, categoryID);
 		 statement.setString(4, quantityPerUnit);
-		 statement.setString(5, String.valueOf(unitPrice));
-		 statement.setString(6, String.valueOf(unitsInStock));
-		 statement.setString(7, String.valueOf(reorderLevel));
+		 statement.setDouble(5, unitPrice);
+		 statement.setInt(6, unitsInStock);
+		 statement.setInt(7,reorderLevel);
 //            statement.setString(8, String.valueOf(isDiscontinued));
 		 statement.setBoolean(8, isDiscontinued);
 
@@ -173,7 +173,7 @@ public class ProductDao {
 		 if(rows != 0) {
 			System.out.println("Success! The new product was added to the database!");
 		 } else {
-			System.out.println("ERROR! The new product was not added to the database!!!");
+			System.err.println("ERROR! The new product was not added to the database!!!");
 		 }
 
 	  } catch(SQLException e) {
