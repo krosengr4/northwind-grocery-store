@@ -104,4 +104,21 @@ public class ShipperDao {
 	   }
 	}
 
+	public void updateShipper(String query, int shipperId, String newValue) {
+	   try(Connection conn = dataSource.getConnection()) {
+		  PreparedStatement statement = conn.prepareStatement(query);
+		  statement.setString(1, newValue);
+		  statement.setInt(2, shipperId);
+
+		  int rows = statement.executeUpdate();
+		  if(rows != 0) {
+			 System.out.println("Success! Shipper information was updated!");
+		  } else {
+			 System.err.println("Error! Could not update shipper information!!!");
+		  }
+	   } catch (SQLException e) {
+		  throw new RuntimeException(e);
+	   }
+	}
+
 }
