@@ -202,4 +202,22 @@ public class ProductDao {
 	  }
    }
 
+   public void deleteProduct(int productId) {
+	  String query = "DELETE FROM products WHERE ProductID = ?";
+
+	  try (Connection conn = dataSource.getConnection()) {
+		 PreparedStatement statement = conn.prepareStatement(query);
+		 statement.setInt(1, productId);
+
+		 int rows = statement.executeUpdate();
+		 if(rows != 0) {
+			System.out.println("Success! The product was deleted!");
+		 } else {
+			System.err.println("ERROR! Couldn't delete the product!!!");
+		 }
+	  } catch (SQLException e) {
+		 throw new RuntimeException(e);
+	  }
+   }
+
 }
