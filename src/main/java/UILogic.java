@@ -610,7 +610,43 @@ public class UILogic {
    }
 
    public static void processUpdateShipper() {
-	  //Update a shipper
+	  System.out.println("\nEnter the ID of the Shipper you wish to update.");
+	  int shipperId = Utils.getUserInputInt("Enter here: ");
+
+	  String query = setUpdateShipperQuery();
+
+	  if(!query.equals("back")) {
+		 String newValue = Utils.getUserInput("Enter the new value: ");
+
+		 shipperDao.updateShipper(query, shipperId, newValue);
+		 displayShipperAfterUpdate(shipperId);
+	  }
+   }
+
+   private static String setUpdateShipperQuery() {
+	  int columnToUpdate = ui.displayUpdateShipper();
+	  String query = "UPDATE shippers SET ";
+
+	  switch(columnToUpdate){
+		 case 1 -> query += "CompanyName = ?";
+		 case 2 -> query += "Phone = ?";
+		 case 0 -> {
+			return "back";
+		 }
+	  }
+	  query += "WHERE ShipperID = ?;";
+
+	  return query;
+   }
+
+   public static void displayShipperAfterUpdate(int shipperId) {
+	  Shipper shipper = shipperDao.getShipperById(shipperId);
+
+	  if(shipper == null) {
+		 System.out.println("Could not find a shipper with that ID...");
+	  } else {
+		 shipper.print();
+	  }
    }
 
    public static void processDeleteShipper() {
