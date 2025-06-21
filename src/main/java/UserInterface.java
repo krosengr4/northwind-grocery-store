@@ -148,4 +148,16 @@ public class UserInterface {
       return Utils.getUserInputIntMinMax("Enter your option: ", 0, 2);
     }
 
+	public int displayUpdateEmployee() {
+	   System.out.println("\nPlease choose which column you would like to update.");
+	   System.out.println("-----OPTIONS-----");
+	   System.out.println("""
+						1 - Update First Name
+						2 - Update Last Name
+						3 - Update Title
+						0 - Go Back
+						""");
+	   return Utils.getUserInputInt("Enter your option: ");
+	}
+
 }
