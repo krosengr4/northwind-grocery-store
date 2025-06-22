@@ -1,5 +1,6 @@
 public class Customer implements NorthwindData {
 
+   int customerId;
     String companyName;
     String contactName;
     String contactTitle;
@@ -11,8 +12,9 @@ public class Customer implements NorthwindData {
     String phoneNumber;
     String fax;
 
-    public Customer (String companyName, String contactName, String contactTitle, String address, String region, String postalCode,
+    public Customer (int customerId, String companyName, String contactName, String contactTitle, String address, String region, String postalCode,
                      String city, String country, String phoneNumber, String fax) {
+	   this.customerId = customerId;
         this.companyName = companyName;
         this.contactName = contactName;
         this.contactTitle = contactTitle;
@@ -27,6 +29,7 @@ public class Customer implements NorthwindData {
 
     public void print() {
         System.out.println("-----CUSTOMER-----");
+	   System.out.println("Customer ID: " + this.customerId);
         System.out.println("Contact Name: " + this.contactName);
         System.out.println("Company Name: " + this.companyName);
         System.out.println("Title: " + this.contactTitle);

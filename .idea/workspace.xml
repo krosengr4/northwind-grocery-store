@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90d6bda1-ba48-48c6-81d7-2c5dfe924efb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CategoryDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CategoryLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CategoryLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CustomerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CustomerDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ProductLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ProductLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CategoryDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CategoryDaoTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -22,24 +22,9 @@ public class CustomerDao {
             ResultSet results = prepStatement.executeQuery();
 
             while (results.next()) {
-                //region getting fields for Customer object
-                String companyName = results.getString("CompanyName");
-                String customerName = results.getString("ContactName");
-                String contactTitle = results.getString("ContactTitle");
-                String address = results.getString("Address");
-                String region = results.getString("Region");
-                String postalCode = results.getString("PostalCode");
-                String city = results.getString("City");
-                String country = results.getString("Country");
-                String phoneNumber = results.getString("Phone");
-                String fax = results.getString("Fax");
-                //endregion
-
-
-                Customer newCustomer = new Customer(companyName, customerName, contactTitle, address, region, postalCode, city, country, phoneNumber, fax);
+                Customer newCustomer = mapRow(results);
                 customersList.add(newCustomer);
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -48,7 +33,6 @@ public class CustomerDao {
     }
 
     public Customer getCustomer(String query, String userInput) {
-        Customer customer = null;
 
         try (Connection conn = dataSource.getConnection()) {
 
@@ -57,29 +41,14 @@ public class CustomerDao {
 
             ResultSet results = prepStatement.executeQuery();
 
-            while (results.next()) {
-                //region getting fields for Customer object
-                String companyName = results.getString("CompanyName");
-                String customerName = results.getString("ContactName");
-                String contactTitle = results.getString("ContactTitle");
-                String address = results.getString("Address");
-                String region = results.getString("Region");
-                String postalCode = results.getString("PostalCode");
-                String city = results.getString("City");
-                String country = results.getString("Country");
-                String phoneNumber = results.getString("Phone");
-                String fax = results.getString("Fax");
-                //endregion
-
-
-                customer = new Customer(companyName, customerName, contactTitle, address, region, postalCode, city, country, phoneNumber, fax);
+            if(results.next()) {
+			   return mapRow(results);
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        return customer;
+		return null;
     }
 
     public ArrayList<NorthwindData> getCustomersList(String query, String userInput) {
@@ -93,25 +62,9 @@ public class CustomerDao {
             ResultSet results = prepStatement.executeQuery();
 
             while (results.next()) {
-                //region getting fields for Customer object
-                String companyName = results.getString("CompanyName");
-                String customerName = results.getString("ContactName");
-                String contactTitle = results.getString("ContactTitle");
-                String address = results.getString("Address");
-                String region = results.getString("Region");
-                String postalCode = results.getString("PostalCode");
-                String city = results.getString("City");
-                String country = results.getString("Country");
-                String phoneNumber = results.getString("Phone");
-                String fax = results.getString("Fax");
-                //endregion
-
-
-                Customer newCustomer = new Customer(companyName, customerName, contactTitle, address, region, postalCode, city, country, phoneNumber, fax);
-
+                Customer newCustomer = mapRow(results);
                 customersList.add(newCustomer);
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -200,6 +153,22 @@ public class CustomerDao {
 	   } catch (SQLException e) {
 		  throw new RuntimeException(e);
 	   }
+	}
+
+	private Customer mapRow(ResultSet results) throws SQLException {
+	   int customerId = results.getInt("CustomerID");
+	   String companyName = results.getString("CompanyName");
+	   String customerName = results.getString("ContactName");
+	   String contactTitle = results.getString("ContactTitle");
+	   String address = results.getString("Address");
+	   String region = results.getString("Region");
+	   String postalCode = results.getString("PostalCode");
+	   String city = results.getString("City");
+	   String country = results.getString("Country");
+	   String phoneNumber = results.getString("Phone");
+	   String fax = results.getString("Fax");
+
+	   return new Customer(customerId, companyName, customerName, contactTitle, address, region, postalCode, city, country, phoneNumber, fax);
 	}
 
 }
