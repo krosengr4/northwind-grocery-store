@@ -12,26 +12,15 @@ public class ProductDao {
 
    public ArrayList<NorthwindData> getAllProducts() {
 	  ArrayList<NorthwindData> productsList = new ArrayList<>();
+	  String query = "SELECT * FROM products;";
 
 	  try(Connection conn = dataSource.getConnection()) {
-
-		 String query = "SELECT * FROM products;";
 		 PreparedStatement prepStatement = conn.prepareStatement(query);
 
 		 ResultSet results = prepStatement.executeQuery();
 
 		 while(results.next()) {
-			int productID = results.getInt("ProductID");
-			String productName = results.getString("ProductName");
-			int supplierID = results.getInt("SupplierID");
-			int categoryID = results.getInt("CategoryID");
-			String quantityPerUnit = results.getString("QuantityPerUnit");
-			double unitPrice = results.getDouble("UnitPrice");
-			int unitsInStock = results.getInt("UnitsInStock");
-			int reorderLevel = results.getInt("ReorderLevel");
-			boolean isDiscontinued = results.getBoolean("Discontinued");
-
-			Product newProduct = new Product(productID, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, isDiscontinued);
+			Product newProduct = mapRow(results);
 			productsList.add(newProduct);
 		 }
 
@@ -44,28 +33,16 @@ public class ProductDao {
 
    public ArrayList<NorthwindData> getProductsFromCategory(String userCatChoice) {
 	  ArrayList<NorthwindData> productsList = new ArrayList<>();
+	  String query = "SELECT * FROM products WHERE CategoryID = ?;";
 
 	  try(Connection conn = dataSource.getConnection()) {
-
-		 String query = "SELECT * FROM products WHERE CategoryID = ?;";
 		 PreparedStatement prepStatement = conn.prepareStatement(query);
 		 prepStatement.setString(1, userCatChoice);
 
 		 ResultSet results = prepStatement.executeQuery();
 
 		 while(results.next()) {
-			int productID = results.getInt("ProductID");
-			String productName = results.getString("ProductName");
-			int supplierID = results.getInt("SupplierID");
-			int categoryID = results.getInt("CategoryID");
-			String quantityPerUnit = results.getString("QuantityPerUnit");
-			double unitPrice = results.getDouble("UnitPrice");
-			int unitsInStock = results.getInt("UnitsInStock");
-			int reorderLevel = results.getInt("ReorderLevel");
-			boolean isDiscontinued = results.getBoolean("Discontinued");
-
-			Product newProduct = new Product(productID, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, isDiscontinued);
-
+			Product newProduct = mapRow(results);
 			productsList.add(newProduct);
 		 }
 
@@ -77,34 +54,19 @@ public class ProductDao {
    }
 
    public Product getProduct(String query, String userInput) {
-
-	  Product product = null;
-
 	  try(Connection conn = dataSource.getConnection()) {
 
 		 PreparedStatement prepStatement = conn.prepareStatement(query);
 		 prepStatement.setString(1, userInput);
 
 		 ResultSet results = prepStatement.executeQuery();
-		 while(results.next()) {
-			int productID = results.getInt("ProductID");
-			String productName = results.getString("ProductName");
-			int supplierID = results.getInt("SupplierID");
-			int categoryID = results.getInt("CategoryID");
-			String quantityPerUnit = results.getString("QuantityPerUnit");
-			double unitPrice = results.getDouble("UnitPrice");
-			int unitsInStock = results.getInt("UnitsInStock");
-			int reorderLevel = results.getInt("ReorderLevel");
-			boolean isDiscontinued = results.getBoolean("Discontinued");
-
-			product = new Product(productID, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, isDiscontinued);
+		 if(results.next()) {
+			return mapRow(results);
 		 }
-
 	  } catch(SQLException e) {
 		 throw new RuntimeException(e);
 	  }
-
-	  return product;
+	  return null;
    }
 
    public ArrayList<NorthwindData> getProductsByPrice(String query, double minPrice, double maxPrice) {
@@ -119,20 +81,9 @@ public class ProductDao {
 		 ResultSet results = prepStatement.executeQuery();
 
 		 while(results.next()) {
-			int productID = results.getInt("ProductID");
-			String productName = results.getString("ProductName");
-			int supplierID = results.getInt("SupplierID");
-			int categoryID = results.getInt("CategoryID");
-			String quantityPerUnit = results.getString("QuantityPerUnit");
-			double unitPrice = results.getDouble("UnitPrice");
-			int unitsInStock = results.getInt("UnitsInStock");
-			int reorderLevel = results.getInt("ReorderLevel");
-			boolean isDiscontinued = results.getBoolean("Discontinued");
-
-			Product newProduct = new Product(productID, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, isDiscontinued);
+			Product newProduct = mapRow(results);
 			productsList.add(newProduct);
 		 }
-
 	  } catch(SQLException e) {
 		 throw new RuntimeException(e);
 	  }
@@ -144,7 +95,6 @@ public class ProductDao {
    //                            int unitsInStock, int unitsOnOrder, int reorderLevel, boolean isDiscontinued
 
    public void addAProduct(Product product) {
-
 	  String productName = product.productName;
 	  int supplierID = product.supplierID;
 	  int categoryID = product.categoryID;
@@ -154,9 +104,10 @@ public class ProductDao {
 	  int reorderLevel = product.reorderLevel;
 	  boolean isDiscontinued = product.isDiscontinued;
 
+	  String query = "INSERT INTO products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, ReorderLevel, Discontinued) " +
+							 "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+
 	  try(Connection conn = dataSource.getConnection()) {
-		 String query = "INSERT INTO products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, ReorderLevel, Discontinued) " +
-								"VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 		 PreparedStatement statement = conn.prepareStatement(query);
 		 statement.setString(1, productName);
 		 statement.setInt(2, supplierID);
@@ -164,8 +115,7 @@ public class ProductDao {
 		 statement.setString(4, quantityPerUnit);
 		 statement.setDouble(5, unitPrice);
 		 statement.setInt(6, unitsInStock);
-		 statement.setInt(7,reorderLevel);
-//            statement.setString(8, String.valueOf(isDiscontinued));
+		 statement.setInt(7, reorderLevel);
 		 statement.setBoolean(8, isDiscontinued);
 
 		 int rows = statement.executeUpdate();
@@ -205,7 +155,7 @@ public class ProductDao {
    public void deleteProduct(int productId) {
 	  String query = "DELETE FROM products WHERE ProductID = ?";
 
-	  try (Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = dataSource.getConnection()) {
 		 PreparedStatement statement = conn.prepareStatement(query);
 		 statement.setInt(1, productId);
 
@@ -215,9 +165,23 @@ public class ProductDao {
 		 } else {
 			System.err.println("ERROR! Couldn't delete the product!!!");
 		 }
-	  } catch (SQLException e) {
+	  } catch(SQLException e) {
 		 throw new RuntimeException(e);
 	  }
+   }
+
+   private Product mapRow(ResultSet results) throws SQLException {
+	  int productID = results.getInt("ProductID");
+	  String productName = results.getString("ProductName");
+	  int supplierID = results.getInt("SupplierID");
+	  int categoryID = results.getInt("CategoryID");
+	  String quantityPerUnit = results.getString("QuantityPerUnit");
+	  double unitPrice = results.getDouble("UnitPrice");
+	  int unitsInStock = results.getInt("UnitsInStock");
+	  int reorderLevel = results.getInt("ReorderLevel");
+	  boolean isDiscontinued = results.getBoolean("Discontinued");
+
+	  return new Product(productID, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, reorderLevel, isDiscontinued);
    }
 
 }
