@@ -94,16 +94,24 @@ public class EmployeeDao {
 	  String firstName = employee.firstName;
 	  String lastName = employee.lastName;
 	  String employeeTitle = employee.title;
+	  String address = employee.address;
+	  String city = employee.city;
+	  String country = employee.country;
+	  String postalCode = employee.postalCode;
 	  String notes = employee.notes;
 
 	  try(Connection connection = dataSource.getConnection()) {
-		 String query = "INSERT INTO employees (FirstName, LastName, Title, Notes) " +
+		 String query = "INSERT INTO employees (FirstName, LastName, Title, Address, City, Country, PostalCode, Notes) " +
 								"VALUES (?, ?, ?, ?);";
 		 PreparedStatement statement = connection.prepareStatement(query);
 		 statement.setString(1, firstName);
 		 statement.setString(2, lastName);
 		 statement.setString(3, employeeTitle);
-		 statement.setString(4, notes);
+		 statement.setString(4, address);
+		 statement.setString(5, city);
+		 statement.setString(6, country);
+		 statement.setString(6, postalCode);
+		 statement.setString(7, notes);
 
 		 int rows = statement.executeUpdate();
 		 if(rows != 0) {
@@ -160,8 +168,12 @@ public class EmployeeDao {
 	  String lastName = results.getString("LastName");
 	  String title = results.getString("Title");
 //			   Date birthDate = results.getDate("BirthDate");
+	  String address = results.getString("Address");
+	  String city = results.getString("City");
+	  String country = results.getString("Country");
+	  String postalCode = results.getString("PostalCode");
 	  String notes = results.getString("Notes");
 
-	  return new Employee(employeeID, firstName, lastName, title, notes);
+	  return new Employee(employeeID, firstName, lastName, title, address, city, country, postalCode, notes);
    }
 }
