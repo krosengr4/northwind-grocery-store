@@ -11,22 +11,17 @@ public class CategoryDao {
    }
 
    public ArrayList<NorthwindData> getAllCategories() {
-
 	  ArrayList<NorthwindData> categoriesList = new ArrayList<>();
+	  String query = "SELECT * FROM categories ORDER BY CategoryID;";
 
 	  try(Connection conn = dataSource.getConnection()) {
 
-		 String query = "SELECT * FROM categories ORDER BY CategoryID;";
 		 PreparedStatement prepStatement = conn.prepareStatement(query);
 
 		 ResultSet results = prepStatement.executeQuery();
 
 		 while(results.next()) {
-			int catID = results.getInt("CategoryID");
-			String catName = results.getString("CategoryName");
-			String catDescription = results.getString("Description");
-
-			Category newCategory = new Category(catID, catName, catDescription);
+			Category newCategory = mapRow(results);
 			categoriesList.add(newCategory);
 		 }
 
@@ -38,53 +33,42 @@ public class CategoryDao {
    }
 
    public Category getCategoryByName(String userInput) {
-	  Category category = null;
+	  String query = "SELECT * FROM categories WHERE CategoryName LIKE ?";
 
 	  try(Connection conn = dataSource.getConnection()) {
 
-		 String query = "SELECT * FROM categories WHERE CategoryName LIKE ?";
 		 PreparedStatement prepStatement = conn.prepareStatement(query);
 		 prepStatement.setString(1, "%" + userInput + "%");
 
 		 ResultSet results = prepStatement.executeQuery();
 
-		 while(results.next()) {
-			int catID = results.getInt("CategoryID");
-			String catName = results.getString("CategoryName");
-			String catDescription = results.getString("Description");
-
-			category = new Category(catID, catName, catDescription);
+		 if(results.next()) {
+			return mapRow(results);
 		 }
 
 	  } catch(SQLException e) {
 		 throw new RuntimeException(e);
 	  }
 
-	  return category;
+	  return null;
    }
 
    public Category getCategoryByID(int userCategoryID) {
-	  Category category = null;
+	  String query = "SELECT * FROM categories WHERE CategoryID = ?";
 
 	  try(Connection conn = dataSource.getConnection()) {
-
-		 String query = "SELECT * FROM categories WHERE CategoryID = ?";
 		 PreparedStatement statement = conn.prepareStatement(query);
 		 statement.setInt(1, userCategoryID);
 
 		 ResultSet results = statement.executeQuery();
-		 while(results.next()) {
-			int categoryID = results.getInt("CategoryID");
-			String categoryName = results.getString("CategoryName");
-			String description = results.getString("Description");
 
-			category = new Category(categoryID, categoryName, description);
+		 if(results.next()) {
+			return mapRow(results);
 		 }
-
 	  } catch(SQLException e) {
 		 throw new RuntimeException(e);
 	  }
-	  return category;
+	  return null;
    }
 
    public void addCategory(Category category) {
@@ -136,7 +120,7 @@ public class CategoryDao {
 		 statement.setInt(1, categoryId);
 
 		 int rows = statement.executeUpdate();
-		 if (rows != 0){
+		 if(rows != 0) {
 			System.out.println("Success! The category was deleted!");
 		 } else {
 			System.err.println("ERROR! The category could not be deleted!");
@@ -144,5 +128,13 @@ public class CategoryDao {
 	  } catch(SQLException e) {
 		 throw new RuntimeException(e);
 	  }
+   }
+
+   private Category mapRow(ResultSet row) throws SQLException {
+	  int categoryId = row.getInt("CategoryID");
+	  String categoryName = row.getString("CategoryName");
+	  String description = row.getString("Description");
+
+	  return new Category(categoryId, categoryName, description);
    }
 }
