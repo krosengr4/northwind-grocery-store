@@ -59,10 +59,14 @@ public class EmployeeLogic {
 	  String firstName = Utils.getUserInput("Enter the employees first name: ");
 	  String lastName = Utils.getUserInput("Enter the employees last name: ");
 	  String title = Utils.getUserInput("Enter the employees title: ");
+	  String address = Utils.getUserInput("Enter the employee's address: ");
+	  String city = Utils.getUserInput("Enter the employee city: ");
+	  String country = Utils.getUserInput("Enter the employee's country: ");
+	  String postalCode = Utils.getUserInput("Enter the employee's postal code: ");
 	  String notes = Utils.getUserInput("Please enter any notes (if none, enter 'none'): ");
 
 
-	  Employee employee = new Employee(0, firstName, lastName, title, notes);
+	  Employee employee = new Employee(0, firstName, lastName, title, address, city, country, postalCode, notes);
 	  employeeDao.addEmployee(employee);
    }
 
