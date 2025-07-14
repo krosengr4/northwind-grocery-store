@@ -21,7 +21,7 @@ class ProductTest {
 
         Product product = productDao.getProduct(query, productID);
 
-        String actual = product.name;
+        String actual = product.productName;
 
         Assertions.assertEquals("Filo Mix", actual);
 

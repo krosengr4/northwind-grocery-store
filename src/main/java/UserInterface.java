@@ -148,6 +148,7 @@ public class UserInterface {
       return Utils.getUserInputIntMinMax("Enter your option: ", 0, 2);
     }
 
+	//! Add new fields that a user can update!
 	public int displayUpdateEmployee() {
 	   System.out.println("\nPlease choose which column you would like to update.");
 	   System.out.println("-----OPTIONS-----");

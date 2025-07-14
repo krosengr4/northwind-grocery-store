@@ -74,6 +74,7 @@ public class CustomerLogic {
 	  System.out.println("\n---ADD NEW CUSTOMER---");
 	  String companyName = Utils.getUserInput("Enter the Company Name: ");
 	  String contactName = Utils.getUserInput("Enter the Contact Name: ");
+	  String contactTitle = Utils.getUserInput("Enter the Contact Title: ");
 	  String address = Utils.getUserInput("Enter the Address: ");
 	  String region = Utils.getUserInput("Enter the Region: ");
 	  String postalCode = Utils.getUserInput("Enter the Postal Code: ");
@@ -82,7 +83,7 @@ public class CustomerLogic {
 	  String phoneNumber = Utils.getUserInput("Enter the Customer's Phone Number: ");
 	  String fax = Utils.getUserInput("Enter the Customer's Phone Number: ");
 
-	  Customer customer = new Customer(null, companyName, contactName, address, region, postalCode, city, country, phoneNumber, fax);
+	  Customer customer = new Customer(0, companyName, contactName, contactTitle, address, region, postalCode, city, country, phoneNumber, fax);
 	  customerDao.addCustomer(customer);
    }
 
