@@ -134,10 +134,9 @@ public class UserInterface {
                 8 - Update Country
                 9  - Update Phone Number
                 10 - Update Fax
-                0 - Go Back
                 """);
 
-        return Utils.getUserInputIntMinMax("Enter your option: ", 0, 10);
+        return Utils.getUserInputIntMinMax("Enter your option: ", 1, 10);
     }
 
     public int displayUpdateCategory() {

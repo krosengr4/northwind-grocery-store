@@ -96,54 +96,76 @@ public class CustomerLogic {
 
    public static void processUpdateCustomer() {
 	  System.out.println("\nPlease Enter the Customer ID of the customer you wish to update.");
-	  String customerID = Utils.getUserInput("Enter Here: ");
+	  int customerID = Utils.getUserInputInt("Enter Here: ");
 
-	  String query = setCustomerUpdateQuery();
-
-	  if(!query.equalsIgnoreCase("back")) {
-		 String newValue = Utils.getUserInput("Enter the New Value: ");
-
-		 customerDao.updateCustomer(query, customerID, newValue);
-		 displayCustomerAfterUpdate(customerID);
-	  }
-   }
-
-   private static void displayCustomerAfterUpdate(String customerID) {
-	  String query = "SELECT * FROM customers WHERE CustomerID = ?;";
-	  Customer customer = customerDao.getCustomer(query, customerID);
-
-	  if(customer == null) {
-		 System.err.println("Error! We could not get the customer after the update...");
+	  Customer customer = customerDao.getCustomerById(customerID);
+	  if (customer == null) {
+		  System.out.println("There are no customers with that id...");
 	  } else {
-		 customer.print();
+		  Customer updatedCustomer = customerUpdateField(customer);
+		  customerDao.updateCustomer(updatedCustomer, customerID);
 	  }
-	  Utils.pauseApp();
    }
 
-   private static String setCustomerUpdateQuery() {
-	  int columnToUpdate = ui.displayUpdateCustomer();
-	  String query = "UPDATE customers SET ";
 
-	  switch(columnToUpdate) {
-		 case 1 -> query += "CompanyName = ?";
-		 case 2 -> query += "ContactName = ?";
-		 case 3 -> query += "ContactTitle = ?";
-		 case 4 -> query += "Address = ?";
-		 case 5 -> query += "Region = ?";
-		 case 6 -> query += "PostalCode = ?";
-		 case 7 -> query += "City = ?";
-		 case 8 -> query += "Country = ?";
-		 case 9 -> query += "Phone = ?";
-		 case 10 -> query += "Fax = ?";
-		 case 0 -> {
-			return "back";
-		 }
-		 default -> System.out.println("ERROR! Please Select One of the listed number!");
-	  }
-
-	  query += " WHERE CustomerID = ?;";
-
-	  return query;
+   private static Customer customerUpdateField(Customer customer) {
+	   int userChoice = ui.displayUpdateCustomer();
+	   switch(userChoice) {
+		   case 1: {
+			   String newCompanyName = Utils.getUserInput("Enter the new company name: ");
+			   customer.setCompanyName(newCompanyName);
+			   return customer;
+		   }
+		   case 2: {
+			   String newContactName = Utils.getUserInput("Enter the new contact name: ");
+			   customer.setContactName(newContactName);
+			   return customer;
+		   }
+		   case 3: {
+			   String newContactTitle = Utils.getUserInput("Enter the new contact title: ");
+			   customer.setContactTitle(newContactTitle);
+			   return customer;
+		   }
+		   case 4: {
+			   String newAddress = Utils.getUserInput("Enter the new address: ");
+			   customer.setAddress(newAddress);
+			   return customer;
+		   }
+		   case 5: {
+			   String newRegion = Utils.getUserInput("Enter the new region: ");
+			   customer.setRegion(newRegion);
+			   return customer;
+		   }
+		   case 6: {
+			   String newPostal = Utils.getUserInput("Enter the new postal code: ");
+			   customer.setPostalCode(newPostal);
+			   return customer;
+		   }
+		   case 7: {
+			   String city = Utils.getUserInput("Enter the new city: ");
+			   customer.setCity(city);
+			   return customer;
+		   }
+		   case 8: {
+			   String country = Utils.getUserInput("Enter the new country: ");
+			   customer.setCountry(country);
+			   return customer;
+		   }
+		   case 9: {
+			   String phoneNumber = Utils.getUserInput("Enter the new phone number: ");
+			   customer.setPhoneNumber(phoneNumber);
+			   return customer;
+		   }
+		   case 10: {
+			   String fax = Utils.getUserInput("Enter the new fax: ");
+			   customer.setFax(fax);
+			   return customer;
+		   }
+		   default: {
+			   System.err.println("ERROR! Something went wrong with your selection.");
+		   }
+	   }
+	   return customer;
    }
 
    public static void processDeleteCustomer() {
