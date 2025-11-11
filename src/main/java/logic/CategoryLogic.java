@@ -56,39 +56,24 @@ public class CategoryLogic {
 	  System.out.println("\nPlease Enter the Category ID of the Category you wish to Update.");
 	  int categoryID = Utils.getUserInputInt("Enter here: ");
 
-	  String query = setCategoryUpdateQuery();
-
-	  if(!query.equals("back")) {
-		 String newValue = Utils.getUserInput("Enter the New Value for this column: ");
-
-		 categoryDao.updateCategory(query, categoryID, newValue);
-		 displayAfterCatUpdate(categoryID);
-	  }
-   }
-
-   public static String setCategoryUpdateQuery() {
-	  int columnToUpdate = ui.displayUpdateCategory();
-	  String query = "UPDATE categories SET ";
-
-	  switch(columnToUpdate) {
-		 case 1 -> query += "CategoryName = ?";
-		 case 2 -> query += "Description = ?";
-		 case 0 -> {
-			return "back";
-		 }
-	  }
-	  query += " WHERE CategoryID = ?";
-
-	  return query;
-   }
-
-   public static void displayAfterCatUpdate(int productID) {
-	  Category category = categoryDao.getCategoryByID(productID);
-
-	  if(category != null) {
-		 category.print();
+	  Category category = categoryDao.getCategoryByID(categoryID);
+	  if(category == null) {
+		  System.out.println("There are no categories with that ID...");
 	  } else {
-		 System.err.println("Error! Couldn't find Category with that ID!");
+		  int userChoice = ui.displayUpdateCategory();
+
+		  switch(userChoice) {
+			  case 1 -> {
+				  String newName = Utils.getUserInput("Enter the new category name: ");
+				  category.setName(newName.trim());
+				  categoryDao.updateCategory(category, categoryID);
+			  }
+			  case 2 -> {
+				  String newDescription = Utils.getUserInput("Enter the new description: ");
+				  category.setDescription(newDescription.trim());
+				  categoryDao.updateCategory(category, categoryID);
+			  }
+		  }
 	  }
    }
 

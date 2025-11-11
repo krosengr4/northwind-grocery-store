@@ -97,7 +97,7 @@ public class CategoryDao extends MySqlDaoBase{
 	  }
    }
 
-   public void updateCategory(Category category, int categoryID, String newValue) {
+   public void updateCategory(Category category, int categoryID) {
 	   String query = """
 			   UPDATE categories
 			   set CategoryName = ?,
