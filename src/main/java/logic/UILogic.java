@@ -1,5 +1,8 @@
+package logic;
+
 import models.NorthwindData;
 import org.apache.commons.dbcp2.BasicDataSource;
+import ui.UserInterface;
 import utils.Utils;
 
 import java.util.ArrayList;

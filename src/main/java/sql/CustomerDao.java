@@ -1,3 +1,5 @@
+package sql;
+
 import models.Customer;
 import models.NorthwindData;
 
@@ -128,9 +130,9 @@ public class CustomerDao {
             int rows = statement.executeUpdate();
 
             if (rows != 0) {
-                System.out.println("Success! Information Updated for models.Customer with an ID of: " + customerID);
+                System.out.println("Success! Information Updated for Customer with an ID of: " + customerID);
             } else {
-                System.err.println("ERROR! The models.Customer Information was not updated!!!");
+                System.err.println("ERROR! The Customer Information was not updated!!!");
             }
 
 
@@ -149,9 +151,9 @@ public class CustomerDao {
 
 		  int rows = statement.executeUpdate();
 		  if (rows != 0) {
-			 System.out.println("Success! models.Customer was deleted!");
+			 System.out.println("Success! Customer was deleted!");
 		  } else {
-			 System.err.println("ERROR! models.Customer was not deleted!!!");
+			 System.err.println("ERROR! Customer was not deleted!!!");
 		  }
 	   } catch (SQLException e) {
 		  throw new RuntimeException(e);

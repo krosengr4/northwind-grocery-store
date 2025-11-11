@@ -1,3 +1,5 @@
+package sql;
+
 import models.NorthwindData;
 import models.Product;
 
@@ -145,7 +147,7 @@ public class ProductDao {
 		 int rows = statement.executeUpdate();
 
 		 if(rows != 0) {
-			System.out.println("\nSuccess! Information Updated for models.Product with an ID of: " + productID);
+			System.out.println("\nSuccess! Information Updated for Product with an ID of: " + productID);
 		 } else {
 			System.out.println("\nCould not find that product...");
 		 }

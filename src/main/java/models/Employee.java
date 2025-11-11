@@ -1,18 +1,16 @@
-import java.util.Date;
+package models;
 
 public class Employee implements NorthwindData {
 
    int employeeID;
-    String firstName;
-    String lastName;
-    String title;
-//	Date birthDate;
-//	Date hireDate;
-	String address;
-	String city;
-	String country;
-	String postalCode;
-   String notes;
+	public String firstName;
+	public String lastName;
+	public String title;
+	public String address;
+	public String city;
+	public String country;
+	public String postalCode;
+   public String notes;
 
     public Employee(int employeeID, String firstName, String lastName, String title, String address, String city, String country, String postalCode, String notes) {
 	   this.employeeID = employeeID;

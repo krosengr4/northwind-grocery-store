@@ -1,6 +1,9 @@
+import models.NorthwindData;
+import models.Product;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import sql.ProductDao;
 
 import java.util.ArrayList;
 

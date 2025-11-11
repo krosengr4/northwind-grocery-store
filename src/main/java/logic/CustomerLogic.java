@@ -1,7 +1,10 @@
+package logic;
+
 import models.Customer;
 import models.NorthwindData;
 import org.apache.commons.dbcp2.BasicDataSource;
 import sql.CustomerDao;
+import ui.UserInterface;
 import utils.Utils;
 
 import java.util.ArrayList;
@@ -82,17 +85,17 @@ public class CustomerLogic {
 	  String address = Utils.getUserInput("Enter the Address: ");
 	  String region = Utils.getUserInput("Enter the Region: ");
 	  String postalCode = Utils.getUserInput("Enter the Postal Code: ");
-	  String city = Utils.getUserInput("Enter the models.Customer's City: ");
-	  String country = Utils.getUserInput("Enter the models.Customer's Country: ");
-	  String phoneNumber = Utils.getUserInput("Enter the models.Customer's Phone Number: ");
-	  String fax = Utils.getUserInput("Enter the models.Customer's Phone Number: ");
+	  String city = Utils.getUserInput("Enter the Customer's City: ");
+	  String country = Utils.getUserInput("Enter the Customer's Country: ");
+	  String phoneNumber = Utils.getUserInput("Enter the Customer's Phone Number: ");
+	  String fax = Utils.getUserInput("Enter the Customer's Phone Number: ");
 
 	  Customer customer = new Customer(0, companyName, contactName, contactTitle, address, region, postalCode, city, country, phoneNumber, fax);
 	  customerDao.addCustomer(customer);
    }
 
    public static void processUpdateCustomer() {
-	  System.out.println("\nPlease Enter the models.Customer ID of the customer you wish to update.");
+	  System.out.println("\nPlease Enter the Customer ID of the customer you wish to update.");
 	  String customerID = Utils.getUserInput("Enter Here: ");
 
 	  String query = setCustomerUpdateQuery();
@@ -148,7 +151,7 @@ public class CustomerLogic {
 	  boolean isCorrect = Utils.passwordCheck(password);
 
 	  if(isCorrect) {
-		 int customerId = Utils.getUserInputInt("Enter the models.Customer ID to delete: ");
+		 int customerId = Utils.getUserInputInt("Enter the Customer ID to delete: ");
 		 customerDao.deleteCustomer(customerId);
 	  } else {
 		 System.out.println("That password is incorrect!");

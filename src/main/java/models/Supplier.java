@@ -1,4 +1,6 @@
-public class Supplier implements NorthwindData{
+package models;
+
+public class Supplier implements NorthwindData {
 
    int supplierId;
    String companyName;

@@ -1,16 +1,18 @@
+package models;
+
 public class Customer implements NorthwindData {
 
    int customerId;
-    String companyName;
-    String contactName;
-    String contactTitle;
-    String address;
-    String region;
-    String postalCode;
-    String city;
-    String country;
-    String phoneNumber;
-    String fax;
+    public String companyName;
+    public String contactName;
+    public String contactTitle;
+    public String address;
+    public String region;
+    public String postalCode;
+    public String city;
+    public String country;
+    public String phoneNumber;
+    public String fax;
 
     public Customer (int customerId, String companyName, String contactName, String contactTitle, String address, String region, String postalCode,
                      String city, String country, String phoneNumber, String fax) {

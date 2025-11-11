@@ -1,3 +1,5 @@
+package ui;
+
 import utils.Utils;
 
 public class UserInterface {

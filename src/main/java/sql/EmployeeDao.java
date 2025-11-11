@@ -1,3 +1,5 @@
+package sql;
+
 import models.Employee;
 import models.NorthwindData;
 
@@ -136,9 +138,9 @@ public class EmployeeDao {
 
 		 int rows = statement.executeUpdate();
 		 if(rows != 0) {
-			System.out.println("Success! models.Employee successfully updated!");
+			System.out.println("Success! Employee successfully updated!");
 		 } else {
-			System.err.println("ERROR! The models.Employee Information was not updated!");
+			System.err.println("ERROR! The Employee Information was not updated!");
 		 }
 
 	  } catch(SQLException e) {
@@ -155,7 +157,7 @@ public class EmployeeDao {
 
 		 int rows = statement.executeUpdate();
 		 if(rows != 0) {
-			System.out.println("Success! models.Employee was deleted!");
+			System.out.println("Success! Employee was deleted!");
 		 } else {
 			System.err.println("ERROR! Could not delete employee!");
 		 }

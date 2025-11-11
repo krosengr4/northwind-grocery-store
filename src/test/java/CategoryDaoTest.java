@@ -1,6 +1,8 @@
+import models.Category;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import sql.CategoryDao;
 
 class CategoryDaoTest {
 

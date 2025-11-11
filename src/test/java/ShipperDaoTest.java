@@ -1,10 +1,11 @@
+import models.NorthwindData;
+import models.Shipper;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import sql.ShipperDao;
 
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ShipperDaoTest {
     BasicDataSource dataSource = new BasicDataSource();

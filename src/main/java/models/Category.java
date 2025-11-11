@@ -1,8 +1,10 @@
+package models;
+
 public class Category implements NorthwindData {
 
-    int categoryID;
-    String name;
-    String description;
+    public int categoryID;
+    public String name;
+    public String description;
 
     public Category (int categoryID, String name, String description) {
         this.categoryID = categoryID;

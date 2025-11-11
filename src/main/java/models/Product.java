@@ -1,16 +1,16 @@
-import javax.swing.plaf.synth.SynthOptionPaneUI;
+package models;
 
 public class Product implements NorthwindData {
 
-    int productID;
-    String productName;
-    int supplierID;
-    int categoryID;
-    String quantityPerUnit;
-    double unitPrice;
-    int unitsInStock;
-    int reorderLevel;
-    boolean isDiscontinued; //!<-- This will need to be a boolean
+    public int productID;
+    public String productName;
+    public int supplierID;
+    public int categoryID;
+    public String quantityPerUnit;
+    public double unitPrice;
+    public int unitsInStock;
+    public int reorderLevel;
+    public boolean isDiscontinued; //!<-- This will need to be a boolean
 
     public Product (int productID, String productName, int supplierID, int categoryID, String quantityPerUnit,
                     double unitPrice, int unitsInStock, int reorderLevel, boolean isDiscontinued) {

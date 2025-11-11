@@ -1,3 +1,5 @@
+package sql;
+
 import models.NorthwindData;
 import models.Shipper;
 
@@ -83,7 +85,7 @@ public class ShipperDao {
 
 		 int rows = statement.executeUpdate();
 		 if(rows != 0) {
-			System.out.println("Success! models.Shipper was added!!!");
+			System.out.println("Success! Shipper was added!!!");
 		 } else {
 			System.err.println("ERROR! Could not add shipper!!!");
 		 }
@@ -101,7 +103,7 @@ public class ShipperDao {
 
 		 int rows = statement.executeUpdate();
 		 if(rows != 0) {
-			System.out.println("Success! models.Shipper information was updated!");
+			System.out.println("Success! Shipper information was updated!");
 		 } else {
 			System.err.println("Error! Could not update shipper information!!!");
 		 }
@@ -119,9 +121,9 @@ public class ShipperDao {
 
 		 int rows = statement.executeUpdate();
 		 if(rows != 0) {
-			System.out.println("Success! models.Shipper was deleted!");
+			System.out.println("Success! Shipper was deleted!");
 		 } else {
-			System.err.println("ERROR! Could not delete models.Shipper!");
+			System.err.println("ERROR! Could not delete Shipper!");
 		 }
 	  } catch(SQLException e) {
 		 throw new RuntimeException(e);

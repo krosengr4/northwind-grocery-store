@@ -6,6 +6,32 @@
   <component name="ChangeListManager">
     <list default="true" id="90d6bda1-ba48-48c6-81d7-2c5dfe924efb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logic/CategoryLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logic/CategoryLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logic/CustomerLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logic/CustomerLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logic/EmployeeLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logic/EmployeeLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logic/ProductLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logic/ProductLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logic/ShipperLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logic/ShipperLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logic/UILogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logic/UILogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/NorthwindData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/NorthwindData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Shipper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Shipper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Supplier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sql/CategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sql/CategoryDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sql/CustomerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sql/CustomerDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sql/EmployeeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sql/EmployeeDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sql/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sql/ProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sql/ShipperDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sql/ShipperDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/UserInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CategoryDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CategoryDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/EmployeeDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/EmployeeDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ProductTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ProductTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ShipperDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ShipperDaoTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +89,7 @@
     "JUnit.ShipperDaoTest.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
@@ -107,5 +134,26 @@
       <updated>1749670815249</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/logic/CustomerLogic.java</url>
+          <line>98</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/sql/CustomerDao.java</url>
+          <line>127</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/sql/CustomerDao.java</url>
+          <line>123</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

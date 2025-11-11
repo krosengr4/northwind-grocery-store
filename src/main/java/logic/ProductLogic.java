@@ -1,7 +1,10 @@
+package logic;
+
 import models.NorthwindData;
 import models.Product;
 import org.apache.commons.dbcp2.BasicDataSource;
 import sql.ProductDao;
+import ui.UserInterface;
 import utils.Utils;
 
 import java.util.ArrayList;
@@ -38,7 +41,7 @@ public class ProductLogic {
    }
 
    public static void processProductByName() {
-	  String productName = Utils.getUserInput("\nPlease Enter the models.Product Name: ").trim();
+	  String productName = Utils.getUserInput("\nPlease Enter the Product Name: ").trim();
 	  String query = "SELECT * FROM products WHERE ProductName LIKE ?;";
 
 	  Product product = productDao.getProduct(query, productName);
@@ -85,9 +88,9 @@ public class ProductLogic {
 
    public static void processAddProduct() {
 	  System.out.println("---ADD A NEW PRODUCT---");
-	  String productName = Utils.getUserInput("Enter the models.Product Name: ");
-	  int supplierID = Utils.getUserInputInt("Enter the models.Supplier ID: ");
-	  int categoryID = Utils.getUserInputInt("Enter the models.Category ID: ");
+	  String productName = Utils.getUserInput("Enter the Product Name: ");
+	  int supplierID = Utils.getUserInputInt("Enter the Supplier ID: ");
+	  int categoryID = Utils.getUserInputInt("Enter the Category ID: ");
 	  String quantityPerUnit = Utils.getUserInput("Enter the Quantity Per Unit: ");
 	  double unitPrice = Utils.getUserInputDouble("Enter the Price of 1 Unit:");
 	  int unitsInStock = Utils.getUserInputInt("Enter the Units In Stock:");
@@ -98,7 +101,7 @@ public class ProductLogic {
    }
 
    public static void processUpdateProduct() {
-	  System.out.println("\nPlease enter the models.Product ID of the product you wish to update.");
+	  System.out.println("\nPlease enter the Product ID of the product you wish to update.");
 //            String productID = utils.Utils.promptGetUserInput("Enter here: ").trim();
 	  int productIDInt = Utils.getUserInputInt("Enter Here: ");
 	  String productID = String.valueOf(productIDInt);
@@ -157,7 +160,7 @@ public class ProductLogic {
 	  boolean isPassword = Utils.passwordCheck(password);
 
 	  if(isPassword) {
-		 int productId = Utils.getUserInputInt("Enter the models.Product ID to delete: ");
+		 int productId = Utils.getUserInputInt("Enter the Product ID to delete: ");
 		 productDao.deleteProduct(productId);
 	  } else {
 		 System.out.println("That password is incorrect!");

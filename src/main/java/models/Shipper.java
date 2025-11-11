@@ -1,8 +1,10 @@
-public class Shipper implements NorthwindData{
+package models;
 
-    int shipperID;
-    String companyName;
-    String phoneNumber;
+public class Shipper implements NorthwindData {
+
+    public int shipperID;
+    public String companyName;
+    public String phoneNumber;
 
     public Shipper (int shipperID, String companyName, String phoneNumber) {
         this.shipperID = shipperID;
