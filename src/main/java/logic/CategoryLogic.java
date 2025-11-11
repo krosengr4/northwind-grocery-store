@@ -1,4 +1,8 @@
+import models.Category;
+import models.NorthwindData;
 import org.apache.commons.dbcp2.BasicDataSource;
+import sql.CategoryDao;
+import utils.Utils;
 
 import java.util.ArrayList;
 
@@ -46,7 +50,7 @@ public class CategoryLogic {
    }
 
    public static void processUpdateCategory() {
-	  System.out.println("\nPlease Enter the Category ID of the Category you wish to Update.");
+	  System.out.println("\nPlease Enter the models.Category ID of the models.Category you wish to Update.");
 	  int categoryID = Utils.getUserInputInt("Enter here: ");
 
 	  String query = setCategoryUpdateQuery();
@@ -81,7 +85,7 @@ public class CategoryLogic {
 	  if(category != null) {
 		 category.print();
 	  } else {
-		 System.err.println("Error! Couldn't find Category with that ID!");
+		 System.err.println("Error! Couldn't find models.Category with that ID!");
 	  }
    }
 
@@ -90,7 +94,7 @@ public class CategoryLogic {
 	  boolean isCorrect = Utils.passwordCheck(password);
 
 	  if(isCorrect) {
-		 int categoryId = Utils.getUserInputInt("Enter the Category ID to delete: ");
+		 int categoryId = Utils.getUserInputInt("Enter the models.Category ID to delete: ");
 		 categoryDao.deleteCategory(categoryId);
 	  } else {
 		 System.out.println("That password is incorrect!!!");
@@ -100,8 +104,8 @@ public class CategoryLogic {
 
    public static void processAddCategory() {
 	  System.out.println("\n---ADD NEW CATEGORY---\n");
-	  String categoryName = Utils.getUserInput("Enter a Category Name: ");
-	  String description = Utils.getUserInput("Enter a Category description: ");
+	  String categoryName = Utils.getUserInput("Enter a models.Category Name: ");
+	  String description = Utils.getUserInput("Enter a models.Category description: ");
 
 	  Category category = new Category(0, categoryName, description);
 	  categoryDao.addCategory(category);

@@ -1,4 +1,8 @@
+import models.Employee;
+import models.NorthwindData;
 import org.apache.commons.dbcp2.BasicDataSource;
+import sql.EmployeeDao;
+import utils.Utils;
 
 import java.util.ArrayList;
 
@@ -71,7 +75,7 @@ public class EmployeeLogic {
    }
 
    public static void processUpdateEmployee() {
-	  System.out.println("Please enter the Employee ID of the employee you wish to update.");
+	  System.out.println("Please enter the models.Employee ID of the employee you wish to update.");
 	  int employeeID = Utils.getUserInputInt("Enter here: ");
 
 	  String query = setEmployeeUpdateQuery();
@@ -117,7 +121,7 @@ public class EmployeeLogic {
 	  boolean isCorrect = Utils.passwordCheck(password);
 
 	  if(isCorrect) {
-		 int employeeId = Utils.getUserInputInt("Enter the Employee ID to delete: ");
+		 int employeeId = Utils.getUserInputInt("Enter the models.Employee ID to delete: ");
 		 employeeDao.deleteEmployee(employeeId);
 	  } else {
 		 System.out.println("That password is incorrect!!!");

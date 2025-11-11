@@ -1,3 +1,6 @@
+import models.Category;
+import models.NorthwindData;
+
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
@@ -84,9 +87,9 @@ public class CategoryDao {
 
 		 int rows = statement.executeUpdate();
 		 if(rows != 0) {
-			System.out.println("Success! Added " + categoryName + " Category");
+			System.out.println("Success! Added " + categoryName + " models.Category");
 		 } else {
-			System.err.println("ERROR! Could not add Category to the database!!!");
+			System.err.println("ERROR! Could not add models.Category to the database!!!");
 		 }
 
 	  } catch(SQLException e) {
@@ -94,22 +97,16 @@ public class CategoryDao {
 	  }
    }
 
-   public void updateCategory(String query, int categoryID, String newValue) {
-	  try(Connection conn = dataSource.getConnection()) {
-		 PreparedStatement statement = conn.prepareStatement(query);
-		 statement.setString(1, newValue);
-		 statement.setInt(2, categoryID);
+   public void updateCategory(Category category, int categoryID) {
+	   String query = """
+			   UPDATE categories
+			   set CategoryName = ?,
+			   Description = ?
+			   WHERE CategoryID = ?;
+			   """;
 
-		 int rows = statement.executeUpdate();
-		 if(rows != 0) {
-			System.out.println("\nSuccess! Information Updated for Category with an ID of: " + categoryID);
-		 } else {
-			System.out.println("\nCould not find Category with that ID...");
-		 }
+	   try(Connection connection = )
 
-	  } catch(SQLException e) {
-		 throw new RuntimeException(e);
-	  }
    }
 
    public void deleteCategory(int categoryId) {

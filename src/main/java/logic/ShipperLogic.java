@@ -1,4 +1,8 @@
+import models.NorthwindData;
+import models.Shipper;
 import org.apache.commons.dbcp2.BasicDataSource;
+import sql.ShipperDao;
+import utils.Utils;
 
 import java.util.ArrayList;
 
@@ -32,7 +36,7 @@ public class ShipperLogic {
    }
 
    public static void processShipperByName() {
-	  String companyName = Utils.getUserInput("Please Enter the Company Name of the Shipper: ");
+	  String companyName = Utils.getUserInput("Please Enter the Company Name of the models.Shipper: ");
 	  String query = "SELECT * FROM shippers WHERE CompanyName LIKE ?";
 
 	  Shipper shipper = shipperDao.getShipper(query, companyName);
@@ -70,7 +74,7 @@ public class ShipperLogic {
    }
 
    public static void processUpdateShipper() {
-	  System.out.println("\nEnter the ID of the Shipper you wish to update.");
+	  System.out.println("\nEnter the ID of the models.Shipper you wish to update.");
 	  int shipperId = Utils.getUserInputInt("Enter here: ");
 
 	  String query = setUpdateShipperQuery();
@@ -115,7 +119,7 @@ public class ShipperLogic {
 	  boolean isCorrect = Utils.passwordCheck(password);
 
 	  if(isCorrect) {
-		 int shipperId = Utils.getUserInputInt("Enter the Shipper ID you wish to delete: ");
+		 int shipperId = Utils.getUserInputInt("Enter the models.Shipper ID you wish to delete: ");
 		 shipperDao.deleteShipper(shipperId);
 	  } else {
 		 System.out.println("That password is incorrect!!!");
