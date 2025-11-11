@@ -2,6 +2,7 @@ package sql;
 
 import models.Customer;
 import models.NorthwindData;
+import models.Product;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -35,24 +36,26 @@ public class CustomerDao extends MySqlDaoBase {
         return customersList;
     }
 
-    public Customer getCustomer(String query, String userInput) {
+	public Customer getCustomerById(int customerId) {
+		String query = "SELECT * FROM customers WHERE customerId = ?;";
 
-        try (Connection conn = getConnection()) {
+		try(Connection connection = getConnection()) {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setInt(1, customerId);
 
-            PreparedStatement prepStatement = conn.prepareStatement(query);
-            prepStatement.setString(1, userInput);
+			ResultSet result = statement.executeQuery();
+			if(result.next()) {
+				return mapRow(result);
+			} else {
+				System.err.println("There are no orders with that ID!");
+			}
 
-            ResultSet results = prepStatement.executeQuery();
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
 
-            if(results.next()) {
-			   return mapRow(results);
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
 		return null;
-    }
+	}
 
     public ArrayList<NorthwindData> getCustomersList(String query, String userInput) {
         ArrayList<NorthwindData> customersList = new ArrayList<>();
