@@ -7,12 +7,10 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class EmployeeDao {
-
-   private final DataSource dataSource;
+public class EmployeeDao extends MySqlDaoBase {
 
    public EmployeeDao(DataSource dataSource) {
-	  this.dataSource = dataSource;
+	  super(dataSource);
    }
 
    public ArrayList<NorthwindData> getAllEmployees() {
@@ -20,7 +18,7 @@ public class EmployeeDao {
 	  ArrayList<NorthwindData> employeesList = new ArrayList<>();
 	  String query = "SELECT * FROM employees;";
 
-	  try(Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = getConnection()) {
 
 		 PreparedStatement prepStatement = conn.prepareStatement(query);
 
@@ -39,7 +37,7 @@ public class EmployeeDao {
 
    public Employee getEmployee(String query, String userInput) {
 
-	  try(Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = getConnection()) {
 
 		 PreparedStatement prepStatement = conn.prepareStatement(query);
 		 prepStatement.setString(1, "%" + userInput + "%");
@@ -60,7 +58,7 @@ public class EmployeeDao {
    public Employee getEmployeeByID(int employeeId) {
 	  String query = "SELECT * FROM employees WHERE EmployeeID = ?;";
 
-	  try(Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = getConnection()) {
 		 PreparedStatement statement = conn.prepareStatement(query);
 		 statement.setInt(1, employeeId);
 
@@ -78,7 +76,7 @@ public class EmployeeDao {
    public ArrayList<NorthwindData> getEmployeesList(String query, String userInput) {
 	  ArrayList<NorthwindData> employeesList = new ArrayList<>();
 
-	  try(Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = getConnection()) {
 
 		 PreparedStatement prepStatement = conn.prepareStatement(query);
 		 prepStatement.setString(1, "%" + userInput + "%");
@@ -105,7 +103,7 @@ public class EmployeeDao {
 	  String postalCode = employee.postalCode;
 	  String notes = employee.notes;
 
-	  try(Connection connection = dataSource.getConnection()) {
+	  try(Connection connection = getConnection()) {
 		 String query = "INSERT INTO employees (FirstName, LastName, Title, Address, City, Country, PostalCode, Notes) " +
 								"VALUES (?, ?, ?, ?);";
 		 PreparedStatement statement = connection.prepareStatement(query);
@@ -131,7 +129,7 @@ public class EmployeeDao {
    }
 
    public void updateEmployee(String query, int employeeId, String newValue) {
-	  try(Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = getConnection()) {
 		 PreparedStatement statement = conn.prepareStatement(query);
 		 statement.setString(1, newValue);
 		 statement.setInt(2, employeeId);
@@ -151,7 +149,7 @@ public class EmployeeDao {
    public void deleteEmployee(int employeeId) {
 	  String query = "DELETE FROM employees WHERE EmployeeID = ?;";
 
-	  try(Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = getConnection()) {
 		 PreparedStatement statement = conn.prepareStatement(query);
 		 statement.setInt(1, employeeId);
 

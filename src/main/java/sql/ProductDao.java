@@ -7,19 +7,17 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ProductDao {
-
-   private final DataSource dataSource;
+public class ProductDao extends MySqlDaoBase{
 
    public ProductDao(DataSource dataSource) {
-	  this.dataSource = dataSource;
+	  super(dataSource);
    }
 
    public ArrayList<NorthwindData> getAllProducts() {
 	  ArrayList<NorthwindData> productsList = new ArrayList<>();
 	  String query = "SELECT * FROM products;";
 
-	  try(Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = getConnection()) {
 		 PreparedStatement prepStatement = conn.prepareStatement(query);
 
 		 ResultSet results = prepStatement.executeQuery();
@@ -40,7 +38,7 @@ public class ProductDao {
 	  ArrayList<NorthwindData> productsList = new ArrayList<>();
 	  String query = "SELECT * FROM products WHERE CategoryID = ?;";
 
-	  try(Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = getConnection()) {
 		 PreparedStatement prepStatement = conn.prepareStatement(query);
 		 prepStatement.setString(1, userCatChoice);
 
@@ -59,7 +57,7 @@ public class ProductDao {
    }
 
    public Product getProduct(String query, String userInput) {
-	  try(Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = getConnection()) {
 
 		 PreparedStatement prepStatement = conn.prepareStatement(query);
 		 prepStatement.setString(1, userInput);
@@ -77,7 +75,7 @@ public class ProductDao {
    public ArrayList<NorthwindData> getProductsByPrice(String query, double minPrice, double maxPrice) {
 	  ArrayList<NorthwindData> productsList = new ArrayList<>();
 
-	  try(Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = getConnection()) {
 
 		 PreparedStatement prepStatement = conn.prepareStatement(query);
 		 prepStatement.setDouble(1, minPrice);
@@ -112,7 +110,7 @@ public class ProductDao {
 	  String query = "INSERT INTO products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, ReorderLevel, Discontinued) " +
 							 "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
-	  try(Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = getConnection()) {
 		 PreparedStatement statement = conn.prepareStatement(query);
 		 statement.setString(1, productName);
 		 statement.setInt(2, supplierID);
@@ -139,7 +137,7 @@ public class ProductDao {
    public void updateAProduct(String query, String productID, String newValue) {
 
 	  //! Fix Error "Data truncation: Data too long for column 'Discontinued' at row 1"
-	  try(Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = getConnection()) {
 		 PreparedStatement statement = conn.prepareStatement(query);
 		 statement.setString(1, newValue);
 		 statement.setString(2, String.valueOf(productID));
@@ -160,7 +158,7 @@ public class ProductDao {
    public void deleteProduct(int productId) {
 	  String query = "DELETE FROM products WHERE ProductID = ?";
 
-	  try(Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = getConnection()) {
 		 PreparedStatement statement = conn.prepareStatement(query);
 		 statement.setInt(1, productId);
 

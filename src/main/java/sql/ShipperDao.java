@@ -7,19 +7,17 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ShipperDao {
-
-   private final DataSource dataSource;
+public class ShipperDao extends MySqlDaoBase{
 
    public ShipperDao(DataSource dataSource) {
-	  this.dataSource = dataSource;
+	  super(dataSource);
    }
 
    public ArrayList<NorthwindData> getAllShippers() {
 	  ArrayList<NorthwindData> shippersList = new ArrayList<>();
 	  String query = "SELECT * FROM shippers";
 
-	  try(Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = getConnection()) {
 
 		 PreparedStatement statement = conn.prepareStatement(query);
 
@@ -38,7 +36,7 @@ public class ShipperDao {
 
    public Shipper getShipper(String query, String userInput) {
 
-	  try(Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = getConnection()) {
 		 PreparedStatement statement = conn.prepareStatement(query);
 		 statement.setString(1, "%" + userInput + "%");
 
@@ -57,7 +55,7 @@ public class ShipperDao {
    public Shipper getShipperById(int shipperId) {
 	  String query = "	SELECT * FROM shippers WHERE ShipperID = ?;";
 
-	  try(Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = getConnection()) {
 		 PreparedStatement statement = conn.prepareStatement(query);
 		 statement.setInt(1, shipperId);
 
@@ -78,7 +76,7 @@ public class ShipperDao {
 
 	  String query = "INSERT INTO shippers (CompanyName, Phone) " +
 							 "VALUES (?, ?);";
-	  try(Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = getConnection()) {
 		 PreparedStatement statement = conn.prepareStatement(query);
 		 statement.setString(1, companyName);
 		 statement.setString(2, phoneNumber);
@@ -96,7 +94,7 @@ public class ShipperDao {
    }
 
    public void updateShipper(String query, int shipperId, String newValue) {
-	  try(Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = getConnection()) {
 		 PreparedStatement statement = conn.prepareStatement(query);
 		 statement.setString(1, newValue);
 		 statement.setInt(2, shipperId);
@@ -115,7 +113,7 @@ public class ShipperDao {
    public void deleteShipper(int shipperId) {
 	  String query = "DELETE FROM shippers WHERE ShipperID = ?;";
 
-	  try(Connection conn = dataSource.getConnection()) {
+	  try(Connection conn = getConnection()) {
 		 PreparedStatement statement = conn.prepareStatement(query);
 		 statement.setInt(1, shipperId);
 
