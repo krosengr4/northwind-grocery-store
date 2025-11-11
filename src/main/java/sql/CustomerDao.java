@@ -7,19 +7,17 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class CustomerDao {
-    
-    private final DataSource dataSource;
-    
+public class CustomerDao extends MySqlDaoBase {
+
     public CustomerDao(DataSource dataSource) {
-        this.dataSource = dataSource;
+        super(dataSource);
     }
 
     public ArrayList<NorthwindData> getAllCustomers() {
 
         ArrayList<NorthwindData> customersList = new ArrayList<>();
 
-        try (Connection conn = dataSource.getConnection()) {
+        try (Connection conn = getConnection()) {
 
             String query = "SELECT * FROM customers ORDER BY Country;";
             PreparedStatement prepStatement = conn.prepareStatement(query);
@@ -39,7 +37,7 @@ public class CustomerDao {
 
     public Customer getCustomer(String query, String userInput) {
 
-        try (Connection conn = dataSource.getConnection()) {
+        try (Connection conn = getConnection()) {
 
             PreparedStatement prepStatement = conn.prepareStatement(query);
             prepStatement.setString(1, userInput);
@@ -59,7 +57,7 @@ public class CustomerDao {
     public ArrayList<NorthwindData> getCustomersList(String query, String userInput) {
         ArrayList<NorthwindData> customersList = new ArrayList<>();
 
-        try (Connection conn = dataSource.getConnection()) {
+        try (Connection conn = getConnection()) {
 
             PreparedStatement prepStatement = conn.prepareStatement(query);
             prepStatement.setString(1, "%" + userInput + "%");
@@ -91,7 +89,7 @@ public class CustomerDao {
         String fax = customer.fax;
         //endregion
 
-        try (Connection conn = dataSource.getConnection()) {
+        try (Connection conn = getConnection()) {
 
             String query = "INSERT INTO customers (CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
@@ -120,32 +118,53 @@ public class CustomerDao {
         }
     }
 
-    public void updateCustomer (String query, String customerID, String newValue) {
+    public void updateCustomer (Customer customer, int customerID) {
+		String query = """
+				UPDATE customers
+				SET CompanyName = ?,
+				ContactName = ?,
+				ContactTitle = ?,
+				Address = ?,
+				City = ?,
+				Region = ?,
+				PostalCode = ?,
+				Country = ?,
+				Phone = ?,
+				Fax = ?
+				WHERE CustomerID = ?;
+				""";
 
-        try (Connection conn = dataSource.getConnection()) {
-            PreparedStatement statement = conn.prepareStatement(query);
-            statement.setString(1, newValue);
-            statement.setString(2, customerID);
+		try (Connection connection = getConnection()) {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, customer.companyName);
+			statement.setString(2, customer.contactName);
+			statement.setString(3, customer.contactTitle);
+			statement.setString(4, customer.address);
+			statement.setString(5, customer.city);
+			statement.setString(6, customer.region);
+			statement.setString(7, customer.postalCode);
+			statement.setString(8, customer.country);
+			statement.setString(9, customer.phoneNumber);
+			statement.setString(10, customer.fax);
+			statement.setInt(11, customerID);
 
-            int rows = statement.executeUpdate();
+			int rows = statement.executeUpdate();
+			if (rows > 0) {
+				System.out.println("Success! The customer information was updated!");
+			} else {
+				System.err.println("ERROR! Could not update the customer information!");
+			}
 
-            if (rows != 0) {
-                System.out.println("Success! Information Updated for Customer with an ID of: " + customerID);
-            } else {
-                System.err.println("ERROR! The Customer Information was not updated!!!");
-            }
-
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
 
     }
 
 	public void deleteCustomer(int customerId) {
 	   String query = "DELETE FROM customers WHERE CustomerID = ?;";
 
-	   try (Connection conn = dataSource.getConnection()) {
+	   try (Connection conn = getConnection()) {
 		  PreparedStatement statement = conn.prepareStatement(query);
 		  statement.setInt(1, customerId);
 
